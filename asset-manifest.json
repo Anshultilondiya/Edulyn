@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Edulyn/static/css/main.51461900.chunk.css",
+    "main.js": "/Edulyn/static/js/main.1b57373c.chunk.js",
+    "main.js.map": "/Edulyn/static/js/main.1b57373c.chunk.js.map",
+    "runtime-main.js": "/Edulyn/static/js/runtime-main.3dc79c08.js",
+    "runtime-main.js.map": "/Edulyn/static/js/runtime-main.3dc79c08.js.map",
+    "static/css/2.39f76091.chunk.css": "/Edulyn/static/css/2.39f76091.chunk.css",
+    "static/js/2.57e4df6b.chunk.js": "/Edulyn/static/js/2.57e4df6b.chunk.js",
+    "static/js/2.57e4df6b.chunk.js.map": "/Edulyn/static/js/2.57e4df6b.chunk.js.map",
+    "index.html": "/Edulyn/index.html",
+    "static/css/2.39f76091.chunk.css.map": "/Edulyn/static/css/2.39f76091.chunk.css.map",
+    "static/css/main.51461900.chunk.css.map": "/Edulyn/static/css/main.51461900.chunk.css.map",
+    "static/js/2.57e4df6b.chunk.js.LICENSE.txt": "/Edulyn/static/js/2.57e4df6b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3dc79c08.js",
+    "static/css/2.39f76091.chunk.css",
+    "static/js/2.57e4df6b.chunk.js",
+    "static/css/main.51461900.chunk.css",
+    "static/js/main.1b57373c.chunk.js"
+  ]
+}
