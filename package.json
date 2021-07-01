@@ -32,12 +32,14 @@
     "styled-components": "^5.1.1",
     "swiper": "^6.7.0"
   },
-  "homepage": "http://www.thetahmid.com/themes/edulyn-v1.0",
+  "homepage": "https://anshultilondiya.github.io/Edulyn/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -55,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "fslightbox-react": "^1.4.9"
+    "fslightbox-react": "^1.4.9",
+    "gh-pages": "^3.2.3"
   }
 }
