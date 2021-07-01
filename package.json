@@ -32,14 +32,12 @@
     "styled-components": "^5.1.1",
     "swiper": "^6.7.0"
   },
-  "homepage": "https://anshultilondiya.github.io/Edulyn",
+  "homepage": "https://anshultilondiya.github.io/Edulyn/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -32,6 +32,11 @@ const PackageSection = () => {
                 <section className="product-area">
                     <Container>
                         <Row>
+                            <Col md="12">
+                                <div className="sec-title text-center">
+                                    <h4>We Provide Best Quality Packages. Find the Right One That Fits You.</h4>
+                                </div>
+                            </Col>
                             <Col lg="11" md="9" sm="8" style={{ margin: "auto" }}>
                                 <Row>
                                     {

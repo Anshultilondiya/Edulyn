@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import Footer from '../../components/Footer';
 import { Styles } from './styles/forms.js';
+import { Dropdown, Button, ButtonGroup, Form } from "react-bootstrap"
 
-function Register() {
+
+
+function Career() {
     useEffect(() => {
         const form = document.getElementById("form_registration");
         const fname = document.getElementById("registration_fname");
         const lname = document.getElementById("registration_lname");
         const email = document.getElementById("registration_email");
+        const phone_1 = document.getElementById("registration_phone_1");
+        const phone_2 = document.getElementById("registration_phone_2");
         const user = document.getElementById("registration_user");
         const password = document.getElementById("registration_password");
         const cpassword = document.getElementById("registration_cpassword");
@@ -83,7 +88,9 @@ function Register() {
             return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email);
         }
     });
-
+    const [education, setEducation] = useState("Select");
+    const [current, setCurrent] = useState("Select");
+    const eduArr = ["Under Graduation", "Graduation", "Post Graduation", "Others"]
     return (
         <Styles>
             {/* Main Wrapper */}
@@ -105,27 +112,148 @@ function Register() {
                                         <h3>Career Form</h3>
                                     </div>
                                     <form id="form_registration" className="form">
+                                        <Row>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_fname">First Name</label>
+                                                    <input type="text" placeholder="First name" id="registration_fname" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_lname">Last Name</label>
+                                                    <input type="text" placeholder="Last name" id="registration_lname" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_email">Email Address</label>
+                                                    <input type="email" placeholder="Email address" id="registration_email" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_email">Date of Birth</label>
+                                                    <input type="date" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_user">Phone 1</label>
+                                                    <input type="text" placeholder="Phone 1" id="registration_phone_1" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_user">Phone 2</label>
+                                                    <input type="text" placeholder="Phone 2" id="registration_phone_2" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+                                            {/* <Col lg="6">
+                                                <Row>
+                                                    <Col lg="6">
+                                                        <p className="form-control">
+                                                            <label htmlFor="registration_user">Phone 1</label>
+                                                            <input type="text" placeholder="Phone 1" id="registration_phone_1" />
+                                                            <span className="registration_input-msg"></span>
+                                                        </p>
+                                                    </Col>
+                                                    <Col lg="6">
+                                                        <p className="form-control">
+                                                            <label htmlFor="registration_user">Phone 2</label>
+                                                            <input type="text" placeholder="Phone 2" id="registration_phone_2" />
+                                                            <span className="registration_input-msg"></span>
+                                                        </p>
+                                                    </Col>
+                                                </Row>
+                                            </Col> */}
+                                            <Col lg="6">
+                                                <p className="form-control option-menu">
+                                                    <Col lg="12">
+
+                                                        <label htmlFor="registration_email">Educational Qualification</label>
+                                                    </Col>
+                                                    <Col lg="12">
+                                                        <Dropdown as={ButtonGroup}>
+                                                            <Button variant="success">{education}</Button>
+                                                            <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+                                                            <Dropdown.Menu>
+                                                                {eduArr.map((el, index) => (
+                                                                    <Dropdown.Item key={index} onClick={() => {
+                                                                        setEducation(el)
+                                                                        console.log(el)
+                                                                    }}>{el}</Dropdown.Item>
+                                                                ))}
+                                                            </Dropdown.Menu>
+                                                        </Dropdown>
+                                                    </Col>
+                                                    {
+                                                        education === "Others" ? (
+                                                            <div className="others-text">
+                                                                <input type="email" placeholder="Please Enter Your Qualification" id="registration_email" />
+                                                                <span className="registration_input-msg"></span>
+                                                            </div>) : null
+                                                    }
+
+                                                    {/* <p>{education}</p> */}
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control option-menu">
+                                                    <Col lg="12">
+
+                                                        <label htmlFor="registration_email">Current Status</label>
+                                                    </Col>
+                                                    <Col lg="12">
+                                                        <Dropdown as={ButtonGroup}>
+                                                            <Button variant="success">{current}</Button>
+                                                            <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+                                                            <Dropdown.Menu>
+                                                                <Dropdown.Item onClick={() => { setCurrent("Working") }}>Working</Dropdown.Item>
+                                                                <Dropdown.Item onClick={() => { setCurrent("Self-Employed") }}>Self-Employed</Dropdown.Item>
+                                                                <Dropdown.Item onClick={() => { setCurrent("Un-Employed") }}>Un-Employed</Dropdown.Item>
+                                                            </Dropdown.Menu>
+                                                        </Dropdown>
+                                                    </Col>
+                                                    {
+                                                        education === "Others" ? (
+                                                            <div className="others-text">
+                                                                <input type="email" placeholder="Please Enter Your Qualification" id="registration_email" />
+                                                                <span className="registration_input-msg"></span>
+                                                            </div>) : null
+                                                    }
+
+                                                    {/* <p>{education}</p> */}
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_user">Location</label>
+                                                    <input type="text" placeholder="Location" id="registration_phone_2" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_user">Investment Capacity</label>
+                                                    <input type="text" placeholder="Investment Capacity" id="registration_phone_2" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+
+                                            </Col>
+                                        </Row>
                                         <p className="form-control">
-                                            <label htmlFor="registration_fname">First Name</label>
-                                            <input type="text" placeholder="First name" id="registration_fname" />
-                                            <span className="registration_input-msg"></span>
+                                            <label htmlFor="registration_user">Upload</label>
+                                            <input type="file" name="file" className="resume-upload" />
                                         </p>
-                                        <p className="form-control">
-                                            <label htmlFor="registration_lname">Last Name</label>
-                                            <input type="text" placeholder="Last name" id="registration_lname" />
-                                            <span className="registration_input-msg"></span>
-                                        </p>
-                                        <p className="form-control">
-                                            <label htmlFor="registration_email">Email Address</label>
-                                            <input type="email" placeholder="Email address" id="registration_email" />
-                                            <span className="registration_input-msg"></span>
-                                        </p>
-                                        <p className="form-control">
-                                            <label htmlFor="registration_user">User Name</label>
-                                            <input type="text" placeholder="Username" id="registration_user" />
-                                            <span className="registration_input-msg"></span>
-                                        </p>
-                                        <p className="form-control">
+                                        {/* <p className="form-control">
                                             <label htmlFor="registration_password">Password</label>
                                             <input type="password" placeholder="*******" id="registration_password" />
                                             <span className="registration_input-msg"></span>
@@ -134,12 +262,12 @@ function Register() {
                                             <label htmlFor="registration_cpassword">Confirm Password</label>
                                             <input type="password" placeholder="Confirm password" id="registration_cpassword" />
                                             <span className="registration_input-msg"></span>
-                                        </p>
-                                        <button>Register Now</button>
+                                        </p> */}
+                                        <button className="submit">Submit</button>
                                     </form>
-                                    <div className="have_account-btn text-center">
+                                    {/* <div className="have_account-btn text-center">
                                         <p>Already have an account? <Link to="/login">Login Here</Link></p>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </Col>
                         </Row>
@@ -150,8 +278,8 @@ function Register() {
                 <Footer />
 
             </div>
-        </Styles>
+        </Styles >
     )
 }
 
-export default Register
+export default Career

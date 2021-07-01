@@ -24,6 +24,7 @@ export const colors = {
     footer1: "#1a1b25",
     footer2: "#16171f",
     ftext: "#8D8E92",
+    white: "ffffff"
 
 }
 

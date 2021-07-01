@@ -281,7 +281,7 @@ export const Styles = styled.div`
         .registration-area {
             padding : 70px 0;
             .registration-box {
-                max-width : 500px;
+                max-width : 80%;
                 margin: auto;
                 border: 1px solid ${colors.border1};
                 box-shadow: 0 0px 20px rgba(0,0,0,0.08);
@@ -331,8 +331,18 @@ export const Styles = styled.div`
                                 font-size : 14px;
                             }
                         }
-
-                        input {
+                        textarea{
+                            height          : 96px !important;
+                        }
+                        .resume-upload{
+                            width           : 100% !important;
+                            height          : 48px;
+                            background-color: #ffffff;
+                            padding         : 10px 5px !important;
+                            border          : none !important;
+                            
+                          }
+                        input, textarea {
                             width           : 100%;
                             height          : 48px;
                             background-color: #ffffff;
@@ -372,7 +382,7 @@ export const Styles = styled.div`
                     }
 
                     p.form-control.success {
-                        input {
+                        input,textarea {
                             border: 2px solid ${colors.green};
                         }
 
@@ -389,7 +399,7 @@ export const Styles = styled.div`
                     }
 
                     p.form-control.error {
-                        input {
+                        input, textarea{
                             border: 2px solid ${colors.red};
                         }
 
@@ -411,17 +421,18 @@ export const Styles = styled.div`
                         }
                     }
 
-                    button {
+                    button.submit {
                         font-size  : 16px;
                         color      : #fff;
                         background : ${colors.gr_bg};
-                        width      : 100%;
+                        width      : 30%;
                         height     : 48px;
                         font-weight: 500;
                         border     : none;
                         border-radius : 5px;
                         text-transform: uppercase;
                         margin-bottom : 20px;
+                        margin-left:35%;
 
                         &:hover {
                             background: ${colors.gr_bg2};
@@ -451,6 +462,9 @@ export const Styles = styled.div`
                             }
                         }
                     }
+                }
+                @media(max-width: 767px) {
+                    max-width:94%;
                 }
             }
 

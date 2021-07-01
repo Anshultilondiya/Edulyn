@@ -288,7 +288,7 @@ const HeaderTwo = () => {
                       More <RiArrowDropDownLine className="moreButton" />
                     </Link>
                     <ul className="dropdown list-unstyled">
-                      <li className="nav-item">
+                      {/* <li className="nav-item">
                         <Link
                           className="nav-link"
                           to={process.env.PUBLIC_URL + "/about"}
@@ -319,7 +319,7 @@ const HeaderTwo = () => {
                         >
                           Registration
                         </Link>
-                      </li>
+                      </li> */}
                       <li className="nav-item">
                         <Link
                           className="nav-link"
@@ -333,10 +333,10 @@ const HeaderTwo = () => {
                           className="nav-link"
                           to={process.env.PUBLIC_URL + "/faq"}
                         >
-                          Faq
+                          FAQ
                         </Link>
                       </li>
-                      <li className="nav-item">
+                      {/* <li className="nav-item">
                         <Link
                           className="nav-link"
                           to={process.env.PUBLIC_URL + "/404"}
@@ -351,15 +351,15 @@ const HeaderTwo = () => {
                         >
                           Coming Soon
                         </Link>
-                      </li>
-                      <li className="nav-item">
+                      </li> */}
+                      {/* <li className="nav-item">
                         <Link
                           className="nav-link"
                           to={process.env.PUBLIC_URL + "/course-grid"}
                         >
                           Courses Grid
                         </Link>
-                      </li>
+                      </li> */}
                       <li className="nav-item">
                         <Link
                           className="nav-link"

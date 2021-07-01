@@ -81,6 +81,16 @@
   padding: 10px;
 }
 
+.option-menu .col-lg-12{
+  padding-left: 0 !important;
+}
+
+.form-control .others-text{
+  margin-top:15px;
+}
+
+
+
 
 
 

@@ -145,7 +145,7 @@ function StickyMenu(props) {
                       More <RiArrowDropDownLine className="moreButton" />
                     </Link>
                     <ul className="dropdown list-unstyled">
-                      <li className="nav-item">
+                      {/* <li className="nav-item">
                         <Link
                           className="nav-link"
                           to={process.env.PUBLIC_URL + "/about"}
@@ -176,7 +176,7 @@ function StickyMenu(props) {
                         >
                           Registration
                         </Link>
-                      </li>
+                      </li> */}
                       <li className="nav-item">
                         <Link
                           className="nav-link"
@@ -190,10 +190,10 @@ function StickyMenu(props) {
                           className="nav-link"
                           to={process.env.PUBLIC_URL + "/faq"}
                         >
-                          Faq
+                          FAQ
                         </Link>
                       </li>
-                      <li className="nav-item">
+                      {/* <li className="nav-item">
                         <Link
                           className="nav-link"
                           to={process.env.PUBLIC_URL + "/404"}
@@ -216,7 +216,7 @@ function StickyMenu(props) {
                         >
                           Courses Grid
                         </Link>
-                      </li>
+                      </li> */}
                       <li className="nav-item">
                         <Link
                           className="nav-link"

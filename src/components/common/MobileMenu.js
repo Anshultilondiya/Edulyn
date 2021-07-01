@@ -296,17 +296,17 @@ function MobileMenu() {
 
                                         to={process.env.PUBLIC_URL + "/faq"}
                                     >
-                                        Faq
+                                        FAQ
                                     </Link>
                                 </li>
-                                <li className="nav-item">
+                                {/* <li className="nav-item">
                                     <Link
 
                                         to={process.env.PUBLIC_URL + "/404"}
                                     >
                                         404
                                     </Link>
-                                </li>
+                                </li> */}
                                 <li className="nav-item">
                                     <Link
 

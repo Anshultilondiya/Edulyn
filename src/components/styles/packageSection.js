@@ -3,10 +3,26 @@ import { colors } from "../common/element/elements.js";
 
 export const Styles = styled.div`
     .product-page {
+        background: ${colors.bg2};
         .product-area {
             padding : 70px 0;
+            .sec-title {
+                h4 {
+                    color        : ${colors.black1};
+                    line-height  : 35px;
+                    font-weight  : 600;
+                    max-width    : 550px;
+                    margin       : auto;
+                    margin-bottom: 42px;
+    
+                    @media(max-width: 575px) {
+                        margin-bottom: 15px;
+                        font-size: 20px;
+                    }
+                }
+            }
             .product-box {
-                border: 1px solid ${colors.border1};
+                border: 2px solid ${colors.border1};
                 border-radius: 5px;
                 transition: all 0.2s ease;
                 margin-bottom: 30px;
