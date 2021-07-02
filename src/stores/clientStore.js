@@ -18,6 +18,9 @@ const createClientStore = () => {
     facultyData: [],
     blogs: [],
     allCourses: [],
+    webDetails: {},
+    webConfig: {},
+    webLayout: {},
   };
 };
 

@@ -111,7 +111,7 @@ export const Styles = styled.div`
                     }
 
                     .blog-desk {
-                        p {
+                        p.blog-p {
                             font-size     : 14px;
                             color         : ${colors.text3};
                             border-bottom : 1px solid ${colors.border1};

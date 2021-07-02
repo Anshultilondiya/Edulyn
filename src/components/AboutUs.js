@@ -22,7 +22,7 @@ const AboutUs = () => {
   const clientStore = useClientStore();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  console.log(location)
+  // console.log(location)
 
   const openModal = () => {
     setIsOpen(true);
@@ -48,7 +48,7 @@ const AboutUs = () => {
       };
       setData(obj);
       setDataStatus(true);
-      // console.log("About Us Data ", obj);
+      console.log("About Us Data ", clientStore.instituteDetails);
       // }
     }
     if (!dataStatus) setToggle(toggle + 1);

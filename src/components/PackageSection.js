@@ -21,7 +21,7 @@ const PackageSection = () => {
         const res = await fetchPackageDetails(clientStore.webHash, 3);
         let arr = buildPackage(res.response)
         setPackages(arr)
-        // console.log(res.response)
+        console.log(res.response)
     }
 
     return (
@@ -55,7 +55,7 @@ const PackageSection = () => {
                                                         <div className="pro-title">
                                                             <h5><Link to={process.env.PUBLIC_URL + data.productUrl}>{data.productTitle}</Link></h5>
                                                         </div>
-                                                        <div className="pro-rating">
+                                                        {/* <div className="pro-rating">
                                                             <ul className="list-unstyled list-inline">
                                                                 <li className="list-inline-item"><i className="las la-star"></i></li>
                                                                 <li className="list-inline-item"><i className="las la-star"></i></li>
@@ -63,9 +63,12 @@ const PackageSection = () => {
                                                                 <li className="list-inline-item"><i className="las la-star"></i></li>
                                                                 <li className="list-inline-item"><i className="las la-star-half-alt"></i></li>
                                                             </ul>
-                                                        </div>
+                                                        </div> */}
                                                         <div className="pro-price">
-                                                            <p> &#8377; {data.price}</p>
+                                                            <p> Price : &#8377; {data.price}</p>
+                                                        </div>
+                                                        <div>
+                                                            <p>{data.courseDuration}</p>
                                                         </div>
                                                     </div>
                                                 </div>

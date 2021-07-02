@@ -10,6 +10,7 @@ export const Styles = styled.div`
                     img {
                         border-radius: 5px;
                         margin-bottom: 20px;
+                        width:100%;
                     }
                 }
 

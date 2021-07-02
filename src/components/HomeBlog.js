@@ -53,10 +53,7 @@ const HomeBlog = () => {
                                 <div className="blog-img">
                                   <Link to={process.env.PUBLIC_URL + data.postLink}>
                                     <img
-                                      src={
-                                        process.env.PUBLIC_URL +
-                                        `/assets/images/${data.postImg}`
-                                      }
+                                      src={data.postImg}
                                       alt=""
                                       className="img-fluid"
                                     />
@@ -83,12 +80,12 @@ const HomeBlog = () => {
                                       </div>
                                     </div>
                                     <div className="blog-desk">
-                                      <p
+                                      <p className="blog-p"
                                         dangerouslySetInnerHTML={{
                                           __html: data.shortDes,
                                         }}
-                                      ></p>
-                                      <ul className="list-unstyled list-inline">
+                                      />
+                                      {/* <ul className="list-unstyled list-inline">
                                         <li className="list-inline-item">
                                           <Link
                                             to={
@@ -118,7 +115,7 @@ const HomeBlog = () => {
                                             <i className="las la-thumbs-up"></i> 37
                                           </Link>
                                         </li>
-                                      </ul>
+                                      </ul> */}
                                     </div>
                                   </div>
                                 </div>

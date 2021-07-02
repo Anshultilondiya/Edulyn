@@ -8,7 +8,7 @@ import MobileMenu from "./common/MobileMenu";
 import { Styles } from "./styles/headerTwo.js";
 import { useClientStore } from "./../contextProviders/clientContext";
 import { RiArrowDropDownLine } from "react-icons/ri"
-
+import { fetchDynamicButton } from "../apis/api";
 
 const HeaderTwo = () => {
   const clientStore = useClientStore();
@@ -18,11 +18,13 @@ const HeaderTwo = () => {
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
   const [logo, setLogo] = useState("");
-
+  const [dynamicButton, setDynamicButton] = useState({});
   useEffect(() => {
     updateData();
   }, [phone, toggle, dataStatus]);
-
+  useEffect(() => {
+    getDynamicButton();
+  }, [])
   const updateData = () => {
     if (clientStore.instituteDetails["About Us"] !== undefined && !dataStatus) {
       setPhone(clientStore.instituteDetails.Contact1);
@@ -37,6 +39,21 @@ const HeaderTwo = () => {
     }
     if (!dataStatus) setToggle(toggle + 1);
   };
+
+
+  const getDynamicButton = async () => {
+    // const res = await fetchDynamicButton(clientStore.webHash);
+    const hash = "56609cdc79b2838b15c2950d5dbf654b"
+    const res = await fetchDynamicButton(hash);
+    let obj = {
+      tab: res.tab_name,
+      arr: res.response,
+      status: res.status,
+    }
+    setDynamicButton(obj)
+    console.log("dynamic", res)
+  }
+
 
   return (
     <Styles>
@@ -279,6 +296,42 @@ const HeaderTwo = () => {
                       Pay Online
                     </Link>
                   </li>
+
+                  {dynamicButton.status === "success" ? (<li className="nav-item">
+                    <Link
+                      className="nav-link dropdown-toggle"
+                      to={process.env.PUBLIC_URL + "/"}
+                      data-toggle="dropdown"
+                      style={{
+                        display: "flex",
+                        alignItems: "center"
+                      }}
+                    >
+                      {dynamicButton.tab} <RiArrowDropDownLine className="moreButton" />
+                    </Link>
+                    <ul className="dropdown list-unstyled">
+                      {dynamicButton.arr.length > 0 ? (
+                        <div>
+                          {dynamicButton.arr.map((el, i) => {
+                            return (
+                              <li className="nav-item" key={i}>
+                                <a
+                                  className="nav-link"
+                                  href={el.url}
+                                >
+                                  {el.title}
+                                </a>
+                              </li>
+                            )
+                          })}
+                        </div>
+                      ) : null}
+                    </ul>
+                  </li>) : null}
+
+
+
+
                   <li className="nav-item dropdown">
                     <Link
                       className="nav-link dropdown-toggle"
@@ -387,9 +440,17 @@ const HeaderTwo = () => {
                       <li className="nav-item">
                         <Link
                           className="nav-link"
-                          to={process.env.PUBLIC_URL + "/coming-soon"}
+                          to={process.env.PUBLIC_URL + "/alerts"}
                         >
-                          Alert
+                          Alerts
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link"
+                          to={process.env.PUBLIC_URL + "/achievements"}
+                        >
+                          Achievements
                         </Link>
                       </li>
 

@@ -64,12 +64,12 @@ const BlogDetails = () => {
                                         <Col lg="11" md="11" sm="11" style={{ margin: "auto" }}>
                                             <div className="blog-details-box">
                                                 <div className="blog-details-banner">
-                                                    <img src="https://www.shortmanclothier.com/manage/wp-content/themes/shortman-clothier/timthumb.php?src=https://www.shortmanclothier.com/manage/wp-content/uploads/2018/08/blogging-1.jpg&h=450&w=650&zc=1q=100" alt="" className="img-fluid" />
+                                                    <img src={blog.post_image} alt="" className="img-fluid" />
                                                 </div>
                                                 <div className="heading">
                                                     <h4>{blog.post_title}</h4>
                                                 </div>
-                                                <div className="blog-auth_date d-flex">
+                                                {/* <div className="blog-auth_date d-flex">
                                                     <div className="author-img d-flex">
                                                         <Link to={process.env.PUBLIC_URL + "/"}><img src={process.env.PUBLIC_URL + `/assets/images/author.jpg`} alt="" /></Link>
                                                         <p><Link to={process.env.PUBLIC_URL + "/"}>{blog.user_first_name + " " + blog.user_last_name}</Link></p>
@@ -84,7 +84,7 @@ const BlogDetails = () => {
                                                     <div className="post-comment">
                                                         <p><Link to={process.env.PUBLIC_URL + "/"}><i className="las la-comment"></i> (23)</Link></p>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div className="blog-details-desc">
                                                     <div dangerouslySetInnerHTML={{ __html: blog.post_description }} style={{
                                                         textAlign: "justify"

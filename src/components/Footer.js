@@ -55,20 +55,20 @@ const Footer = () => {
 
                                         <ul className="list-unstyled">
                                             <li><Link to={process.env.PUBLIC_URL + "/blog-grid"}><IoIosArrowForward />Blogs</Link></li>
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward /> Careers</Link></li>
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward />Franchise</Link></li>
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward />SpeedLabs</Link></li>
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward />Achievements</Link></li>
+                                            <li><Link to={process.env.PUBLIC_URL + "/career"}><IoIosArrowForward /> Careers</Link></li>
+                                            <li><Link to={process.env.PUBLIC_URL + "/franchise"}><IoIosArrowForward />Franchise</Link></li>
+                                            <li><a href={"https://www.speedlabs.in"} target="blank"><IoIosArrowForward />SpeedLabs</a></li>
+                                            <li><Link to={process.env.PUBLIC_URL + "/achievements"}><IoIosArrowForward />Achievements</Link></li>
                                         </ul>
                                     </Col>
                                     <Col>
 
                                         <ul className="list-unstyled">
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward />FAQs</Link></li>
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward />Admission</Link></li>
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward />Batches</Link></li>
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward />Alerts</Link></li>
-                                            <li><Link to={process.env.PUBLIC_URL + "/"}><IoIosArrowForward />Contact Us</Link></li>
+                                            <li><Link to={process.env.PUBLIC_URL + "/faq"}><IoIosArrowForward />FAQs</Link></li>
+                                            <li><Link to={process.env.PUBLIC_URL + "/admission"}><IoIosArrowForward />Admission</Link></li>
+                                            <li><Link to={process.env.PUBLIC_URL + "/batches"}><IoIosArrowForward />Batches</Link></li>
+                                            <li><Link to={process.env.PUBLIC_URL + "/alerts"}><IoIosArrowForward />Alerts</Link></li>
+                                            <li><Link to={process.env.PUBLIC_URL + "/contact"}><IoIosArrowForward />Contact Us</Link></li>
                                         </ul>
                                     </Col>
                                 </Row>

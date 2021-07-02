@@ -6,10 +6,30 @@ import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import Footer from '../../components/Footer';
 import { Styles } from './styles/forms.js';
 import { Dropdown, Button, ButtonGroup, Form } from "react-bootstrap"
-
+import { fetchCourseDetails } from "./../../apis/api";
+import { useClientStore } from "./../../contextProviders/clientContext"
 
 
 function Admission() {
+    const clientStore = useClientStore();
+    const [admission, setAdmission] = useState("Select");
+    const [eduArr, setEduArr] = useState([])
+
+
+    useEffect(() => {
+        getCourses();
+    }, []);
+
+    const getCourses = async () => {
+        const res = await fetchCourseDetails(clientStore.webHash, 3);
+        // console.log("All Courses", res.response);
+        setEduArr([...res.response, { course_name: "Others" }]);
+    };
+
+
+
+
+
     useEffect(() => {
         const form = document.getElementById("form_registration");
         const fname = document.getElementById("registration_fname");
@@ -88,9 +108,6 @@ function Admission() {
             return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email);
         }
     });
-    const [education, setEducation] = useState("Select");
-    const [current, setCurrent] = useState("Select");
-    const eduArr = ["Under Graduation", "Graduation", "Post Graduation", "Others"]
     return (
         <Styles>
             {/* Main Wrapper */}
@@ -100,7 +117,7 @@ function Admission() {
                 <HeaderTwo />
 
                 {/* Breadcroumb */}
-                <BreadcrumbBox title="Admission" />
+                {/* <BreadcrumbBox title="Admission" /> */}
 
                 {/* Registration Area */}
                 <section className="registration-area">
@@ -109,7 +126,7 @@ function Admission() {
                             <Col md="12">
                                 <div className="registration-box">
                                     <div className="registration-title text-center">
-                                        <h3>Admission</h3>
+                                        <h3>Admission Form</h3>
                                     </div>
                                     <form id="form_registration" className="form">
                                         <Row>
@@ -128,8 +145,15 @@ function Admission() {
                                             </Col>
                                             <Col lg="6">
                                                 <p className="form-control">
-                                                    <label htmlFor="registration_lname">Father's/Mother's Name</label>
-                                                    <input type="text" placeholder="Last name" id="registration_lname" />
+                                                    <label htmlFor="registration_lname">Father's Name</label>
+                                                    <input type="text" placeholder="Father's Full Name" id="registration_lname" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_lname">Mother's Name</label>
+                                                    <input type="text" placeholder="Mother's Full Name" id="registration_lname" />
                                                     <span className="registration_input-msg"></span>
                                                 </p>
                                             </Col>
@@ -156,15 +180,22 @@ function Admission() {
                                             </Col>
                                             <Col lg="6">
                                                 <p className="form-control">
-                                                    <label htmlFor="registration_user">State</label>
-                                                    <input type="text" placeholder="State" id="registration_phone_2" />
+                                                    <label htmlFor="registration_user">City</label>
+                                                    <input type="text" placeholder="City" id="registration_phone_2" />
                                                     <span className="registration_input-msg"></span>
                                                 </p>
                                             </Col>
                                             <Col lg="6">
                                                 <p className="form-control">
-                                                    <label htmlFor="registration_user">City</label>
-                                                    <input type="text" placeholder="City" id="registration_phone_2" />
+                                                    <label htmlFor="registration_user">District</label>
+                                                    <input type="text" placeholder="District" id="registration_phone_2" />
+                                                    <span className="registration_input-msg"></span>
+                                                </p>
+                                            </Col>
+                                            <Col lg="6">
+                                                <p className="form-control">
+                                                    <label htmlFor="registration_user">State</label>
+                                                    <input type="text" placeholder="State" id="registration_phone_2" />
                                                     <span className="registration_input-msg"></span>
                                                 </p>
                                             </Col>
@@ -196,11 +227,36 @@ function Admission() {
                                                     <span className="registration_input-msg"></span>
                                                 </p>
                                             </Col>
+
                                             <Col lg="6">
-                                                <p className="form-control">
-                                                    <label htmlFor="registration_user">Admission For</label>
-                                                    <input type="text" placeholder="Admission For" id="registration_phone_2" />
-                                                    <span className="registration_input-msg"></span>
+                                                <p className="form-control option-menu">
+                                                    <Col lg="12">
+
+                                                        <label htmlFor="registration_user">Admission For</label>
+                                                    </Col>
+                                                    <Col lg="12">
+                                                        <Dropdown as={ButtonGroup}>
+                                                            <Button variant="success">{admission}</Button>
+                                                            <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+                                                            <Dropdown.Menu>
+                                                                {eduArr.map((el, index) => (
+                                                                    <Dropdown.Item key={index} onClick={() => {
+                                                                        setAdmission(el.course_name)
+                                                                        console.log(el.course_name)
+                                                                    }}>{el.course_name}</Dropdown.Item>
+                                                                ))}
+                                                            </Dropdown.Menu>
+                                                        </Dropdown>
+                                                    </Col>
+                                                    {
+                                                        admission === "Others" ? (
+                                                            <div className="others-text">
+                                                                <input type="email" placeholder="Please Enter " id="registration_email" />
+                                                                <span className="registration_input-msg"></span>
+                                                            </div>) : null
+                                                    }
+
+                                                    {/* <p>{education}</p> */}
                                                 </p>
                                             </Col>
                                             <Col lg="6">

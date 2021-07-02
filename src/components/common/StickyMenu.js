@@ -1,10 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { Styles } from "./styles/stickyMenu.js";
 import { RiArrowDropDownLine } from "react-icons/ri"
+import { fetchDynamicButton } from "./../../apis/api";
+
 
 function StickyMenu(props) {
+
+  const [dynamicButton, setDynamicButton] = useState({});
+
+  useEffect(() => {
+    getDynamicButton();
+  }, [])
+
+  const getDynamicButton = async () => {
+    // const res = await fetchDynamicButton(clientStore.webHash);
+    const hash = "56609cdc79b2838b15c2950d5dbf654b"
+    const res = await fetchDynamicButton(hash);
+    let obj = {
+      tab: res.tab_name,
+      arr: res.response,
+      status: res.status,
+    }
+    setDynamicButton(obj)
+    console.log("dynamic", res)
+  }
+
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const stickyMenu = document.querySelector(".sticky-menu");
@@ -120,15 +143,6 @@ function StickyMenu(props) {
                     </a>
                   </li>
                   <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      href="https://practice.speedlabs.in/"
-                      target="blank"
-                    >
-                      Resources
-                    </a>
-                  </li>
-                  <li className="nav-item">
                     <Link
                       className="nav-link"
                       to={process.env.PUBLIC_URL + "/payonline"}
@@ -136,6 +150,37 @@ function StickyMenu(props) {
                       Pay Online
                     </Link>
                   </li>
+                  {dynamicButton.status === "success" ? (<li className="nav-item">
+                    <Link
+                      className="nav-link dropdown-toggle"
+                      to={process.env.PUBLIC_URL + "/"}
+                      data-toggle="dropdown"
+                      style={{
+                        display: "flex",
+                        alignItems: "center"
+                      }}
+                    >
+                      {dynamicButton.tab} <RiArrowDropDownLine className="moreButton" />
+                    </Link>
+                    <ul className="dropdown list-unstyled">
+                      {dynamicButton.arr.length > 0 ? (
+                        <div>
+                          {dynamicButton.arr.map((el, i) => {
+                            return (
+                              <li className="nav-item" key={i}>
+                                <a
+                                  className="nav-link"
+                                  href={el.url}
+                                >
+                                  {el.title}
+                                </a>
+                              </li>
+                            )
+                          })}
+                        </div>
+                      ) : null}
+                    </ul>
+                  </li>) : null}
                   <li className="nav-item dropdown">
                     <Link
                       className="nav-link dropdown-toggle"
@@ -244,9 +289,17 @@ function StickyMenu(props) {
                       <li className="nav-item">
                         <Link
                           className="nav-link"
-                          to={process.env.PUBLIC_URL + "/coming-soon"}
+                          to={process.env.PUBLIC_URL + "/alerts"}
                         >
-                          Alert
+                          Alerts
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link"
+                          to={process.env.PUBLIC_URL + "/achievements"}
+                        >
+                          Achievements
                         </Link>
                       </li>
 

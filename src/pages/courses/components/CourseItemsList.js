@@ -66,7 +66,7 @@ const CourseItemList = () => {
                                         // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${data.imgUrl})`
                                         backgroundImage: `url(${data.imgUrl})`
                                     }}>
-                                    <div className="author-img d-flex">
+                                    {/* <div className="author-img d-flex">
                                         <div className="img">
                                             <Link to={process.env.PUBLIC_URL + data.courseLink}>
                                                 <img src={process.env.PUBLIC_URL + `/assets/images/${data.authorImg}`} alt="" />
@@ -76,15 +76,15 @@ const CourseItemList = () => {
                                             <p>{data.authorName}</p>
                                             <span>{data.authorCourses}</span>
                                         </div>
-                                    </div>
-                                    <div className="course-price">
+                                    </div> */}
+                                    {/* <div className="course-price">
                                         <p>{data.price}</p>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="course-content">
                                 <h6 className="heading"><Link to={process.env.PUBLIC_URL + data.courseLink}>{data.courseTitle}</Link></h6>
-                                <div className="rating">
+                                {/* <div className="rating">
                                     <ul className="list-unstyled list-inline">
                                         <li className="list-inline-item"><i className="las la-star"></i></li>
                                         <li className="list-inline-item"><i className="las la-star"></i></li>
@@ -94,7 +94,7 @@ const CourseItemList = () => {
                                         </li>
                                         <li className="list-inline-item">(4.5)</li>
                                     </ul>
-                                </div>
+                                </div> */}
                                 <p className="desc" dangerouslySetInnerHTML={{ __html: `${data.courseDesc.slice(0, 150)} ...` }}></p>
                                 <Link className="details-btn" to={process.env.PUBLIC_URL + data.courseLink}>View Details</Link>
                             </div>

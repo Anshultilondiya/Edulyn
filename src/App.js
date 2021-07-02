@@ -30,13 +30,16 @@ import Product from "./pages/shop/Products";
 import Packages from "./pages/packages/Packages";
 import ProductDetails from "./pages/shop/ProductDetails";
 import Cart from "./pages/shop/Cart";
+import Alert from "./pages/alert/Alert";
+import Achievements from "./pages/achievements/Achievements";
+import Batches from "./pages/batches/Batches";
 
 // Additional Swiper Css for adding functionality
 import "swiper/swiper-bundle.css";
 
 // Importing APIs
 
-import { fetchInstituteDetails, fetchWebHash } from "./apis/api";
+import { fetchInstituteDetails, fetchWebData, fetchWebHash } from "./apis/api";
 
 // Importing MobX and Stores
 import { useClientStore } from "./contextProviders/clientContext";
@@ -50,6 +53,7 @@ const App = () => {
     // getWebHash(domain);
     // getSliderData();
     getInstituteDetails();
+    getWebData();
   }, []);
 
   const getWebHash = async (domain) => {
@@ -67,6 +71,15 @@ const App = () => {
     console.log(clientStore.instituteDetails !== {});
     console.log("Institute Details", res.response);
   };
+
+  const getWebData = async () => {
+    const res = await fetchWebData(clientStore.webHash);
+    console.log("web Data JSON", res);
+    document.title = res.detail.web_title;
+    clientStore.webDetails = res.detail;
+    clientStore.webConfig = res.config;
+    clientStore.webLayout = res.layout;
+  }
 
   return (
     <Observer>
@@ -148,6 +161,18 @@ const App = () => {
               <Route
                 path={`${process.env.PUBLIC_URL + "/faq"}`}
                 component={Faq}
+              />
+              <Route
+                path={`${process.env.PUBLIC_URL + "/alerts"}`}
+                component={Alert}
+              />
+              <Route
+                path={`${process.env.PUBLIC_URL + "/achievements"}`}
+                component={Achievements}
+              />
+              <Route
+                path={`${process.env.PUBLIC_URL + "/batches"}`}
+                component={Batches}
               />
               <Route
                 path={`${process.env.PUBLIC_URL + "/404"}`}

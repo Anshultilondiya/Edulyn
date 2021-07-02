@@ -100,7 +100,7 @@ function Career() {
                 <HeaderTwo />
 
                 {/* Breadcroumb */}
-                <BreadcrumbBox title="Career Form" />
+                {/* <BreadcrumbBox title="Career Form" /> */}
 
                 {/* Registration Area */}
                 <section className="registration-area">

@@ -100,7 +100,7 @@ function Franchise() {
                 <HeaderTwo />
 
                 {/* Breadcroumb */}
-                <BreadcrumbBox title="Franchise Form" />
+                {/* <BreadcrumbBox title="Franchise Form" /> */}
 
                 {/* Registration Area */}
                 <section className="registration-area">
@@ -220,7 +220,7 @@ function Franchise() {
                                                     <span className="registration_input-msg"></span>
                                                 </p>
                                             </Col>
-                                          
+
                                             <Col lg="6">
                                                 <p className="form-control">
                                                     <label htmlFor="registration_user">Investment Capacity</label>

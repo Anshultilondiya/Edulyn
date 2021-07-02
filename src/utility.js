@@ -87,8 +87,8 @@ export const buildTestimonials = (res) => {
       id: nanoid(),
       testimonialTitle: res[i].title,
       testimonialDesc: res[i].desc,
-      // authorImg: `https://careerliftprod.s3.amazonaws.com/website_logo/${res[i].img_url}`,
-      authorImg: "testimonial-1.jpg",
+      authorImg: res[i].img_url,
+      // authorImg: "testimonial-1.jpg",
       authorName: `${res[i].fname} ${res[i].lname}`,
       authorTitle: "Developer",
     };
@@ -184,7 +184,7 @@ export const buildBlog = (res) => {
     let obj = {
       id: res[i].blog_id,
       authorImg: "author.jpg",
-      postImg: "blog-1.jpg",
+      postImg: res[i].post_image,
       postLink: "/blog-details/" + res[i].blog_id,
       postDate: "25 Mar",
       postTitle: res[i].post_title,

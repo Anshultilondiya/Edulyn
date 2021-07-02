@@ -51,7 +51,7 @@ const BlogGrid = () => {
               <section className="blog-grid-area">
                 <Container>
                   <Row>
-                    <Col lg="9" md="8" sm="7">
+                    <Col lg="11" md="8" sm="7" style={{ margin: "auto" }}>
                       <Row>
                         {dataArray.map((data, i) => (
                           <Col lg="6" md="12" key={i}>
@@ -61,17 +61,14 @@ const BlogGrid = () => {
                                   to={process.env.PUBLIC_URL + data.postLink}
                                 >
                                   <img
-                                    src={
-                                      process.env.PUBLIC_URL +
-                                      `/assets/images/${data.postImg}`
-                                    }
+                                    src={data.postImg}
                                     alt=""
                                     className="img-fluid"
                                   />
                                 </Link>
                               </div>
                               <div className="blog-content">
-                                <div className="blog-auth_date d-flex">
+                                {/* <div className="blog-auth_date d-flex">
                                   <div className="author-img d-flex">
                                     <Link
                                       to={
@@ -103,7 +100,7 @@ const BlogGrid = () => {
                                       {data.postDate}
                                     </p>
                                   </div>
-                                </div>
+                                </div> */}
                                 <div className="blog-title">
                                   <h6>
                                     <Link
@@ -131,13 +128,13 @@ const BlogGrid = () => {
                         ))}
                       </Row>
 
-                      <div className="text-center">
+                      {/* <div className="text-center">
                         <Pagination />
-                      </div>
+                      </div> */}
                     </Col>
-                    <Col lg="3" md="4" sm="5">
+                    {/* <Col lg="3" md="4" sm="5">
                       <BlogSidebar />
-                    </Col>
+                    </Col> */}
                   </Row>
                 </Container>
               </section>

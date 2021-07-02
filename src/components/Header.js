@@ -7,7 +7,8 @@ import StickyMenu from "./common/StickyMenu";
 import MobileMenu from "./common/MobileMenu";
 import { Styles } from "./styles/header.js";
 import { useClientStore } from "../contextProviders/clientContext";
-import { RiArrowDropDownLine } from "react-icons/ri"
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { fetchDynamicButton } from "../apis/api";
 
 
 const Header = () => {
@@ -17,11 +18,17 @@ const Header = () => {
   const [address, setAddress] = useState("795 South Park Avenue, CA 94107");
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
-  const [logo, setLogo] = useState("");
+  const [logo, setLogo] = useState("");;
+  const [dynamicButton, setDynamicButton] = useState({});
 
   useEffect(() => {
     updateData();
   }, [phone, toggle, dataStatus]);
+
+
+  useEffect(() => {
+    getDynamicButton();
+  }, [])
 
   const updateData = () => {
     if (clientStore.instituteDetails["About Us"] !== undefined && !dataStatus) {
@@ -45,6 +52,20 @@ const Header = () => {
   // const headerLogo =async()=>{
   //     const res = await fetch( )
   // }
+
+  const getDynamicButton = async () => {
+    // const res = await fetchDynamicButton(clientStore.webHash);
+    const hash = "56609cdc79b2838b15c2950d5dbf654b"
+    const res = await fetchDynamicButton(hash);
+    let obj = {
+      tab: res.tab_name,
+      arr: res.response,
+      status: res.status,
+    }
+    setDynamicButton(obj)
+    console.log("dynamic", res)
+  }
+
 
   return (
     <Styles>
@@ -327,14 +348,37 @@ const Header = () => {
                         Pay Online
                       </Link>
                     </li>
-                    <li className="nav-item">
+                    {dynamicButton.status === "success" ? (<li className="nav-item">
                       <Link
-                        className="nav-link"
-                        to={process.env.PUBLIC_URL + "/payonline"}
+                        className="nav-link dropdown-toggle"
+                        to={process.env.PUBLIC_URL + "/"}
+                        data-toggle="dropdown"
+                        style={{
+                          display: "flex",
+                          alignItems: "center"
+                        }}
                       >
-                        Resources
+                        {dynamicButton.tab} <RiArrowDropDownLine className="moreButton" />
                       </Link>
-                    </li>
+                      <ul className="dropdown list-unstyled">
+                        {dynamicButton.arr.length > 0 ? (
+                          <div>
+                            {dynamicButton.arr.map((el, i) => {
+                              return (
+                                <li className="nav-item" key={i}>
+                                  <a
+                                    className="nav-link"
+                                    href={el.url}
+                                  >
+                                    {el.title}
+                                  </a>
+                                </li>
+                              )
+                            })}
+                          </div>
+                        ) : null}
+                      </ul>
+                    </li>) : null}
                     <li className="nav-item dropdown">
                       <Link
                         className="nav-link dropdown-toggle"
@@ -447,9 +491,17 @@ const Header = () => {
                         <li className="nav-item">
                           <Link
                             className="nav-link"
-                            to={process.env.PUBLIC_URL + "/coming-soon"}
+                            to={process.env.PUBLIC_URL + "/alerts"}
                           >
-                            Alert
+                            Alerts
+                          </Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link
+                            className="nav-link"
+                            to={process.env.PUBLIC_URL + "/achievements"}
+                          >
+                            Achievements
                           </Link>
                         </li>
 

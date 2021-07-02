@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Styles } from "./styles/mobileMenu.js";
 import { useClientStore } from "./../../contextProviders/clientContext";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
+import { fetchDynamicButton } from "./../../apis/api";
 
 function MobileMenu() {
 
@@ -14,10 +15,29 @@ function MobileMenu() {
     const [dataStatus, setDataStatus] = useState(false);
     const [toggle, setToggle] = useState(0);
     const [logo, setLogo] = useState("");
+    const [dynamicButton, setDynamicButton] = useState({});
 
     useEffect(() => {
         updateData();
     }, [phone, toggle, dataStatus]);
+
+    useEffect(() => {
+        getDynamicButton();
+    }, [])
+
+    const getDynamicButton = async () => {
+        // const res = await fetchDynamicButton(clientStore.webHash);
+        const hash = "56609cdc79b2838b15c2950d5dbf654b"
+        const res = await fetchDynamicButton(hash);
+        let obj = {
+            tab: res.tab_name,
+            arr: res.response,
+            status: res.status,
+        }
+        setDynamicButton(obj)
+        console.log("dynamic", res)
+    }
+
 
     const updateData = () => {
         if (clientStore.instituteDetails["About Us"] !== undefined && !dataStatus) {
@@ -249,29 +269,37 @@ function MobileMenu() {
                             </ul>
                         </div> */}
                     </div>
-                    <div className="mb-menu-item">
+                    {dynamicButton.status === "success" ? (<div className="mb-menu-item">
                         <button className="mb-menu-button" onClick={() => {
                             setDynamicOpen(!dynamicOpen)
                         }}>
-                            <p>Resources <i className="las la-plus"></i></p>
+                            <p>{dynamicButton.tab} <i className="las la-plus"></i></p>
                         </button>
                         <div className={`mb-menu-content ${dynamicOpen ? "show" : ""}`}>
                             <ul className="list-unstyled">
                                 {/* <li><Link to={process.env.PUBLIC_URL + "/products"}>Products</Link></li>
                                 <li><Link to={process.env.PUBLIC_URL + "/product-details"}>Product Details</Link></li>
                                 <li><Link to={process.env.PUBLIC_URL + "/cart"}>Cart</Link></li> */}
-                                <li className="nav-item">
-                                    <Link
 
-                                        to={process.env.PUBLIC_URL + "/contact"}
-                                    >
-                                        Contact
-                                    </Link>
-                                </li>
-
+                                {dynamicButton.arr.length > 0 ? (
+                                    <div>
+                                        {dynamicButton.arr.map((el, i) => {
+                                            return (
+                                                <li className="nav-item" key={i}>
+                                                    <a
+                                                        style={{ textTransform: "uppercase" }}
+                                                        href={el.url}
+                                                    >
+                                                        {el.title}
+                                                    </a>
+                                                </li>
+                                            )
+                                        })}
+                                    </div>
+                                ) : null}
                             </ul>
                         </div>
-                    </div>
+                    </div>) : null}
                     <div className="mb-menu-item">
                         <button className="mb-menu-button" onClick={() => {
                             setMenuOpen(!menuOpen)
@@ -334,9 +362,9 @@ function MobileMenu() {
                                 <li className="nav-item">
                                     <Link
 
-                                        to={process.env.PUBLIC_URL + "/coming-soon"}
+                                        to={process.env.PUBLIC_URL + "/alerts"}
                                     >
-                                        Alert
+                                        Alerts
                                     </Link>
                                 </li>
 

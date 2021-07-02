@@ -104,15 +104,12 @@ const TestimonialSlider = () => {
                                 alt={data.authorImg}
                               /> */}
                               <img
-                                src={
-                                  process.env.PUBLIC_URL +
-                                  `/assets/images/${data.authorImg}`
-                                }
+                                src={data.authorImg}
                                 className="slider-image"
                                 alt={data.authorImg}
                               />
                               <h6>{data.authorName}</h6>
-                              <p>{data.authorTitle}</p>
+                              {/* <p>{data.authorTitle}</p> */}
                             </div>
                           </div>
                         ))}
