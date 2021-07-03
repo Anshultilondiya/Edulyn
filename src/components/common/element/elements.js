@@ -1,7 +1,7 @@
-export const colors = {
-
+export let colors = {
     bg1: "#182B49",
     bg2: "#F6F9FF",
+    bg3: "#11B67A",
     gr_bg: "linear-gradient(90deg, #11B67A 0%, #009444 100%)",
     gr_bg2: "linear-gradient(90deg, #009444 0%, #11B67A 100%)",
     copy_bg: "#122340",
@@ -25,8 +25,15 @@ export const colors = {
     footer2: "#16171f",
     ftext: "#8D8E92",
     white: "ffffff"
-
 }
+
+export const ColorFun = (obj) => {
+    colors.bg1 = obj.primary;
+    colors.bg2 = obj.secondary;
+    colors.bg3 = obj.ternary;
+    console.log("After", colors)
+}
+
 
 export const fonts = {
 
@@ -34,3 +41,4 @@ export const fonts = {
     poppins: "'Poppins', sans-serif",
 
 }
+
