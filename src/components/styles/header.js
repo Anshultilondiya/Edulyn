@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { colors } from "../common/element/elements.js";
-
+// import { colors } from "../common/element/elements.js";
+import { colorStore } from "../common/element/elements.js";
+let colors = colorStore.getColor();
 
 export const Styles = styled.div`
     .top-bar {
@@ -313,6 +314,7 @@ export const Styles = styled.div`
     }
 
     .main-menu {
+    
         .main-menu-box {
             position: relative;
             z-index : 111;
@@ -469,6 +471,10 @@ export const Styles = styled.div`
                 }
             }
         }
+        @media(max-width:1199px){
+            max-width:95%;
+        }
+
 
         @media(max-width: 991px) {
             display : none;

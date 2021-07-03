@@ -114,7 +114,7 @@ export const buildNotification = (res) => {
     // console.log(obj);
     arr.push(obj);
   }
-  console.log("Arr", arr);
+  // console.log("Arr", arr);
   return arr;
 };
 

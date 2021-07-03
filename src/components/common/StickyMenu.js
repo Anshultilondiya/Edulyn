@@ -24,7 +24,7 @@ function StickyMenu(props) {
       status: res.status,
     }
     setDynamicButton(obj)
-    console.log("dynamic", res)
+    // console.log("dynamic", res)
   }
 
 
@@ -52,14 +52,14 @@ function StickyMenu(props) {
       >
         <Container>
           <Row>
-            <Col md="3">
+            <Col lg="2" md="2">
               <div className="logo">
                 <Link to={process.env.PUBLIC_URL + "/"}>
                   <img src={props.logo} alt="" width="100%" height="auto" />
                 </Link>
               </div>
             </Col>
-            <Col md="9" style={{ display: "flex" }}>
+            <Col lg="10" style={{ display: "flex" }}>
               <div
                 className="menu-box d-flex justify-content-end"
                 style={{ margin: "auto" }}

@@ -21,7 +21,7 @@ const PackageSection = () => {
         const res = await fetchPackageDetails(clientStore.webHash, 3);
         let arr = buildPackage(res.response)
         setPackages(arr)
-        console.log(res.response)
+        // console.log(res.response)
     }
 
     return (

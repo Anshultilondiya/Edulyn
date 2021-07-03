@@ -71,7 +71,7 @@ const HeroSlider = () => {
       // clientStore.silderData = temp;
       setDataArray(clientStore.sliderData);
       setDataState(true);
-      console.log("From API", clientStore.sliderData[0].title);
+      // console.log("From API", clientStore.sliderData[0].title);
     } catch (error) {
       console.log(error);
     }

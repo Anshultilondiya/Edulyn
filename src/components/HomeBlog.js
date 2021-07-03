@@ -19,7 +19,7 @@ const HomeBlog = () => {
 
   const getBlogs = async () => {
     const res = await fetchBlogs(clientStore.webHash);
-    console.log("Blogs", res.response);
+    // console.log("Blogs", res.response);
     clientStore.blogs = buildBlog(res.response);
     setDataArray(clientStore.blogs);
     // console.log("Blogs", clientStore.blogs);

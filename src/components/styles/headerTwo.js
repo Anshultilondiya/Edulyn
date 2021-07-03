@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { colors } from "../common/element/elements.js";
+// import { colors } from "../common/element/elements.js";
+import { colorStore } from "../common/element/elements.js";
+let colors = colorStore.getColor();
 
 export const Styles = styled.div`
     .top-bar2 {

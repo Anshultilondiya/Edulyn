@@ -112,9 +112,22 @@
   padding: 10px;
   margin-left: 10px;
 }
+#form_registration .form-control label{
+  position: relative;
+}
 
 
+#form_registration .form-control label svg{
+  position: absolute;
+  top: 0px;
+} 
 
+.icon-cards{
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
 
 
 
@@ -125,19 +138,23 @@
 
 @media (min-width:1200px) {
   .header-menu-container{
-    max-width:80% !important;
+    max-width:90% !important;
     margin: auto !important;
   }
 }
-@media (max-width:991px) {
+@media (max-width:1199px) {
   .header-menu-container{
-    max-width:100% !important;
+    max-width:96% !important;
+    margin: auto !important;
   }
 }
-@media (min-width:768px) {
-  .header-menu-container{
-    max-width:100% !important;
-  }
+@media (max-width:768px) {
+  .icon-cards{
+    flex-direction:row;
+    align-items: center;
+    justify-content: start;
+    padding: 30px;
+}
 }
 @media (max-width:575px) {
   .alert-container p{

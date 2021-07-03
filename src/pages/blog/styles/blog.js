@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../components/common/element/elements.js"
+import { colorStore } from "../../../components/common/element/elements.js"
 
 export const Styles = styled.div`
     .blog-classic-page {
@@ -34,10 +34,10 @@ export const Styles = styled.div`
                         p {
                             a {
                                 font-size: 14px;
-                                color: ${colors.green};
+                                color: ${colorStore.colors.green};
                                 font-weight: 500;
                                 &:hover {
-                                    color: ${colors.black1};
+                                    color: ${colorStore.colors.black1};
                                 }
                             }
                         }
@@ -53,11 +53,11 @@ export const Styles = styled.div`
                         margin-right: 20px;
                         p {
                             font-size : 14px;
-                            color: ${colors.text2};
+                            color: ${colorStore.colors.text2};
                             font-weight: 500;
                             i {
                                 font-size : 20px;
-                                color: ${colors.green};
+                                color: ${colorStore.colors.green};
                                 vertical-align: top;
                             }
                         }
@@ -78,10 +78,10 @@ export const Styles = styled.div`
                 .blog-title {
                     h5 {
                         a {
-                            color: ${colors.black1};
+                            color: ${colorStore.colors.black1};
                             line-height: 32px;
                             &:hover {
-                                color: ${colors.green};
+                                color: ${colorStore.colors.green};
                             }
 
                             @media(max-width: 991px) {
@@ -118,7 +118,7 @@ export const Styles = styled.div`
         .blog-grid-area {
             padding : 70px 0;
             .blog-item {
-                border: 1px solid ${colors.border1};
+                border: 1px solid ${colorStore.colors.border1};
                 border-radius: 5px;
                 transition: all 0.2s ease;
                 margin-bottom: 30px;
@@ -148,10 +148,10 @@ export const Styles = styled.div`
                             p {
                                 a {
                                     font-size: 13px;
-                                    color: ${colors.green};
+                                    color: ${colorStore.colors.green};
                                     font-weight: 500;
                                     &:hover {
-                                        color: ${colors.black1};
+                                        color: ${colorStore.colors.black1};
                                     }
                                 }
                             }
@@ -166,11 +166,11 @@ export const Styles = styled.div`
                             margin-right: 8px;
                             p {
                                 font-size : 13px;
-                                color: ${colors.text2};
+                                color: ${colorStore.colors.text2};
                                 font-weight: 500;
                                 i {
                                     font-size : 20px;
-                                    color: ${colors.green};
+                                    color: ${colorStore.colors.green};
                                     vertical-align: top;
                                 }
                             }
@@ -185,10 +185,10 @@ export const Styles = styled.div`
                         margin-bottom: 10px;
                         h6 {
                             a {
-                                color: ${colors.black1};
+                                color: ${colorStore.colors.black1};
                                 line-height: 25px;
                                 &:hover {
-                                    color: ${colors.green};
+                                    color: ${colorStore.colors.green};
                                 }
 
                                 @media(max-width: 767px) {
@@ -201,7 +201,7 @@ export const Styles = styled.div`
                     .blog-desc {
                         p {
                             font-size : 14px;
-                            color : ${colors.text3};
+                            color : ${colorStore.colors.text3};
                             line-height: 25px;
                         }
                     }

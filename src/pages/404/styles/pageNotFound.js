@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../../components/common/element/elements.js";
+import { colorStore } from "../../../components/common/element/elements.js";
+
 
 export const Styles = styled.div`
     .error-page {
@@ -22,10 +23,10 @@ export const Styles = styled.div`
             .error-box {
                 h1 {
                     font-size : 192px;
-                    color    : ${colors.black1};
+                    color    : ${colorStore.colors.black1};
                     font-weight: 600;
                     span {
-                        color    : ${colors.green};
+                        color    : ${colorStore.colors.green};
                     }
 
                     @media(max-width: 575px) {
@@ -33,7 +34,7 @@ export const Styles = styled.div`
                     }
                 }
                 h3 {
-                    color    : ${colors.black2};
+                    color    : ${colorStore.colors.black2};
                     font-weight : 600;
                     margin-bottom: 20px;
 
@@ -43,13 +44,13 @@ export const Styles = styled.div`
                 }
                 p {
                     font-size : 17px;
-                    color : ${colors.text1};
+                    color : ${colorStore.colors.text1};
                     font-weight: 500;
                     margin-bottom: 40px;
                 }
                 a {
                     font-size: 18px;
-                    background : ${colors.gr_bg};
+                    background : ${colorStore.colors.gr_bg};
                     color : #ffffff;
                     padding: 12px 30px;
                     font-weight: 500;
@@ -59,7 +60,7 @@ export const Styles = styled.div`
                         margin-right: 6px;
                     }
                     &:hover {
-                        background : ${colors.gr_bg2};
+                        background : ${colorStore.colors.gr_bg2};
                     }
 
                     @media(max-width: 575px) {

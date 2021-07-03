@@ -12,13 +12,7 @@ import { useLocation } from "react-router";
 
 
 const AboutUs = () => {
-  // constructor() {
-  //     super()
-  //     this.state = {
-  //         isOpen: false
-  //     }
-  //     this.openModal = this.openModal.bind(this)
-  // }
+
   const clientStore = useClientStore();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -48,7 +42,8 @@ const AboutUs = () => {
       };
       setData(obj);
       setDataStatus(true);
-      console.log("About Us Data ", clientStore.instituteDetails);
+      // console.log("About Us Data ", clientStore.instituteDetails);
+
       // }
     }
     if (!dataStatus) setToggle(toggle + 1);
@@ -127,7 +122,7 @@ const AboutUs = () => {
                           </span>
                         )}
                       </p>
-                      <Row>
+                      {/* <Row>
                         <Col sm="4">
                           <div className="counter-box box1 text-center">
                             <h3>
@@ -155,7 +150,7 @@ const AboutUs = () => {
                             <p>Courses</p>
                           </div>
                         </Col>
-                      </Row>
+                      </Row> */}
                       {location.pathname !== process.env.PUBLIC_URL + "/about" ? (<Link
                         className="readmore-btn"
                         to={process.env.PUBLIC_URL + "/about"}

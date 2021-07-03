@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { colors } from "../element/elements.js";
+import { colorStore } from "../element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+let colors = colorStore.getColor();
 
 export const Styles = styled.div`
 .mobile-menu-area {
@@ -80,7 +82,10 @@ export const Styles = styled.div`
                     img {
                         max-width: 150px;
                         @media(max-width: 480px) {
-                            max-width : 120px;
+                            max-width : 150px;
+                        }
+                        @media(max-width: 991px) {
+                            max-width : 200px;
                         }
                     }
                 }

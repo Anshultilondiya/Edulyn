@@ -36,12 +36,12 @@ const FaqEvent = () => {
   useEffect(() => {
     getNotification();
     getFAQ();
-    console.log("FAQ STATE", faqDataArray)
+    // console.log("FAQ STATE", faqDataArray)
   }, []);
 
   const getNotification = async () => {
     const res = await fetchNotification(clientStore.webHash);
-    console.log("Notifications", res.response);
+    // console.log("Notifications", res.response);
     let notifications = buildNotification(res.response);
     setNotificationsDataArray(notifications);
     setNotifyData(notifications[0])
@@ -49,9 +49,9 @@ const FaqEvent = () => {
   };
 
   const getFAQ = async () => {
-    console.log("FAQ Section");
+    // console.log("FAQ Section");
     const res = await fetchFAQ(clientStore.webHash);
-    console.log("FAQ", res.response);
+    // console.log("FAQ", res.response);
     clientStore.faqData = buildFaq(res.response);
     setFaqDataArray(clientStore.faqData);
     // console.log("FAQ", clientStore.faqData);

@@ -53,7 +53,7 @@ const TeamSlider = () => {
     clientStore.facultyData = buildFaculty(res.response);
     setDataArray(clientStore.facultyData);
     setDataStatus(true);
-    console.log("facultyData", buildFaculty(res.response));
+    // console.log("facultyData", buildFaculty(res.response));
   };
 
   const [show, setShow] = useState(false);
@@ -100,7 +100,7 @@ const TeamSlider = () => {
                   }</p>
                 </div>
                 <div style={{
-                  marginTop:"30px"
+                  marginTop: "30px"
                 }}>
                   <p
                     dangerouslySetInnerHTML={{

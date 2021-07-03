@@ -27,8 +27,8 @@ const TabBox = () => {
       setOurVision(clientStore.instituteDetails["Our vision"]);
       setDirectorMessage(clientStore.instituteDetails["Director Message"]);
       setCoFounderMessage(clientStore.instituteDetails["Co-founder Message"]);
-      setDirectorImg(clientStore.instituteDetails["Director Image"]);
-      setCoFounderImg(clientStore.instituteDetails["Co-founder Image"]);
+      setDirectorImg(clientStore.instituteDetails["imgURL"] + clientStore.instituteDetails["Director Image"]);
+      setCoFounderImg(clientStore.instituteDetails["imgURL"] + clientStore.instituteDetails["Co-founder Image"]);
       // setLogo(
       //   "https://careerliftprod.s3.amazonaws.com/website_logo/" +
       //     clientStore.instituteDetails["Header Logo"]
@@ -126,9 +126,7 @@ const TabBox = () => {
                       <Row>
                         <Col md={3}>
                           <img
-                            src={
-                              "https://komonews.com/resources/media/efe6838b-6e29-4afb-8e57-2203e44a0267-large16x9_Boss.jpg?1491764564379"
-                            }
+                            src={directorImg}
                             alt=""
                             width="100%"
                           />
@@ -178,9 +176,7 @@ const TabBox = () => {
                       <Row>
                         <Col md={3}>
                           <img
-                            src={
-                              "https://komonews.com/resources/media/efe6838b-6e29-4afb-8e57-2203e44a0267-large16x9_Boss.jpg?1491764564379"
-                            }
+                            src={coFounderImg}
                             alt=""
                             width="100%"
                           />

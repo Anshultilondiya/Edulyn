@@ -20,7 +20,7 @@ const Footer = () => {
         fetchWebData(clientStore.webHash)
             .then((data) => {
                 setWebDetail(data.detail);
-                console.log("web Details", data.detail)
+                // console.log("web Details", data.detail)
             })
             .catch((err) => {
                 console.log(err);
@@ -29,7 +29,7 @@ const Footer = () => {
     return (
         <Styles>
             {/* Footer Area */}
-            <footer className="footer1" style={{ backgroundImage: `url(assets/images/${process.env.PUBLIC_URL + Datas.backgroundImage})` }}>
+            <footer className="footer1" >
                 <Container>
                     <Row>
                         <Col md="6">

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../components/common/element/elements.js";
+import { colorStore } from "../../../components/common/element/elements.js";
 
 export const Styles = styled.div`
     .contact-page {
@@ -7,7 +7,7 @@ export const Styles = styled.div`
             padding : 68px 0 0;
             .contact-box-title {
                 h4 {
-                    color: ${colors.black1};
+                    color: ${colorStore.colors.black1};
                     font-weight: 600;
                     padding-bottom: 10px;
                     margin-bottom: 30px;
@@ -15,7 +15,7 @@ export const Styles = styled.div`
                     &:before {
                         position: absolute;
                         content: "";
-                        background: ${colors.green};
+                        background: ${colorStore.colors.green};
                         width: 50px;
                         height: 2px;
                         bottom: 0;
@@ -32,10 +32,10 @@ export const Styles = styled.div`
                 margin-bottom: 30px;
                 i {
                     font-size : 32px;
-                    color: ${colors.green};
+                    color: ${colorStore.colors.green};
                     width: 65px;
                     height: 65px;
-                    border: 1px solid ${colors.border3};
+                    border: 1px solid ${colorStore.colors.border3};
                     text-align: center;
                     border-radius : 50%;
                     padding-top: 15px;
@@ -51,7 +51,7 @@ export const Styles = styled.div`
                     }
                 }
                 h5 {
-                    color: ${colors.black2};
+                    color: ${colorStore.colors.black2};
                     font-weight: 600;
                     margin-bottom: 8px;
 
@@ -61,7 +61,7 @@ export const Styles = styled.div`
                 }
                 p {
                     font-size : 14px;
-                    color: ${colors.text3};
+                    color: ${colorStore.colors.text3};
 
                     @media(max-width: 991px) {
                         font-size: 13px;
@@ -120,14 +120,14 @@ export const Styles = styled.div`
                             }
 
                             &:hover {
-                                background-color: ${colors.green} !important;
+                                background-color: ${colorStore.colors.green} !important;
 
                                 &:before {
-                                    border-bottom-color: ${colors.green} !important;
+                                    border-bottom-color: ${colorStore.colors.green} !important;
                                 }
 
                                 &:after {
-                                    border-top-color: ${colors.green} !important;
+                                    border-top-color: ${colorStore.colors.green} !important;
                                 }
                             }
                         }
@@ -222,7 +222,7 @@ export const Styles = styled.div`
                 margin-bottom: 70px;
                 .form-title {
                     h4 {
-                        color: ${colors.black1};
+                        color: ${colorStore.colors.black1};
                         font-weight: 600;
                         padding-bottom: 10px;
                         margin-bottom: 30px;
@@ -230,7 +230,7 @@ export const Styles = styled.div`
                         &:before {
                             position: absolute;
                             content: "";
-                            background: ${colors.green};
+                            background: ${colorStore.colors.green};
                             width: 50px;
                             height: 2px;
                             bottom: 0;
@@ -259,17 +259,17 @@ export const Styles = styled.div`
                                 background-color: #ffffff;
                                 font-size       : 14px;
                                 padding         : 15px 20px;
-                                color           : ${colors.black1};
-                                border          : 1px solid ${colors.border3};
+                                color           : ${colorStore.colors.black1};
+                                border          : 1px solid ${colorStore.colors.border3};
                                 border-radius : 5px;
 
                                 &::placeholder {
                                     font-size : 14px;
-                                    color     : ${colors.text2};
+                                    color     : ${colorStore.colors.text2};
                                 }
 
                                 &:focus {
-                                    border-color : ${colors.green};
+                                    border-color : ${colorStore.colors.green};
                                 }
 
                                 @media(max-width: 480px) {
@@ -283,17 +283,17 @@ export const Styles = styled.div`
                                 background-color: #ffffff;
                                 font-size       : 14px;
                                 padding         : 15px 20px;
-                                color           : ${colors.black1};
-                                border          : 1px solid ${colors.border3};
+                                color           : ${colorStore.colors.black1};
+                                border          : 1px solid ${colorStore.colors.border3};
                                 border-radius : 5px;
 
                                 &::placeholder {
                                     font-size : 14px;
-                                    color     : ${colors.text2};
+                                    color     : ${colorStore.colors.text2};
                                 }
 
                                 &:focus {
-                                    border-color : ${colors.green};
+                                    border-color : ${colorStore.colors.green};
                                 }
 
                                 @media(max-width: 480px) {
@@ -302,7 +302,7 @@ export const Styles = styled.div`
                             }
 
                             span {
-                                color      : ${colors.red};
+                                color      : ${colorStore.colors.red};
                                 font-weight: 300;
                                 position   : absolute;
                                 bottom     : -20px;
@@ -314,7 +314,7 @@ export const Styles = styled.div`
                         p.form-control.success {
                             input,
                             textarea {
-                                border: 2px solid ${colors.green};
+                                border: 2px solid ${colorStore.colors.green};
                             }
 
                             &::before {
@@ -322,7 +322,7 @@ export const Styles = styled.div`
                                 content    : "\f058";
                                 font-family: "Line Awesome Free";
                                 font-size  : 24px;
-                                color      : ${colors.green};
+                                color      : ${colorStore.colors.green};
                                 font-weight: 900;
                                 top        : 5px;
                                 right      : 10px;
@@ -332,7 +332,7 @@ export const Styles = styled.div`
                         p.form-control.error {
                             input,
                             textarea {
-                                border: 2px solid ${colors.red};
+                                border: 2px solid ${colorStore.colors.red};
                             }
 
                             &::before {
@@ -340,7 +340,7 @@ export const Styles = styled.div`
                                 content    : "\f06a";
                                 font-family: "Line Awesome Free";
                                 font-size  : 24px;
-                                color      : ${colors.red};
+                                color      : ${colorStore.colors.red};
                                 font-weight: 900;
                                 top        : 5px;
                                 right      : 10px;
@@ -356,7 +356,7 @@ export const Styles = styled.div`
                         button {
                             font-size  : 16px;
                             color      : #fff;
-                            background : ${colors.gr_bg};
+                            background : ${colorStore.colors.gr_bg};
                             width      : 100%;
                             height     : 48px;
                             font-weight: 500;
@@ -365,7 +365,7 @@ export const Styles = styled.div`
                             text-transform: uppercase;
 
                             &:hover {
-                                background: ${colors.gr_bg2};
+                                background: ${colorStore.colors.gr_bg2};
 
                                 i {
                                     color: #ffffff;

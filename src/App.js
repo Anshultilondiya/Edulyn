@@ -33,6 +33,7 @@ import Cart from "./pages/shop/Cart";
 import Alert from "./pages/alert/Alert";
 import Achievements from "./pages/achievements/Achievements";
 import Batches from "./pages/batches/Batches";
+import { colorStore } from "./components/common/element/elements";
 
 // Additional Swiper Css for adding functionality
 import "swiper/swiper-bundle.css";
@@ -52,8 +53,8 @@ const App = () => {
   useEffect(() => {
     // getWebHash(domain);
     // getSliderData();
-    getInstituteDetails();
     getWebData();
+    getInstituteDetails();
   }, []);
 
   const getWebHash = async (domain) => {
@@ -68,8 +69,8 @@ const App = () => {
   const getInstituteDetails = async () => {
     const res = await fetchInstituteDetails(clientStore.webHash);
     clientStore.instituteDetails = res.response;
-    console.log(clientStore.instituteDetails !== {});
-    console.log("Institute Details", res.response);
+    // console.log(clientStore.instituteDetails !== {});
+    // console.log("Institute Details", res.response);
   };
 
   const getWebData = async () => {
@@ -79,6 +80,7 @@ const App = () => {
     clientStore.webDetails = res.detail;
     clientStore.webConfig = res.config;
     clientStore.webLayout = res.layout;
+    colorStore.dynamicColor(res.layout)
   }
 
   return (

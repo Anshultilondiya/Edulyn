@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../common/element/elements.js";
+// import { colorStore.colors } from "../common/element/elements.js";
+import { colorStore } from "../common/element/elements.js";
 
 export const Styles = styled.div`
     footer.footer1 {
@@ -12,7 +13,7 @@ export const Styles = styled.div`
         &:before {
             position  : absolute;
             content   : "";
-            background: ${colors.bg1};
+            background: ${colorStore.colors.bg1};
             opacity   : 0.98;
             width     : 100%;
             height    : 100%;
@@ -31,19 +32,19 @@ export const Styles = styled.div`
 
             p {
                 font-size    : 14px;
-                color        : ${colors.text3};
+                color        : ${colorStore.colors.text3};
                 line-height  : 28px;
                 margin-bottom: 20px;
             }
 
             ul {
                 li {
-                    color        : ${colors.text3};
+                    color        : ${colorStore.colors.text3};
                     margin-bottom: 12px;
                     
                     svg {
                         font-size     : 18px;
-                        color         : ${colors.green};
+                        color         : ${colorStore.colors.green};
                         width         : 35px;
                         vertical-align: top;
                     }
@@ -59,7 +60,7 @@ export const Styles = styled.div`
             width:100%;
             padding-left:80px;
             h5 {
-                color         : ${colors.border1};
+                color         : ${colorStore.colors.border1};
                 text-transform: uppercase;
                 margin-top    : 8px;
                 margin-bottom : 35px;
@@ -77,17 +78,17 @@ export const Styles = styled.div`
                 li {
                     a {
                         font-size  : 14px;
-                        color      : ${colors.text3};
+                        color      : ${colorStore.colors.text3};
                         line-height: 38px;
                         
                         svg {
                             font-size   : 12px;
-                            color       : ${colors.green};
+                            color       : ${colorStore.colors.green};
                             margin-right: 10px;
                         }
 
                         &:hover {
-                            color: ${colors.green};
+                            color: ${colorStore.colors.green};
                         }
 
                         @media(max-width: 991px) {
@@ -107,7 +108,7 @@ export const Styles = styled.div`
 
         .f-post {
             h5 {
-                color         : ${colors.border1};
+                color         : ${colorStore.colors.border1};
                 text-transform: uppercase;
                 margin-top    : 8px;
                 margin-bottom : 45px;
@@ -132,12 +133,12 @@ export const Styles = styled.div`
                 .post-content {
                     a {
                         font-size    : 14px;
-                        color        : ${colors.text3};
+                        color        : ${colorStore.colors.text3};
                         display      : inline-block;
                         margin-bottom: 10px;
 
                         &:hover {
-                            color: ${colors.green};
+                            color: ${colorStore.colors.green};
                         }
 
                         @media(max-width: 991px) {
@@ -149,7 +150,7 @@ export const Styles = styled.div`
 
                     span {
                         display: block;
-                        color  : ${colors.text2};
+                        color  : ${colorStore.colors.text2};
                     }
                 }
             }
@@ -162,20 +163,20 @@ export const Styles = styled.div`
 
     .copyright-area {
         padding   : 35px 0 38px;
-        background: ${colors.copy_bg};
+        background: ${colorStore.colors.copy_bg};
 
         .copy-text {
             p {
-                color      : ${colors.text3};
+                color      : ${colorStore.colors.text3};
                 padding-top: 3px;
 
                 i {
-                    color : ${colors.green};
+                    color : ${colorStore.colors.green};
                     margin: 0 2px;
                 }
 
                 a {
-                    color: ${colors.green};
+                    color: ${colorStore.colors.green};
 
                     &:hover {
                         text-decoration: underline;
@@ -230,14 +231,14 @@ export const Styles = styled.div`
                     }
 
                     &:hover {
-                        background-color: ${colors.green} !important;
+                        background-color: ${colorStore.colors.green} !important;
 
                         &:before {
-                            border-bottom-color: ${colors.green} !important;
+                            border-bottom-color: ${colorStore.colors.green} !important;
                         }
 
                         &:after {
-                            border-top-color: ${colors.green} !important;
+                            border-top-color: ${colorStore.colors.green} !important;
                         }
                     }
                 }

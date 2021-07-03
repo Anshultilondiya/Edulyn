@@ -53,7 +53,7 @@ const TestimonialSlider = () => {
 
   const getTestimonial = async () => {
     const res = await fetchTestimonials(clientStore.webHash);
-    console.log("Testimonials", res.response);
+    // console.log("Testimonials", res.response);
     clientStore.testimonials = buildTestimonials(res.response);
     // console.log("Testimonials >>>", clientStore.testimonials);
     // console.log(clientStore.testimonials.length);

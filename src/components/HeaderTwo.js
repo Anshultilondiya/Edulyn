@@ -191,14 +191,14 @@ const HeaderTwo = () => {
                 </Link>
               </div>
             </Col> */}
-            <Col md="3">
+            <Col lg="3">
               <div className="logo">
                 <Link to={process.env.PUBLIC_URL + "/"}>
                   <img src={logo} alt="" width="100%" height="auto" />
                 </Link>
               </div>
             </Col>
-            <Col md="9" style={{ display: "flex" }}>
+            <Col lg="9" style={{ display: "flex" }}>
               <div
                 className="menu-box d-flex justify-content-end"
                 style={{ margin: "auto" }}

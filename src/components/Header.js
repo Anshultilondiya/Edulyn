@@ -63,7 +63,7 @@ const Header = () => {
       status: res.status,
     }
     setDynamicButton(obj)
-    console.log("dynamic", res)
+    // console.log("dynamic", res)
   }
 
 

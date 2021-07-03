@@ -48,11 +48,11 @@ function CourseFilter() {
 
   const getTopCourses = async () => {
     const res = await fetchTopCourses(clientStore.webHash, 3);
-    console.log("Courses", res.response);
+    // console.log("Courses", res.response);
     clientStore.topCourses = buildCourse(res.response);
     setDataArray(clientStore.topCourses);
     setDataStatus(true);
-    console.log(clientStore.topCourses);
+    // console.log(clientStore.topCourses);
   };
 
   return (

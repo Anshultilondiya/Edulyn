@@ -35,7 +35,7 @@ const IconBox = () => {
   const getFeaturesData = async () => {
     try {
       const res = await fetchCoreFeatures(clientStore.webHash);
-      console.log("Features: ", res.response);
+      // console.log("Features: ", res.response);
       let { arr, maxlen } = coreFeatureDataFormat(res.response[0]);
       //   console.log(FormatedArr);
       clientStore.coreFeaturesData = arr;
@@ -125,13 +125,8 @@ const IconBox = () => {
                         }}
                       >
                         <div
-                          className="icon-box d-flex"
-                          style={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            padding: "30px",
-                          }}
+                          className="icon-box d-flex icon-cards"
+                          
                         >
                           <div className={data.uniqClass}>
                             <i className={data.boxIcon}></i>

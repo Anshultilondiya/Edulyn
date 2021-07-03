@@ -6,7 +6,8 @@ Version: 1.0
 ==============================================*/
 
 import { createGlobalStyle } from "styled-components";
-import { colors, fonts } from "../element/elements.js";
+import { colorStore, fonts } from "../element/elements.js";
+let colors = colorStore.getColor();
 
 export const GlobalStyle = createGlobalStyle`
     html {

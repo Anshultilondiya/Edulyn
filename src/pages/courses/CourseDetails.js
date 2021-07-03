@@ -75,7 +75,7 @@ const CourseDetails = () => {
                     <Col lg="9" md="10" sm="12" style={{ margin: "auto" }}>
                       <div className="course-details-top">
                         <div className="heading">
-                          <h4>{courseName}</h4>
+                          <h4> Course : {courseName}</h4>
                         </div>
                         {/* <div className="course-top-overview">
                           <div className="d-flex overviews">

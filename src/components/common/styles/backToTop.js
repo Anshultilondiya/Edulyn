@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { colors } from "../element/elements.js";
+import { colorStore } from "../element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+let colors = colorStore.getColor();
 
 export const Styles = styled.div`
     button.totop-btn {
