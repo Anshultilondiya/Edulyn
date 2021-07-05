@@ -4,13 +4,34 @@ import { Container, Row, Col } from 'react-bootstrap';
 import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import Footer from '../../components/Footer';
-import { Styles } from './styles/forms.js';
+import { StyleFun } from './styles/forms.js';
 import { Dropdown, Button, ButtonGroup, Form } from "react-bootstrap"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as api from '../../apis/api';
+import { useClientStore } from "./../../contextProviders/clientContext"
+import { updateColorObj } from "./../../utility"
 
 function Career() {
+    const clientStore = useClientStore();
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
+
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
     const [selectedFile, setSelectedFile] = useState("");
     const [buttonState, setButtonState] = useState("Submit");
     const [user, setuser] = useState({

@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import { colorStore } from "../../../components/common/element/elements.js"
+import { colors } from "../../../components/common/element/elements.js"
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+
+const Styles = styled.div`
     .blog-details-page {
         .blog-details-area {
             padding : 70px 0;
@@ -16,7 +19,7 @@ export const Styles = styled.div`
 
                 .heading {
                     h4 {
-                        color : ${colorStore.colors.black1};
+                        color : ${colors.black1};
                         font-weight: 600;
                         line-height: 35px;
                         margin-bottom: 25px;
@@ -42,10 +45,10 @@ export const Styles = styled.div`
                         p {
                             a {
                                 font-size: 14px;
-                                color: ${colorStore.colors.green};
+                                color: ${colors.green};
                                 font-weight: 500;
                                 &:hover {
-                                    color: ${colorStore.colors.black1};
+                                    color: ${colors.black1};
                                 }
                             }
                         }
@@ -57,20 +60,20 @@ export const Styles = styled.div`
                         margin-right: 20px;
                         p {
                             font-size : 14px;
-                            color: ${colorStore.colors.text2};
+                            color: ${colors.text2};
                             font-weight: 500;
                             i {
                                 font-size : 20px;
-                                color: ${colorStore.colors.green};
+                                color: ${colors.green};
                                 vertical-align: top;
                             }
 
                             a {
                                 font-size : 14px;
-                                color: ${colorStore.colors.text2};
+                                color: ${colors.text2};
                                 font-weight: 500;
                                 &:hover {
-                                    color: ${colorStore.colors.green};
+                                    color: ${colors.green};
                                 }
                             }
                         }
@@ -92,11 +95,11 @@ export const Styles = styled.div`
                     margin-bottom: 45px;
                     p {
                         font-size: 15px;
-                        color: ${colorStore.colors.text2};
+                        color: ${colors.text2};
                         line-height: 25px;
                         span {
-                            background : ${colorStore.colors.border1};
-                            color: ${colorStore.colors.black2};
+                            background : ${colors.border1};
+                            color: ${colors.black2};
                             display : block;
                             margin: 35px 0;
                             padding: 22px 28px;
@@ -109,7 +112,7 @@ export const Styles = styled.div`
                                 margin-left: -20px;
                                 font-size : 30px;
                                 color : #ffffff;
-                                background : ${colorStore.colors.gr_bg};
+                                background : ${colors.gr_bg};
                                 width: 42px;
                                 height: 42px;
                                 text-align: center;
@@ -122,13 +125,13 @@ export const Styles = styled.div`
                         margin-top : 30px;
                         li {
                             font-size: 14px;
-                            color: ${colorStore.colors.text3};
+                            color: ${colors.text3};
                             line-height: 25px;
                             margin-bottom: 15px;
                             i {
                                 float: left;
-                                color: ${colorStore.colors.green};
-                                border: 1px solid ${colorStore.colors.border3};
+                                color: ${colors.green};
+                                border: 1px solid ${colors.border3};
                                 width: 35px;
                                 height: 35px;
                                 border-radius: 50%;
@@ -149,17 +152,17 @@ export const Styles = styled.div`
                     .blog-tag {
                         ul.tags {
                             li {
-                                color : ${colorStore.colors.text3};
+                                color : ${colors.text3};
                                 a {
                                     font-size: 14px;
-                                    color: ${colorStore.colors.text2};
+                                    color: ${colors.text2};
                                     &:hover {
-                                        color: ${colorStore.colors.green};
+                                        color: ${colors.green};
                                     }
                                 }
                                 &:first-child {
                                     font-size: 15px;
-                                    color: ${colorStore.colors.black1};
+                                    color: ${colors.black1};
                                     font-weight: 500;
                                 }
                             }
@@ -213,21 +216,21 @@ export const Styles = styled.div`
                                     }
 
                                     &:hover {
-                                        background-color: ${colorStore.colors.green} !important;
+                                        background-color: ${colors.green} !important;
 
                                         &:before {
-                                            border-bottom-color: ${colorStore.colors.green} !important;
+                                            border-bottom-color: ${colors.green} !important;
                                         }
 
                                         &:after {
-                                            border-top-color: ${colorStore.colors.green} !important;
+                                            border-top-color: ${colors.green} !important;
                                         }
                                     }
                                 }
 
                                 &:nth-child(1) {
                                     font-size: 15px;
-                                    color: ${colorStore.colors.black1};
+                                    color: ${colors.black1};
                                     font-weight: 500;
                                 }
 
@@ -317,7 +320,7 @@ export const Styles = styled.div`
                 .blog-comments {
                     margin-bottom: 45px;
                     h5 {
-                        color: ${colorStore.colors.black2};
+                        color: ${colors.black2};
                         font-weight: 600;
                         padding-bottom: 10px;
                         margin-bottom: 35px;
@@ -325,7 +328,7 @@ export const Styles = styled.div`
                         &:before {
                             position: absolute;
                             content: "";
-                            background: ${colorStore.colors.green};
+                            background: ${colors.green};
                             width: 50px;
                             height: 2px;
                             bottom: 0;
@@ -333,7 +336,7 @@ export const Styles = styled.div`
                         }
                     }
                     .comment-box {
-                        border-bottom: 1px solid ${colorStore.colors.border1};
+                        border-bottom: 1px solid ${colors.border1};
                         padding-bottom: 20px;
                         margin-bottom: 25px;
                         .comment-image {
@@ -347,22 +350,22 @@ export const Styles = styled.div`
                             .content-title {
                                 .comment-writer {
                                     h6 {
-                                        color: ${colorStore.colors.black2};
+                                        color: ${colors.black2};
                                         font-weight: 600;
                                         margin-bottom : 10px;
                                     }
                                     p {
                                         font-size : 12px;
-                                        color: ${colorStore.colors.text3};
+                                        color: ${colors.text3};
                                         margin-bottom: 5px;
                                     }
                                 }
                                 .reply-btn {
                                     button {
                                         font-size : 14px;
-                                        color: ${colorStore.colors.green};
+                                        color: ${colors.green};
                                         background : transparent;
-                                        border : 1px solid ${colorStore.colors.border3};
+                                        border : 1px solid ${colors.border3};
                                         font-weight: 500;
                                         border-radius: 25px;
                                         padding: 4px 12px 3px;
@@ -373,8 +376,8 @@ export const Styles = styled.div`
                                         }
                                         &:hover {
                                             color : #ffffff;
-                                            background : ${colorStore.colors.gr_bg};
-                                            border-color : ${colorStore.colors.green};
+                                            background : ${colors.gr_bg};
+                                            border-color : ${colors.green};
                                         }
                                     }
                                 }
@@ -382,7 +385,7 @@ export const Styles = styled.div`
                             .comment-desc {
                                 p {
                                     font-size: 14px;
-                                    color: ${colorStore.colors.text2};
+                                    color: ${colors.text2};
                                     line-height: 25px;
                                 }
                             }
@@ -414,3 +417,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles;
+}

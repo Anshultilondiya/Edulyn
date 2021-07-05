@@ -6,12 +6,15 @@ import ReviewForm from "./components/ReviewForm";
 import PopularCourse from "./components/PopularCourse";
 import CourseTag from "./components/CourseTag";
 import Footer from "../../components/Footer";
-import { Styles } from "./styles/course.js";
+import { StyleFun } from "./styles/course.js";
 import { useParams } from "react-router-dom";
 import { useClientStore } from "../../contextProviders/clientContext";
 import { Observer } from "mobx-react";
 
 import { fetchCourseDetailsById } from "./../../apis/api";
+
+import { updateColorObj } from "../../utility";
+
 
 const CourseDetails = () => {
   let { courseID } = useParams();
@@ -55,6 +58,32 @@ const CourseDetails = () => {
     setCourseKeyBenefits(res.response[0]["course_key_benefits"]);
     setCourseEligibility(res.response[0]["course_eligibility"]);
   };
+
+
+
+
+  const [colors, setColors] = useState({ ...clientStore.colors });
+  const [dataStatusCol, setDataStatusCol] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
+
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatusCol) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatusCol(true);
+    }
+    if (!dataStatusCol) setToggle(toggle + 1);
+  };
+
+
+
+
 
   return (
     <Observer>

@@ -1,9 +1,9 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+
+  const Styles = styled.div`
   .icon-box-area {
     padding-bottom: 80px;
 
@@ -201,3 +201,5 @@ export const Styles = styled.div`
     }
   }
 `;
+  return Styles;
+}

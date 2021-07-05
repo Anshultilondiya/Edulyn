@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Styles } from "./styles/mobileMenu.js";
+import { StyleFun } from "./styles/mobileMenu.js";
 import { useClientStore } from "./../../contextProviders/clientContext";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
 import { fetchDynamicButton } from "./../../apis/api";
+import { updateColorObj } from "./../../utility"
+
 
 function MobileMenu() {
 
     const clientStore = useClientStore();
     const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("someemail@domain.com");
-    const [address, setAddress] = useState("795 South Park Avenue, CA 94107");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
     const [dataStatus, setDataStatus] = useState(false);
     const [toggle, setToggle] = useState(0);
     const [logo, setLogo] = useState("");
     const [dynamicButton, setDynamicButton] = useState({});
 
-    useEffect(() => {
-        updateData();
-    }, [phone, toggle, dataStatus]);
+
 
     useEffect(() => {
         getDynamicButton();
@@ -37,7 +37,9 @@ function MobileMenu() {
         setDynamicButton(obj)
         // console.log("dynamic", res)
     }
-
+    useEffect(() => {
+        updateData();
+    }, [phone, toggle, dataStatus]);
 
     const updateData = () => {
         if (clientStore.instituteDetails["About Us"] !== undefined && !dataStatus) {
@@ -58,31 +60,31 @@ function MobileMenu() {
         if (!dataStatus) setToggle(toggle + 1);
     };
 
-
-    // useEffect(() => {
-
-    // Menu Accordion -----------------
-    // const menuButton = document.querySelectorAll(".mb-menu-button");
-    // menuButton.forEach(button => {
-    //     button.addEventListener("click", () => {
-    //         button.classList.toggle("active");
-    //         const content = button.nextElementSibling;
-
-    //         if (button.classList.contains("active")) {
-    //             content.className = "mb-menu-content show";
-    //             content.style.maxHeight = content.scrollHeight + "px";
-    //         } else {
-    //             content.className = "mb-menu-content";
-    //             content.style.maxHeight = "0";
-    //         }
-    //     });
-    // });
-    // });
-
-
     const [isOpen, setIsOpen] = useState(false)
     const [menuOpen, setMenuOpen] = useState(false);
     const [dynamicOpen, setDynamicOpen] = useState(false);
+
+
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataColStatus, setDataColStatus] = useState(false);
+    const [toggleCol, setToggleCol] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
+
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggleCol, dataColStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataColStatus(true);
+        }
+        if (!dataColStatus) setToggleCol(toggleCol + 1);
+    };
+
+
 
 
     return (

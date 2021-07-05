@@ -1,9 +1,10 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
+import { colors } from "../common/element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+// let colors = colorStore.getColor();
+export const StyleFun = (colors) => {
 
-export const Styles = styled.div`
+    const Styles = styled.div`
 
     .tab-section {
         background: ${colors.bg2};
@@ -110,3 +111,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles
+}

@@ -1,7 +1,36 @@
-import React, { useEffect } from 'react';
-import { Styles } from "./styles/backToTop.js";
+import React, { useEffect, useState } from 'react';
+import { StyleFun } from "./styles/backToTop.js";
+
+import { useClientStore } from "./../../contextProviders/clientContext";
+import { updateColorObj } from "./../../utility"
+
+
 
 function BackToTop() {
+
+    const clientStore = useClientStore();
+
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
+
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
+
+
+
     useEffect(() => {
         const topBtn = document.querySelector(".totop-btn");
 

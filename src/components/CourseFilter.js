@@ -2,18 +2,36 @@ import React, { useEffect, useState } from "react";
 import Datas from "../data/course/filter.json";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { Styles } from "./styles/courseFilter.js";
+import { StyleFun } from "./styles/courseFilter.js";
 import { fetchTopCourses } from "./../apis/api";
 
 import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
 import { buildCourse } from "../utility";
+import { getColorObj } from './common/element/elements';
+import { updateColorObj } from '../utility';
 
 function CourseFilter() {
   const clientStore = useClientStore();
   const [dataArray, setDataArray] = useState(Datas.dataList);
+  const [colors, setColors] = useState({ ...getColorObj() });
   const [dataStatus, setDataStatus] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
 
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatus(true);
+    }
+    if (!dataStatus) setToggle(toggle + 1);
+  };
   // useEffect(() => {
   //   const buttons = document.querySelector(".filter-btn-list").children;
   //   const items = document.querySelector(".filter-items").children;
@@ -51,7 +69,6 @@ function CourseFilter() {
     // console.log("Courses", res.response);
     clientStore.topCourses = buildCourse(res.response);
     setDataArray(clientStore.topCourses);
-    setDataStatus(true);
     // console.log(clientStore.topCourses);
   };
 

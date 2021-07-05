@@ -1,9 +1,13 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
+import { colors } from "../common/element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+// let colors = colorStore.getColor();
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+
+
+    const Styles = styled.div`
     .top-bar2 {
         height       : 40px;
         border-bottom: 1px solid ${colors.border1};
@@ -390,3 +394,6 @@ export const Styles = styled.div`
         }
     }
 `;
+
+    return Styles
+}

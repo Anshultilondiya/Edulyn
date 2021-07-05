@@ -6,14 +6,35 @@ import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import BlogSidebar from './components/BlogSidebar';
 import CommentForm from './components/CommentForm';
 import Footer from '../../components/Footer';
-import { Styles } from './styles/blogDetails.js';
+import { StyleFun } from './styles/blogDetails.js';
 import { useParams } from 'react-router-dom'
 import { useClientStore } from '../../contextProviders/clientContext';
 import { Observer } from 'mobx-react';
 import { fetchBlogs } from '../../apis/api';
+import { updateColorObj } from "../../utility";
 
 const BlogDetails = () => {
     const clientStore = useClientStore();
+
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
+
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
+
     const { blogID } = useParams();
     const [blog, setblog] = useState({});
     const [blogs, setblogs] = useState([]);

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { colors } from "../element/elements.js";
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+    const Styles = styled.div`
     .sticky-menu {
         display: none;
         position: fixed;
@@ -206,3 +208,6 @@ export const Styles = styled.div`
         }
     }
 `;
+
+    return Styles
+}

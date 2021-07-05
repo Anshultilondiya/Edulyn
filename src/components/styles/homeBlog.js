@@ -1,9 +1,9 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
-
-export const Styles = styled.div`
+import { colors } from "../common/element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+// let colors = colorStore.getColor();
+export const StyleFun = (colors) => {
+    const Styles = styled.div`
     .home-blog-area {
         padding: 63px 0 42px;
 
@@ -210,3 +210,6 @@ export const Styles = styled.div`
     }
 
 `;
+
+    return Styles
+}

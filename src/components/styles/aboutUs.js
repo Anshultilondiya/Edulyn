@@ -1,9 +1,8 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+    const Styles = styled.div`
     .about-us {
         padding: 78px 0 85px;
 
@@ -237,3 +236,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles
+}

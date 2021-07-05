@@ -5,11 +5,12 @@ import Search from "./common/Search";
 import Sidebar from "./common/Sidebar";
 import StickyMenu from "./common/StickyMenu";
 import MobileMenu from "./common/MobileMenu";
-import { Styles } from "./styles/header.js";
+import { StyleFun } from "./styles/header.js";
 import { useClientStore } from "../contextProviders/clientContext";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { fetchDynamicButton } from "../apis/api";
-
+import { getColorObj } from './common/element/elements';
+import { updateColorObj } from '../utility';
 
 const Header = () => {
   const clientStore = useClientStore();
@@ -48,6 +49,28 @@ const Header = () => {
     }
     if (!dataStatus) setToggle(toggle + 1);
   };
+
+  const [colors, setColors] = useState({ ...getColorObj() });
+  const [dataColStatus, setDataColStatus] = useState(false);
+  const [toggleCol, setToggleCol] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
+
+
+  useEffect(() => {
+    updateColors();
+    setStyles(StyleFun(colors))
+  }, [colors, toggleCol, dataColStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      // setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataColStatus(true);
+    }
+    if (!dataColStatus) setToggleCol(toggleCol + 1);
+  };
+
 
   // const headerLogo =async()=>{
   //     const res = await fetch( )

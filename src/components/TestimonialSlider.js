@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import Datas from "../data/testimonial/testimonial-slider.json";
 import { Container, Row, Col } from "react-bootstrap";
 import Swiper from "react-id-swiper";
-import { Styles } from "./styles/testimonialSlider.js";
+import { StyleFun } from "./styles/testimonialSlider.js";
 import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
 import { fetchTestimonials } from "./../apis/api";
 import { buildTestimonials } from "../utility";
+import { getColorObj } from './common/element/elements';
+import { updateColorObj } from '../utility';
 
 const TestimonialSlider = () => {
   const clientStore = useClientStore();
@@ -60,6 +62,24 @@ const TestimonialSlider = () => {
     setDataArray(clientStore.testimonials);
     setDataStatus(true);
   };
+  const [colors, setColors] = useState({ ...getColorObj() });
+  const [dataStatusCol, setDataStatusCol] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
+
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatusCol) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatusCol(true);
+    }
+    if (!dataStatusCol) setToggle(toggle + 1);
+  };
 
   return (
     <Observer>
@@ -69,9 +89,9 @@ const TestimonialSlider = () => {
             {/* Testimonial Slider */}
             <section
               className="testimonial-area"
-              style={{
-                backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${Datas.backgroundImage})`,
-              }}
+            // style={{
+            //   backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${Datas.backgroundImage})`,
+            // }}
             >
               <Container>
                 <Row>

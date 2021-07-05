@@ -4,12 +4,14 @@ import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import GoogleMap from './GoogleMap';
 import Footer from '../../components/Footer';
-import { Styles } from './styles/contact.js';
+import { StyleFun } from './styles/contact.js';
 import { useClientStore } from '../../contextProviders/clientContext';
 import { fetchInstituteDetails, fetchStatus, sendContactData } from "./../../apis/api"
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { updateColorObj } from "./../../utility"
 
 function Contact() {
 
@@ -197,7 +199,24 @@ function Contact() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
 
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
 
 
 

@@ -1,14 +1,16 @@
-import React, { Component, useEffect, useState } from "react";
-import Datas from "../data/about-us/about-us.json";
+import React, { useEffect, useState } from "react";
+// import Datas from "../data/about-us/about-us.json";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import ModalVideo from "react-modal-video";
-import CountUp from "react-countup";
-import { Styles } from "./styles/aboutUs.js";
+// import CountUp from "react-countup";
+import { StyleFun } from "./styles/aboutUs.js";
 import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
-import { fetchVideo } from "./../apis/api";
+// import { fetchVideo } from "./../apis/api";
 import { useLocation } from "react-router";
+import { getColorObj } from './common/element/elements';
+import { updateColorObj } from '../utility';
 
 
 const AboutUs = () => {
@@ -22,9 +24,13 @@ const AboutUs = () => {
     setIsOpen(true);
   };
 
-  const [data, setData] = useState(Datas);
+  const [data, setData] = useState({});
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
+  const [colors, setColors] = useState({ ...getColorObj() });
+  const [dataColStatus, setDataColStatus] = useState(false);
+  const [toggleCol, setToggleCol] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
 
   useEffect(() => {
     updateData();
@@ -47,6 +53,20 @@ const AboutUs = () => {
       // }
     }
     if (!dataStatus) setToggle(toggle + 1);
+  };
+
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggleCol, dataColStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataColStatus(true);
+    }
+    if (!dataColStatus) setToggleCol(toggleCol + 1);
   };
 
   // useEffect(() => {

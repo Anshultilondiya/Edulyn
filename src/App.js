@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "./helper/ScrollToTop";
-import { GlobalStyle } from "./components/common/styles/global.js";
+import { GlobalStyleFun } from "./components/common/styles/global.js";
 import HomeOne from "./HomeOne";
 import HomeTwo from "./HomeTwo";
 import About from "./pages/about/About";
@@ -23,7 +23,7 @@ import Contact from "./pages/contact/Contact";
 import Faq from "./pages/faq/Faq";
 import PageNotFound from "./pages/404/PageNotFound";
 import ComingSoon from "./pages/comingsoon/ComingSoon";
-import BlogClassic from "./pages/blog/BlogClassic";
+// import BlogClassic from "./pages/blog/BlogClassic";
 import BlogGrid from "./pages/blog/BlogGrid";
 import BlogDetails from "./pages/blog/BlogDetails";
 import Product from "./pages/shop/Products";
@@ -33,7 +33,8 @@ import Cart from "./pages/shop/Cart";
 import Alert from "./pages/alert/Alert";
 import Achievements from "./pages/achievements/Achievements";
 import Batches from "./pages/batches/Batches";
-import { colorStore } from "./components/common/element/elements";
+import { updateColorObj } from "./utility";
+// import { dynamicColor } from "./components/common/element/elementStore";
 
 // Additional Swiper Css for adding functionality
 import "swiper/swiper-bundle.css";
@@ -72,7 +73,8 @@ const App = () => {
     // console.log(clientStore.instituteDetails !== {});
     // console.log("Institute Details", res.response);
   };
-
+  const [colors, setColors] = useState({ ...clientStore.colors });
+  const [GlobalStyle, setGlobalStyle] = useState(GlobalStyleFun(colors));
   const getWebData = async () => {
     const res = await fetchWebData(clientStore.webHash);
     console.log("web Data JSON", res);
@@ -80,7 +82,9 @@ const App = () => {
     clientStore.webDetails = res.detail;
     clientStore.webConfig = res.config;
     clientStore.webLayout = res.layout;
-    colorStore.dynamicColor(res.layout)
+    setGlobalStyle(GlobalStyleFun({ ...updateColorObj(clientStore.colors, clientStore.webLayout) }))
+
+    // dynamicColor(res.layout)
   }
 
   return (
@@ -184,10 +188,10 @@ const App = () => {
                 path={`${process.env.PUBLIC_URL + "/coming-soon"}`}
                 component={ComingSoon}
               />
-              <Route
+              {/* <Route
                 path={`${process.env.PUBLIC_URL + "/blog-classic"}`}
                 component={BlogClassic}
-              />
+              /> */}
               <Route
                 path={`${process.env.PUBLIC_URL + "/blog-grid"}`}
                 component={BlogGrid}

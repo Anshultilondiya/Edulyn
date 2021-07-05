@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import AboutUs from '../../components/AboutUs';
@@ -7,44 +7,68 @@ import TabBox from './../../components/TabBox';
 import TestimonialSlider from '../../components/TestimonialSlider';
 import FaqEvent from '../../components/FaqEvent';
 import Footer from '../../components/Footer';
-import { Styles } from "./styles/about.js";
+import { StyleFun } from "./styles/about.js";
+import { useClientStore } from '../../contextProviders/clientContext';
+import { updateColorObj } from '../../utility';
 
-class About extends Component {
+const About = () => {
+    const clientStore = useClientStore();
 
-    render() {
-        return (
-            <Styles>
-                {/* Main Wrapper */}
-                <div className="main-wrapper about-page">
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
 
-                    {/* Header 2 */}
-                    <HeaderTwo />
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
 
-                    {/* Breadcroumb */}
-                    <BreadcrumbBox title="About Us" />
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
 
-                    {/* About Area */}
-                    <AboutUs />
 
-                    {/* Icon Box Area */}
-                    {/* <IconBox /> */}
 
-                    {/* Tab Section */}
-                    <TabBox />
 
-                    {/* Testimonial Slider */}
-                    {/* <TestimonialSlider /> */}
+    return (
+        <Styles>
+            {/* Main Wrapper */}
+            <div className="main-wrapper about-page">
 
-                    {/* Faq & Event Area */}
-                    {/* <FaqEvent /> */}
+                {/* Header 2 */}
+                <HeaderTwo />
 
-                    {/* Footer 2 */}
-                    <Footer />
+                {/* Breadcroumb */}
+                <BreadcrumbBox title="About Us" />
 
-                </div>
-            </Styles>
-        )
-    }
+                {/* About Area */}
+                <AboutUs />
+
+                {/* Icon Box Area */}
+                {/* <IconBox /> */}
+
+                {/* Tab Section */}
+                <TabBox />
+
+                {/* Testimonial Slider */}
+                {/* <TestimonialSlider /> */}
+
+                {/* Faq & Event Area */}
+                {/* <FaqEvent /> */}
+
+                {/* Footer 2 */}
+                <Footer />
+
+            </div>
+        </Styles>
+    )
+
 }
 
 export default About

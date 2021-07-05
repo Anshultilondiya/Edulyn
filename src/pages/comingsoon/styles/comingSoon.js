@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { colors } from "../../../components/common/element/elements.js";
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+
+const Styles = styled.div`
     .coming-soon-page {
         .coming-soon-area {
             background-size: cover;
@@ -366,3 +369,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles;
+}

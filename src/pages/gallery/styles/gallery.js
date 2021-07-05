@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Styles = styled.div`
+export const StyleFun = (colors) =>{
+    
+const Styles = styled.div`
     .gallery-page {
         .gallery-page-area {
             padding : 70px 0;
@@ -27,3 +29,5 @@ export const Styles = styled.div`
         
     }
 `;
+return Styles;
+}

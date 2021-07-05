@@ -3,9 +3,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import Footer from '../../components/Footer';
-import { Styles } from './styles/product.js';
+import { StyleFun } from './styles/product.js';
 import { fetchAchievement } from './../../apis/api'
 import { useClientStore } from '../../contextProviders/clientContext';
+import { updateColorObj } from '../../utility';
 
 const Achievements = () => {
 
@@ -20,6 +21,26 @@ const Achievements = () => {
         console.log(res.response);
         setArr(res.response)
     }
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
+
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
+
+
 
     return (
         <Styles>

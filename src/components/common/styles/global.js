@@ -6,10 +6,12 @@ Version: 1.0
 ==============================================*/
 
 import { createGlobalStyle } from "styled-components";
-import { colorStore, fonts } from "../element/elements.js";
-let colors = colorStore.getColor();
+import { fonts } from "../element/elements.js";
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyleFun = (colors) => {
+
+
+    const GlobalStyle = createGlobalStyle`
     html {
         color      : ${colors.bg1};
         font-size  : 13px;
@@ -161,3 +163,6 @@ export const GlobalStyle = createGlobalStyle`
         margin-right: 0;
     }
 `;
+
+    return GlobalStyle
+}

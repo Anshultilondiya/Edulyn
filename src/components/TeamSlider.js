@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Datas from "../data/team/team-slider.json";
 import { Container, Row, Col } from "react-bootstrap";
 import Swiper from "react-id-swiper";
-import { Styles } from "./styles/teamSlider.js";
+import { StyleFun } from "./styles/teamSlider.js";
 import { fetchFaculty } from "./../apis/api";
 import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
-import { buildFaculty } from "../utility";
+import { buildFaculty, updateColorObj } from "../utility";
 import { Modal, Button } from "react-bootstrap";
 
 const TeamSlider = () => {
@@ -46,6 +46,25 @@ const TeamSlider = () => {
   useEffect(() => {
     getFaculty();
   }, []);
+  const [colors, setColors] = useState({ ...clientStore.colors });
+  const [dataStatusCol, setDataStatusCol] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
+
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatusCol) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatusCol(true);
+    }
+    if (!dataStatusCol) setToggle(toggle + 1);
+  };
+
 
   const getFaculty = async () => {
     const res = await fetchFaculty(clientStore.webHash, 10);

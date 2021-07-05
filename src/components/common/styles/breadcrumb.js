@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { colorStore } from "../element/elements.js";
-// import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
+import { colors } from "../element/elements.js";
+// import { } from "../common/element/elements.js";
+// let colors = getColor();
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+    const Styles = styled.div`
     .breadcrumb-area {
         background-size    : cover;
         background-position: center;
@@ -73,3 +74,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles
+}

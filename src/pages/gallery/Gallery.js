@@ -6,11 +6,13 @@ import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import Pagination from './../../components/Pagination';
 import Footer from '../../components/Footer';
-import { Styles } from './styles/gallery.js';
+import { StyleFun } from './styles/gallery.js';
 import { fetchImages, fetchVideo } from '../../apis/api';
 import { useClientStore } from '../../contextProviders/clientContext';
 import { Observer } from 'mobx-react';
 import ImageViewer from 'react-simple-image-viewer';
+import { updateColorObj } from '../../utility';
+
 
 
 const Gallery = () => {
@@ -54,9 +56,29 @@ const Gallery = () => {
     }, [])
 
 
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
 
-    console.log(images);
-    console.log(status);
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
+
+
+
+    // console.log(images);
+    // console.log(status);
     // const [imageLg, setImageLg] = useState(null)
     // const [currentImage, setCurrentImage] = useState(0);
     // const [isViewerOpen, setIsViewerOpen] = useState(false);

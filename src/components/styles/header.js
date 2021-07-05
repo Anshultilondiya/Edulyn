@@ -1,9 +1,11 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
+import { colors } from "../common/element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+// let colors = colorStore.getColor();
+export const StyleFun = (colors) => {
 
-export const Styles = styled.div`
+
+    const Styles = styled.div`
     .top-bar {
         background: ${colors.bg1};
         .bar-left {
@@ -481,3 +483,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles
+}

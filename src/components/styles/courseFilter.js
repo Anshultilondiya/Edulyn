@@ -1,9 +1,9 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
-
-export const Styles = styled.div`
+import { colors } from "../common/element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+// let colors = colorStore.getColor();
+export const StyleFun = (colors) => {
+    const Styles = styled.div`
     .course-filter {
         background: ${colors.bg2};
         padding   : 62px 0 70px;
@@ -222,3 +222,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles
+}

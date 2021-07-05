@@ -1,9 +1,8 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+    const Styles = styled.div`
     .team-member-area {
         background: ${colors.bg2};
         padding   : 63px 0;
@@ -119,3 +118,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles;
+}

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Datas from "../data/blog/home-blog.json";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { Styles } from "./styles/homeBlog.js";
+import { StyleFun } from "./styles/homeBlog.js";
 import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
-import { buildBlog } from "../utility";
+import { buildBlog, updateColorObj } from "../utility";
 import { fetchBlogs } from "./../apis/api";
 
 const HomeBlog = () => {
@@ -26,7 +26,24 @@ const HomeBlog = () => {
   };
 
   const [blogLen, setBlogLen] = useState(1)
+  const [colors, setColors] = useState({ ...clientStore.colors });
+  const [dataStatus, setDataStatus] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
 
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatus(true);
+    }
+    if (!dataStatus) setToggle(toggle + 1);
+  };
 
   return (
     <Observer>

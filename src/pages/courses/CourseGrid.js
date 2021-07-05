@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import HeaderTwo from "../../components/HeaderTwo";
 import { BreadcrumbBox } from "../../components/common/Breadcrumb";
 import CourseSidebar from "./components/CourseSidebar";
 import CourseItemGrid from "./components/CourseItemsGrid";
 import Footer from "../../components/Footer";
-import { Styles } from "./styles/course.js";
+import { StyleFun } from "./styles/course.js";
 import { Observer } from "mobx-react";
 import { useClientStore } from "../../contextProviders/clientContext";
+import { updateColorObj } from "../../utility";
+
 
 const CourseGrid = () => {
   const clientStore = useClientStore();
@@ -16,6 +18,24 @@ const CourseGrid = () => {
     window.scrollTo(0, 0)
   }, [])
 
+  const [colors, setColors] = useState({ ...clientStore.colors });
+  const [dataStatus, setDataStatus] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
+
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatus(true);
+    }
+    if (!dataStatus) setToggle(toggle + 1);
+  };
 
 
 

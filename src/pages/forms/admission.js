@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import Footer from '../../components/Footer';
-import { Styles } from './styles/forms.js';
+import { StyleFun } from './styles/forms.js';
 import * as api from '../../apis/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,7 +15,7 @@ import { useClientStore } from "./../../contextProviders/clientContext"
 import { Dropdown, Button, ButtonGroup, Form } from "react-bootstrap"
 import { CgAsterisk } from "react-icons/cg"
 
-
+import { updateColorObj } from "./../../utility"
 
 function Admission() {
 
@@ -34,7 +34,24 @@ function Admission() {
         setEduArr([...res.response, { course_name: "Others" }]);
     };
 
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
 
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
 
 
 

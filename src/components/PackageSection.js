@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 // import Datas from '../../data/shop/product.json';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import { Styles } from './styles/packageSection';
+import { StyleFun } from './styles/packageSection';
 import { useClientStore } from '../contextProviders/clientContext';
 import { fetchPackageDetails } from '../apis/api';
 // import { nanoid } from 'nanoid';
 // import { moment } from "moment"
 import { buildPackage } from '../utility';
+import { getColorObj } from './common/element/elements';
+import { updateColorObj } from '../utility';
 
 const PackageSection = () => {
 
@@ -23,6 +25,24 @@ const PackageSection = () => {
         setPackages(arr)
         // console.log(res.response)
     }
+    const [colors, setColors] = useState({ ...getColorObj() });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
+
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
 
     return (
         <Styles>

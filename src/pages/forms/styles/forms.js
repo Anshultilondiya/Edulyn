@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { colors } from "../../../components/common/element/elements.js";
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+const Styles = styled.div`
     .login-page {
         .login-area {
             padding : 70px 0;
@@ -474,3 +476,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles;
+}

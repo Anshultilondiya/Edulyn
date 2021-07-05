@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+    const Styles = styled.div`
     .about-page {
         .icon-box-area {
             padding-bottom : 72px;
@@ -19,3 +21,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles;
+}

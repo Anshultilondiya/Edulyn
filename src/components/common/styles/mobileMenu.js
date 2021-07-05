@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import { colorStore } from "../element/elements.js";
+import { colors } from "../element/elements.js";
 // import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
+// let colors = colorStore.getColor();
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+    const Styles = styled.div`
 .mobile-menu-area {
     // background : ${colors.bg1};
     display: none;
@@ -272,3 +274,6 @@ export const Styles = styled.div`
     opacity   : 1;
 }
 `;
+
+    return Styles
+}

@@ -14,59 +14,59 @@ import NewsletterForm from "./components/NewsletterForm";
 import Footer from "./components/Footer";
 import PackageSection from "./components/PackageSection";
 
-import { observer } from "mobx-react";
-
-const HomeOne = observer(
-  class HomeOne extends Component {
-    render() {
-      return (
-        <div className="main-wrapper">
-          {/* Header */}
-          <Header />
-
-          {/* Hero Slider */}
-          <HeroSlider />
-
-          {/* Icon Box */}
-          <IconBox />
-
-          {/* About Area */}
-          <AboutUs />
-
-          {/* Course Filter */}
-          <CourseFilter />
-
-          {/* Testimonial Slider */}
-          <TestimonialSlider />
-
-          {/* Packages */}
-          <PackageSection />
+import { useClientStore } from "./contextProviders/clientContext"
 
 
-          {/* Faq & Event Area */}
-          <FaqEvent />
+const HomeOne = () => {
+  const clientStore = useClientStore();
 
-          {/* Team Slider */}
-          <TeamSlider />
+  return (
+    <div className="main-wrapper">
+      {/* Header */}
+      <Header />
 
-          {/* Help Area */}
-          {/* <HelpArea /> */}
+      {/* Hero Slider */}
+      <HeroSlider />
 
-          {/* Blog Area */}
-          <HomeBlog />
+      {/* Icon Box */}
+      <IconBox />
 
-          {/* Campus Tour */}
-          {/* <CampusTour /> */}
+      {/* About Area */}
+      <AboutUs />
 
-          {/* Newsletter Form */}
-          {/* <NewsletterForm /> */}
+      {/* Course Filter */}
+      <CourseFilter />
 
-          {/* Footer */}
-          <Footer />
-        </div>
-      );
-    }
-  }
-);
+      {/* Testimonial Slider */}
+      <TestimonialSlider />
+
+      {/* Packages */}
+      <PackageSection />
+
+
+      {/* Faq & Event Area */}
+      <FaqEvent />
+
+      {/* Team Slider */}
+      <TeamSlider />
+
+      {/* Help Area */}
+      {/* <HelpArea /> */}
+
+      {/* Blog Area */}
+      <HomeBlog />
+
+      {/* Campus Tour */}
+      {/* <CampusTour /> */}
+
+      {/* Newsletter Form */}
+      {/* <NewsletterForm /> */}
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+
+}
 
 export default HomeOne;

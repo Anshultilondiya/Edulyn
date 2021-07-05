@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
-import { Styles } from "./styles/tabBox.js";
+import { StyleFun } from "./styles/tabBox.js";
 import { useClientStore } from "../contextProviders/clientContext";
+import { updateColorObj } from "../utility.js";
 
 const TabBox = () => {
   const clientStore = useClientStore();
@@ -14,7 +15,10 @@ const TabBox = () => {
   const [coFounderImg, setCoFounderImg] = useState("");
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
-
+  const [colors, setColors] = useState({ ...clientStore.colors });
+  const [dataColStatus, setDataColStatus] = useState(false);
+  const [toggleCol, setToggleCol] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
   useEffect(() => {
     updateData();
   }, [toggle, dataStatus]);
@@ -40,6 +44,20 @@ const TabBox = () => {
     if (!dataStatus) setToggle(toggle + 1);
   };
 
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggleCol, dataColStatus]);
+
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataColStatus(true);
+    }
+    if (!dataColStatus) setToggleCol(toggleCol + 1);
+  };
   return (
     <Styles>
       {/* Tab Box Area */}

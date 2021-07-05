@@ -1,10 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Datas from '../../data/coming-soon/coming-soon.json';
 import { Container, Row, Col } from 'react-bootstrap';
 import Timer from 'react-compound-timer';
-import { Styles } from './styles/comingSoon.js';
+import { StyleFun } from './styles/comingSoon.js';
+
+import { useClientStore } from "./../../contextProviders/clientContext"
+import { updateColorObj } from "./../../utility"
 
 function ComingSoon() {
+    const clientStore = useClientStore();
+
+    const [colors, setColors] = useState({ ...clientStore.colors });
+    const [dataStatus, setDataStatus] = useState(false);
+    const [toggle, setToggle] = useState(0);
+    const [Styles, setStyles] = useState(StyleFun(colors));
+
+    useEffect(() => {
+        updateColors();
+    }, [colors, toggle, dataStatus]);
+
+    const updateColors = () => {
+        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+            let obj = { ...colors }
+            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+            setDataStatus(true);
+        }
+        if (!dataStatus) setToggle(toggle + 1);
+    };
+
+
+    
     useEffect(() => {
         const form = document.getElementById("cm_form");
         const email = document.getElementById("cm_email");

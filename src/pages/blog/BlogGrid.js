@@ -7,15 +7,35 @@ import { BreadcrumbBox } from "../../components/common/Breadcrumb";
 import Pagination from "./../../components/Pagination";
 import BlogSidebar from "./components/BlogSidebar";
 import Footer from "../../components/Footer";
-import { Styles } from "./styles/blog.js";
+import { StyleFun } from "./styles/blog.js";
 import { Observer } from "mobx-react";
 import { useClientStore } from "./../../contextProviders/clientContext";
 import { fetchBlogs } from "../../apis/api";
-import { buildBlog } from "../../utility";
+import { buildBlog, updateColorObj } from "../../utility";
 
 const BlogGrid = () => {
-  const clientStore = useClientStore();
 
+  const clientStore = useClientStore();
+  const [colors, setColors] = useState({ ...clientStore.colors });
+  const [dataStatus, setDataStatus] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
+
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatus(true);
+    }
+    if (!dataStatus) setToggle(toggle + 1);
+  };
+
+  
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])

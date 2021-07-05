@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Datas from "../data/faq-event/faq-event.json";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { Styles } from "./styles/faqEvent.js";
+import { StyleFun } from "./styles/faqEvent.js";
 import { fetchNotification, fetchFAQ } from "./../apis/api";
 import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
 import { buildFaq, buildNotification } from "../utility";
 import { Modal, Button } from "react-bootstrap";
+import { getColorObj } from './common/element/elements';
+import { updateColorObj } from '../utility';
 
 const FaqEvent = () => {
   const clientStore = useClientStore();
@@ -74,6 +76,29 @@ const FaqEvent = () => {
   }
 
   // const [modal, setModal] = useState(null);
+
+
+  const [colors, setColors] = useState({ ...getColorObj() });
+  const [dataStatus, setDataStatus] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
+
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatus(true);
+    }
+    if (!dataStatus) setToggle(toggle + 1);
+  };
+
+
+
 
   return (
     <Observer>

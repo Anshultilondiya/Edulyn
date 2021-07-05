@@ -1,14 +1,17 @@
 import styled from "styled-components";
-import { colorStore } from "../../../components/common/element/elements.js";
+import { colors } from "../../../components/common/element/elements.js";
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+
+const Styles = styled.div`
 
     /* Course Grid */
     .course-grid-area {
         padding: 70px 0;
         .course-items {
             .course-item {
-                border: 1px solid ${colorStore.colors.border1};
+                border: 1px solid ${colors.border1};
                 border-radius : 5px;
                 transition : all 0.2s ease;
                 overflow : hidden;
@@ -41,14 +44,14 @@ export const Styles = styled.div`
 
                             p {
                                 font-size    : 12px;
-                                color        : ${colorStore.colors.black1};
+                                color        : ${colors.black1};
                                 font-weight  : 500;
                                 margin-bottom: -4px;
                             }
 
                             span {
                                 font-size  : 11px;
-                                color      : ${colorStore.colors.text3};
+                                color      : ${colors.text3};
                                 font-weight: 500;
                             }
                         }
@@ -59,7 +62,7 @@ export const Styles = styled.div`
                         p {
                             font-size  : 16px;
                             color      : #ffffff;
-                            background : ${colorStore.colors.bg1};
+                            background : ${colors.bg1};
                             position   : absolute;
                             right      : 20px;
                             bottom     : 20px;
@@ -80,22 +83,22 @@ export const Styles = styled.div`
 
                     h6.heading {
                         a {
-                            color        : ${colorStore.colors.black1};
+                            color        : ${colors.black1};
                             font-weight  : 600;
                             display      : inline-block;
                             margin-bottom: 12px;
 
                             &:hover {
-                                color: ${colorStore.colors.green};
+                                color: ${colors.green};
                             }
                         }
                     }
 
                     p.desc {
                         font-size     : 14px;
-                        color         : ${colorStore.colors.text3};
+                        color         : ${colors.text3};
                         line-height   : 25px;
-                        border-bottom : 1px solid ${colorStore.colors.border1};
+                        border-bottom : 1px solid ${colors.border1};
                         padding-bottom: 10px;
                         margin-bottom : 12px;
                     }
@@ -106,11 +109,11 @@ export const Styles = styled.div`
                         .student {
                             p {
                                 font-size: 13px;
-                                color    : ${colorStore.colors.text3};
+                                color    : ${colors.text3};
 
                                 i {
                                     font-size     : 16px;
-                                    color         : ${colorStore.colors.green};
+                                    color         : ${colors.green};
                                     vertical-align: text-bottom;
                                     margin-right  : 3px;
                                 }
@@ -124,12 +127,12 @@ export const Styles = styled.div`
 
                                     i {
                                         font-size: 14px;
-                                        color    : ${colorStore.colors.yellow};
+                                        color    : ${colors.yellow};
                                     }
 
                                     &:last-child {
                                         font-size: 13px;
-                                        color    : ${colorStore.colors.text3};
+                                        color    : ${colors.text3};
                                     }
                                 }
                             }
@@ -187,14 +190,14 @@ export const Styles = styled.div`
 
                                 p {
                                     font-size    : 12px;
-                                    color        : ${colorStore.colors.black1};
+                                    color        : ${colors.black1};
                                     font-weight  : 500;
                                     margin-bottom: -4px;
                                 }
 
                                 span {
                                     font-size  : 11px;
-                                    color      : ${colorStore.colors.text3};
+                                    color      : ${colors.text3};
                                     font-weight: 500;
                                 }
                             }
@@ -209,7 +212,7 @@ export const Styles = styled.div`
                             p {
                                 font-size  : 16px;
                                 color      : #ffffff;
-                                background : ${colorStore.colors.bg1};
+                                background : ${colors.bg1};
                                 position   : absolute;
                                 right      : 20px;
                                 top     : 20px;
@@ -241,7 +244,7 @@ export const Styles = styled.div`
                         &:before {
                             position: absolute;
                             content: "";
-                            background: ${colorStore.colors.green};
+                            background: ${colors.green};
                             width: 50px;
                             height: 2px;
                             bottom: 0;
@@ -249,12 +252,12 @@ export const Styles = styled.div`
                         }
 
                         a {
-                            color        : ${colorStore.colors.black1};
+                            color        : ${colors.black1};
                             font-weight  : 600;
                             display      : inline-block;
 
                             &:hover {
-                                color: ${colorStore.colors.green};
+                                color: ${colors.green};
                             }
                         }
                     }
@@ -267,12 +270,12 @@ export const Styles = styled.div`
 
                                 i {
                                     font-size: 14px;
-                                    color    : ${colorStore.colors.yellow};
+                                    color    : ${colors.yellow};
                                 }
 
                                 &:last-child {
                                     font-size: 13px;
-                                    color    : ${colorStore.colors.text3};
+                                    color    : ${colors.text3};
                                 }
                             }
                         }
@@ -280,22 +283,22 @@ export const Styles = styled.div`
 
                     p.desc {
                         font-size     : 14px;
-                        color         : ${colorStore.colors.text3};
+                        color         : ${colors.text3};
                         line-height   : 25px;
                         margin-bottom : 15px;
                     }
 
                     a.details-btn {
                         font-size : 13px;
-                        color : ${colorStore.colors.green};
-                        border : 1px solid ${colorStore.colors.border3};
+                        color : ${colors.green};
+                        border : 1px solid ${colors.border3};
                         padding: 7px 15px;
                         border-radius: 5px;
                         font-weight: 500;
                         &:hover {
                             color : #ffffff;
-                            background : ${colorStore.colors.gr_bg};
-                            border-color : ${colorStore.colors.green};
+                            background : ${colors.gr_bg};
+                            border-color : ${colors.green};
                         }
                     }
                 }
@@ -321,7 +324,7 @@ export const Styles = styled.div`
         .course-details-top {
             .heading {
                 h4 {
-                    color : ${colorStore.colors.black1};
+                    color : ${colors.black1};
                     font-weight: 600;
                     line-height: 35px;
                     margin-bottom: 25px;
@@ -338,7 +341,7 @@ export const Styles = styled.div`
                         margin-right : 20px;
                         padding-right : 20px;
                         margin-top: -3px;
-                        border-right : 1px solid ${colorStore.colors.border3};
+                        border-right : 1px solid ${colors.border3};
                         img {
                             float : left;
                             max-width: 50px;
@@ -349,7 +352,7 @@ export const Styles = styled.div`
                             float : left;
                             margin-top: 3px;
                             h6 {
-                                color : ${colorStore.colors.black2};
+                                color : ${colors.black2};
                                 font-weight: 600;
                                 text-transform: uppercase;
                                 margin-bottom: 5px;
@@ -360,7 +363,7 @@ export const Styles = styled.div`
                             }
                             p {
                                 font-size : 15px;
-                                color : ${colorStore.colors.text3};
+                                color : ${colors.text3};
                                 font-weight: 500;
 
                                 @media(max-width: 767px) {
@@ -373,9 +376,9 @@ export const Styles = styled.div`
                     .category {
                         margin-right : 20px;
                         padding-right : 20px;
-                        border-right : 1px solid ${colorStore.colors.border3};
+                        border-right : 1px solid ${colors.border3};
                         h6 {
-                            color : ${colorStore.colors.black2};
+                            color : ${colors.black2};
                             font-weight: 600;
                             text-transform: uppercase;
                             margin-bottom: 5px;
@@ -386,7 +389,7 @@ export const Styles = styled.div`
                         }
                         p {
                             font-size : 15px;
-                            color : ${colorStore.colors.text3};
+                            color : ${colors.text3};
                             font-weight: 500;
 
                             @media(max-width: 767px) {
@@ -398,9 +401,9 @@ export const Styles = styled.div`
                     .rating {
                         margin-right : 20px;
                         padding-right : 20px;
-                        border-right : 1px solid ${colorStore.colors.border3};
+                        border-right : 1px solid ${colors.border3};
                         h6 {
-                            color : ${colorStore.colors.black2};
+                            color : ${colors.black2};
                             font-weight: 600;
                             text-transform: uppercase;
                             margin-bottom: 5px;
@@ -414,11 +417,11 @@ export const Styles = styled.div`
                                 margin-right: 1px;
                                 i {
                                     font-size: 16px;
-                                    color: ${colorStore.colors.yellow};
+                                    color: ${colors.yellow};
                                 }
                                 &:last-child {
                                     font-size : 15px;
-                                    color : ${colorStore.colors.text3};
+                                    color : ${colors.text3};
                                     font-weight: 500;
                                     margin-left: 5px;
 
@@ -432,7 +435,7 @@ export const Styles = styled.div`
 
                     .price {
                         h6 {
-                            color : ${colorStore.colors.black2};
+                            color : ${colors.black2};
                             font-weight: 600;
                             text-transform: uppercase;
                             margin-bottom: 5px;
@@ -443,7 +446,7 @@ export const Styles = styled.div`
                         }
                         p {
                             font-size : 15px;
-                            color : ${colorStore.colors.text3};
+                            color : ${colors.text3};
                             font-weight: 500;
 
                             @media(max-width: 767px) {
@@ -473,7 +476,7 @@ export const Styles = styled.div`
                         display: inline-block;
                         a.nav-link {
                             font-size: 14px;
-                            color: ${colorStore.colors.black2};
+                            color: ${colors.black2};
                             font-weight: 500;
                             text-transform : uppercase;
                             padding: 12px 30px 10px;
@@ -484,7 +487,7 @@ export const Styles = styled.div`
                             }
                         }
                         a.nav-link.active {
-                            background : ${colorStore.colors.gr_bg};
+                            background : ${colors.gr_bg};
                             color : #ffffff;
                         }
                     }
@@ -492,7 +495,7 @@ export const Styles = styled.div`
                 .tab-content {
                     .overview-tab {
                         h5 {
-                            color: ${colorStore.colors.black2};
+                            color: ${colors.black2};
                             font-weight: 600;
                             padding-bottom: 10px;
                             margin-bottom: 20px;
@@ -500,7 +503,7 @@ export const Styles = styled.div`
                             &:before {
                                 position: absolute;
                                 content: "";
-                                background: ${colorStore.colors.green};
+                                background: ${colors.green};
                                 width: 50px;
                                 height: 2px;
                                 bottom: 0;
@@ -513,7 +516,7 @@ export const Styles = styled.div`
                         }
                         p {
                             font-size: 15px;
-                            color: ${colorStore.colors.text2};
+                            color: ${colors.text2};
                             line-height: 25px;
 
                             @media(max-width: 575px) {
@@ -531,12 +534,12 @@ export const Styles = styled.div`
                                 margin-top: 20px;
                                 li {
                                     font-size : 14px;
-                                    color: ${colorStore.colors.text3};
+                                    color: ${colors.text3};
                                     line-height : 25px;
                                     margin-bottom : 10px;
                                     i {
                                         font-size : 20px;
-                                        color: ${colorStore.colors.green};
+                                        color: ${colors.green};
                                         float: left;
                                         height: 40px;
                                         line-height: 27px;
@@ -554,13 +557,13 @@ export const Styles = styled.div`
                                 margin-top: 20px;
                                 li {
                                     font-size: 14px;
-                                    color: ${colorStore.colors.text3};
+                                    color: ${colors.text3};
                                     line-height: 25px;
                                     margin-bottom: 15px;
                                     i {
                                         float: left;
-                                        color: ${colorStore.colors.green};
-                                        border: 1px solid ${colorStore.colors.border3};
+                                        color: ${colors.green};
+                                        border: 1px solid ${colors.border3};
                                         width: 35px;
                                         height: 35px;
                                         border-radius: 50%;
@@ -620,14 +623,14 @@ export const Styles = styled.div`
                                         }
 
                                         &:hover {
-                                            background-color: ${colorStore.colors.green} !important;
+                                            background-color: ${colors.green} !important;
 
                                             &:before {
-                                                border-bottom-color: ${colorStore.colors.green} !important;
+                                                border-bottom-color: ${colors.green} !important;
                                             }
 
                                             &:after {
-                                                border-top-color: ${colorStore.colors.green} !important;
+                                                border-top-color: ${colors.green} !important;
                                             }
                                         }
                                     }
@@ -709,7 +712,7 @@ export const Styles = styled.div`
                         .course-curriculum {
                             margin-bottom: 40px;
                             h5 {
-                                color: ${colorStore.colors.black2};
+                                color: ${colors.black2};
                                 font-weight: 600;
                                 padding-bottom: 10px;
                                 margin-bottom: 20px;
@@ -717,7 +720,7 @@ export const Styles = styled.div`
                                 &:before {
                                     position: absolute;
                                     content: "";
-                                    background: ${colorStore.colors.green};
+                                    background: ${colors.green};
                                     width: 50px;
                                     height: 2px;
                                     bottom: 0;
@@ -730,7 +733,7 @@ export const Styles = styled.div`
                             }
                             p {
                                 font-size: 15px;
-                                color: ${colorStore.colors.text2};
+                                color: ${colors.text2};
                                 line-height: 25px;
 
                                 @media(max-width: 575px) {
@@ -740,7 +743,7 @@ export const Styles = styled.div`
                         }
                         .course-element {
                             h5 {
-                                color: ${colorStore.colors.black2};
+                                color: ${colors.black2};
                                 font-weight: 600;
                                 padding-bottom: 10px;
                                 margin-bottom: 20px;
@@ -748,7 +751,7 @@ export const Styles = styled.div`
                                 &:before {
                                     position: absolute;
                                     content: "";
-                                    background: ${colorStore.colors.green};
+                                    background: ${colors.green};
                                     width: 50px;
                                     height: 2px;
                                     bottom: 0;
@@ -770,12 +773,12 @@ export const Styles = styled.div`
                                     text-align : left;
                                     padding: 0;
                                     font-size : 18px;
-                                    color: ${colorStore.colors.black2};
+                                    color: ${colors.black2};
                                     font-weight: 500;
                                     span {
                                         float: right;
                                         font-size: 14px;
-                                        color: ${colorStore.colors.text3};
+                                        color: ${colors.text3};
                                         font-weight: 400;
                                     }
                                 }
@@ -786,16 +789,16 @@ export const Styles = styled.div`
                                     transition: max-height 0.2s ease-in-out;
                                     ul {
                                         li {
-                                            border-bottom : 1px solid ${colorStore.colors.border3};
+                                            border-bottom : 1px solid ${colors.border3};
                                             margin-left: 25px;
                                             padding: 12px 0;
                                             span.play-icon {
                                                 font-size : 14px;
-                                                color: ${colorStore.colors.text3};
+                                                color: ${colors.text3};
                                                 margin-right: 20px;
                                                 i {
-                                                    color: ${colorStore.colors.green};
-                                                    border: 1px solid ${colorStore.colors.green};
+                                                    color: ${colors.green};
+                                                    border: 1px solid ${colors.green};
                                                     font-size: 22px;
                                                     width: 30px;
                                                     height: 30px;
@@ -809,7 +812,7 @@ export const Styles = styled.div`
                                             }
                                             span.lecture-title {
                                                 font-size : 15px;
-                                                color: ${colorStore.colors.black2};
+                                                color: ${colors.black2};
 
                                                 @media(max-width: 575px) {
                                                     font-size : 14px;
@@ -818,7 +821,7 @@ export const Styles = styled.div`
                                             span.lecture-duration {
                                                 float: right;
                                                 font-size: 14px;
-                                                color: ${colorStore.colors.text3};
+                                                color: ${colors.text3};
                                                 line-height: 28px;
                                                 font-weight: 400;
                                             }
@@ -840,7 +843,7 @@ export const Styles = styled.div`
 
                     .instructor-tab {
                         h5 {
-                            color: ${colorStore.colors.black2};
+                            color: ${colors.black2};
                             font-weight: 600;
                             padding-bottom: 10px;
                             margin-bottom: 35px;
@@ -848,7 +851,7 @@ export const Styles = styled.div`
                             &:before {
                                 position: absolute;
                                 content: "";
-                                background: ${colorStore.colors.green};
+                                background: ${colors.green};
                                 width: 50px;
                                 height: 2px;
                                 bottom: 0;
@@ -887,7 +890,7 @@ export const Styles = styled.div`
 
                                         .instructor-name {
                                             h6 {
-                                                color      : ${colorStore.colors.black2};
+                                                color      : ${colors.black2};
                                                 font-weight: 600;
                                                 text-transform: uppercase;
                                                 margin-bottom: 12px;
@@ -898,7 +901,7 @@ export const Styles = styled.div`
                                             }
                                             p {
                                                 font-size  : 14px;
-                                                color      : ${colorStore.colors.text3};
+                                                color      : ${colors.text3};
                                                 font-weight: 500;
                                             }
                                         }
@@ -945,14 +948,14 @@ export const Styles = styled.div`
                                                         }
 
                                                         &:hover {
-                                                            background-color: ${colorStore.colors.green} !important;
+                                                            background-color: ${colors.green} !important;
 
                                                             &:before {
-                                                                border-bottom-color: ${colorStore.colors.green} !important;
+                                                                border-bottom-color: ${colors.green} !important;
                                                             }
 
                                                             &:after {
-                                                                border-top-color: ${colorStore.colors.green} !important;
+                                                                border-top-color: ${colors.green} !important;
                                                             }
                                                         }
                                                     }
@@ -1020,7 +1023,7 @@ export const Styles = styled.div`
                                     .instructor-desk {
                                         p {
                                             font-size : 15px;
-                                            color      : ${colorStore.colors.text2};
+                                            color      : ${colors.text2};
                                             line-height: 25px;
 
                                             @media(max-width: 575px) {
@@ -1041,7 +1044,7 @@ export const Styles = styled.div`
                         .review-comments {
                             margin-bottom: 40px;
                             h5 {
-                                color: ${colorStore.colors.black2};
+                                color: ${colors.black2};
                                 font-weight: 600;
                                 padding-bottom: 10px;
                                 margin-bottom: 35px;
@@ -1049,7 +1052,7 @@ export const Styles = styled.div`
                                 &:before {
                                     position: absolute;
                                     content: "";
-                                    background: ${colorStore.colors.green};
+                                    background: ${colors.green};
                                     width: 50px;
                                     height: 2px;
                                     bottom: 0;
@@ -1061,7 +1064,7 @@ export const Styles = styled.div`
                                 }
                             }
                             .comment-box {
-                                border-bottom: 1px solid ${colorStore.colors.border1};
+                                border-bottom: 1px solid ${colors.border1};
                                 padding-bottom: 20px;
                                 margin-bottom: 25px;
                                 .comment-image {
@@ -1075,7 +1078,7 @@ export const Styles = styled.div`
                                     .content-title {
                                         .comment-writer {
                                             h6 {
-                                                color: ${colorStore.colors.black2};
+                                                color: ${colors.black2};
                                                 font-weight: 600;
                                                 margin-bottom : 10px;
 
@@ -1085,7 +1088,7 @@ export const Styles = styled.div`
                                             }
                                             p {
                                                 font-size : 12px;
-                                                color: ${colorStore.colors.text3};
+                                                color: ${colors.text3};
                                                 margin-bottom: 5px;
                                             }
                                             ul {
@@ -1094,11 +1097,11 @@ export const Styles = styled.div`
                                                     margin-right: 1px;
                                                     i {
                                                         font-size: 16px;
-                                                        color: ${colorStore.colors.yellow};
+                                                        color: ${colors.yellow};
                                                     }
                                                     &:last-child {
                                                         font-size: 13px;
-                                                        color: ${colorStore.colors.text2};
+                                                        color: ${colors.text2};
                                                         margin-left: 5px;
                                                     }
                                                 }
@@ -1107,9 +1110,9 @@ export const Styles = styled.div`
                                         .reply-btn {
                                             button {
                                                 font-size : 14px;
-                                                color: ${colorStore.colors.green};
+                                                color: ${colors.green};
                                                 background : transparent;
-                                                border : 1px solid ${colorStore.colors.border3};
+                                                border : 1px solid ${colors.border3};
                                                 font-weight: 500;
                                                 border-radius: 25px;
                                                 padding: 4px 12px 3px;
@@ -1120,8 +1123,8 @@ export const Styles = styled.div`
                                                 }
                                                 &:hover {
                                                     color : #ffffff;
-                                                    background : ${colorStore.colors.gr_bg};
-                                                    border-color : ${colorStore.colors.green};
+                                                    background : ${colors.gr_bg};
+                                                    border-color : ${colors.green};
                                                 }
                                             }
                                         }
@@ -1129,7 +1132,7 @@ export const Styles = styled.div`
                                     .comment-desc {
                                         p {
                                             font-size: 14px;
-                                            color: ${colorStore.colors.text3};
+                                            color: ${colors.text3};
                                             line-height: 25px;
                                         }
                                     }
@@ -1144,7 +1147,7 @@ export const Styles = styled.div`
 
                         .review-form {
                             h5 {
-                                color: ${colorStore.colors.black2};
+                                color: ${colors.black2};
                                 font-weight: 600;
                                 padding-bottom: 10px;
                                 margin-bottom: 25px;
@@ -1152,7 +1155,7 @@ export const Styles = styled.div`
                                 &:before {
                                     position: absolute;
                                     content: "";
-                                    background: ${colorStore.colors.green};
+                                    background: ${colors.green};
                                     width: 50px;
                                     height: 2px;
                                     bottom: 0;
@@ -1179,7 +1182,7 @@ export const Styles = styled.div`
                 border-radius: 5px;
                 padding: 15px 20px 20px;
                 h5.title {
-                    color: ${colorStore.colors.black1};
+                    color: ${colors.black1};
                     font-weight: 600;
                     padding-bottom: 10px;
                     margin-bottom: 20px;
@@ -1187,7 +1190,7 @@ export const Styles = styled.div`
                     &:before {
                         position: absolute;
                         content: "";
-                        background: ${colorStore.colors.green};
+                        background: ${colors.green};
                         width: 50px;
                         height: 2px;
                         bottom: 0;
@@ -1202,21 +1205,21 @@ export const Styles = styled.div`
                 ul.feature-list {
                     margin-bottom: 20px;
                     li {
-                        border-top: 1px dashed ${colorStore.colors.border3};
+                        border-top: 1px dashed ${colors.border3};
                         padding: 12px 0;
                         font-size : 14px;
-                        color : ${colorStore.colors.black2};
+                        color : ${colors.black2};
                         font-weight: 500;
                         i {
                             font-size : 20px;
-                            color: ${colorStore.colors.green};
+                            color: ${colors.green};
                             vertical-align: top;
                             margin-right : 2px;
                         }
                         span {
                             float : right;
                             font-size: 13px;
-                            color: ${colorStore.colors.text3};
+                            color: ${colors.text3};
                             font-weight: 400;
                             line-height: 20px;
                         }
@@ -1233,7 +1236,7 @@ export const Styles = styled.div`
                 button.enroll-btn {
                     font-size: 16px;
                     color: #fff;
-                    background: ${colorStore.colors.gr_bg};
+                    background: ${colors.gr_bg};
                     display: inline-block;
                     width: 100%;
                     height: 40px;
@@ -1242,7 +1245,7 @@ export const Styles = styled.div`
                     padding: 9px;
                     border-radius: 5px;
                     &:hover {
-                        background: ${colorStore.colors.gr_bg2};
+                        background: ${colors.gr_bg2};
                     }
 
                     @media(max-width: 575px) {
@@ -1261,3 +1264,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles;
+}

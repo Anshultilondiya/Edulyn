@@ -1,9 +1,11 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
+import { colors } from "../common/element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+// let colors = colorStore.getColor();
+export const StyleFun = (colors) => {
 
-export const Styles = styled.div`
+
+    const Styles = styled.div`
     .product-page {
         background: ${colors.bg2};
         .product-area {
@@ -248,3 +250,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles;
+}

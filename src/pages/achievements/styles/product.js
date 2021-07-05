@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { colorStore } from "../../../components/common/element/elements.js";
-// import { colorStore } from "../common/element/elements.js";
-// let colorStore.colors = colorStore.getColor();
+import { colors } from "../../../components/common/element/elements.js";
+// import { } from "../common/element/elements.js";
+// let colors = getColor();
+export const StyleFun = (colors) => {
 
-export const Styles = styled.div`
+    const Styles = styled.div`
     .product-page {
         .product-area {
             padding : 70px 0;
             .product-box {
-                border: 1px solid ${colorStore.colors.border1};
+                border: 1px solid ${colors.border1};
                 border-radius: 5px;
                 transition: all 0.2s ease;
                 margin-bottom: 30px;
@@ -23,7 +24,7 @@ export const Styles = styled.div`
                     span.rank {
                         position: absolute;
                         content : '';
-                        background : ${colorStore.colors.gr_bg};
+                        background : ${colors.gr_bg};
                         width: 60px;
                         height: 60px;
                         text-align: center;
@@ -60,9 +61,9 @@ export const Styles = styled.div`
                         left : 100%;
                         z-index : 1;
                         background: transparent;
-                        border : 2px solid ${colorStore.colors.green};
+                        border : 2px solid ${colors.green};
                         font-size: 13px;
-                        color: ${colorStore.colors.green};
+                        color: ${colors.green};
                         font-weight: 600;
                         text-transform: uppercase;
                         width: 120px;
@@ -72,7 +73,7 @@ export const Styles = styled.div`
                         text-align: center;
                         transition: 0.2s ease;
                         &:hover {
-                            background: ${colorStore.colors.gr_bg};
+                            background: ${colors.gr_bg};
                             color : #ffffff;
                         }
 
@@ -91,9 +92,9 @@ export const Styles = styled.div`
                         right : 100%;
                         z-index : 1;
                         background: transparent;
-                        border : 2px solid ${colorStore.colors.black1};
+                        border : 2px solid ${colors.black1};
                         font-size: 13px;
-                        color: ${colorStore.colors.black1};
+                        color: ${colors.black1};
                         font-weight: 600;
                         text-transform: uppercase;
                         width: 120px;
@@ -103,7 +104,7 @@ export const Styles = styled.div`
                         text-align: center;
                         transition: 0.2s ease;
                         &:hover {
-                            background: ${colorStore.colors.black1};
+                            background: ${colors.black1};
                             color : #ffffff;
                         }
 
@@ -161,10 +162,10 @@ export const Styles = styled.div`
                         margin-bottom: 6px;
                         h5 {
                             a {
-                                color : ${colorStore.colors.black1};
+                                color : ${colors.black1};
                                 font-weight: 600;
                                 &:hover {
-                                    color : ${colorStore.colors.green};
+                                    color : ${colors.green};
                                 }
                             }
                         }
@@ -176,7 +177,7 @@ export const Styles = styled.div`
                                 margin-right: 1px;
                                 i {
                                     font-size: 15px;
-                                    color: ${colorStore.colors.yellow};
+                                    color: ${colors.yellow};
                                 }
                                 &:last-child {
                                     margin-right: 0;
@@ -188,7 +189,7 @@ export const Styles = styled.div`
                     .pro-price {
                         p {
                             font-size : 16px;
-                            color: ${colorStore.colors.green};
+                            color: ${colors.green};
                             font-weight: 500;
                         }
                     }
@@ -209,3 +210,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles;
+}

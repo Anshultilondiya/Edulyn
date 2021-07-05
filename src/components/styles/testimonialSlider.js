@@ -1,9 +1,13 @@
 import styled from "styled-components";
-// import { colors } from "../common/element/elements.js";
-import { colorStore } from "../common/element/elements.js";
-let colors = colorStore.getColor();
+import { colors } from "../common/element/elements.js";
+// import { colorStore } from "../common/element/elements.js";
+// let colors = colorStore.getColor();
 
-export const Styles = styled.div`
+export const StyleFun = (colors) => {
+
+
+
+    const Styles = styled.div`
     .testimonial-area {
         background-size    : cover;
         background-position: center;
@@ -121,3 +125,5 @@ export const Styles = styled.div`
         }
     }
 `;
+    return Styles
+}

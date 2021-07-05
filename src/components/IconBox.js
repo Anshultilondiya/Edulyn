@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Datas from "../data/icon-box/icon-box.json";
 import { Container, Row, Col, Media } from "react-bootstrap";
-import { Styles } from "./styles/iconBox.js";
+import { StyleFun } from "./styles/iconBox.js";
 import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
 import { Modal, Button } from "react-bootstrap";
@@ -11,13 +11,12 @@ import { fetchCoreFeatures } from "./../apis/api";
 
 // importing utility functions
 
-import { coreFeatureDataFormat } from "./../utility";
+import { coreFeatureDataFormat, updateColorObj } from "./../utility";
 
 const IconBox = () => {
   const clientStore = useClientStore();
 
   const [dataArray, setDataArray] = useState(Datas);
-  const [dataState, setDataState] = useState(false);
   const [maxLen, setMaxLen] = useState(0);
   const [isHeightAvail, setIsHeightAvail] = useState(false);
   const [height, setHeight] = useState(0);
@@ -27,7 +26,7 @@ const IconBox = () => {
       getFeaturesData();
     } else {
       setDataArray(clientStore.coreFeaturesData);
-      setDataState(true);
+
     }
     // checkMaxHeight();
   }, []);
@@ -44,6 +43,26 @@ const IconBox = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+
+  const [colors, setColors] = useState({ ...clientStore.colors });
+  const [dataStatus, setDataStatus] = useState(false);
+  const [toggle, setToggle] = useState(0);
+  const [Styles, setStyles] = useState(StyleFun(colors));
+
+  useEffect(() => {
+    updateColors();
+  }, [colors, toggle, dataStatus]);
+
+  const updateColors = () => {
+    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+      let obj = { ...colors }
+      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+      setDataStatus(true);
+    }
+    if (!dataStatus) setToggle(toggle + 1);
   };
 
   //   const checkMaxHeight = () => {
@@ -126,7 +145,7 @@ const IconBox = () => {
                       >
                         <div
                           className="icon-box d-flex icon-cards"
-                          
+
                         >
                           <div className={data.uniqClass}>
                             <i className={data.boxIcon}></i>
