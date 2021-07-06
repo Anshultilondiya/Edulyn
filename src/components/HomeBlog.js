@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { StyleFun } from "./styles/homeBlog.js";
 import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
-import { buildBlog, updateColorObj } from "../utility";
+import { buildBlog } from "../utility";
 import { fetchBlogs } from "./../apis/api";
 
 const HomeBlog = () => {
@@ -19,31 +19,15 @@ const HomeBlog = () => {
 
   const getBlogs = async () => {
     const res = await fetchBlogs(clientStore.webHash);
-    // console.log("Blogs", res.response);
     clientStore.blogs = buildBlog(res.response);
     setDataArray(clientStore.blogs);
-    // console.log("Blogs", clientStore.blogs);
   };
 
   const [blogLen, setBlogLen] = useState(1)
-  const [colors, setColors] = useState({ ...clientStore.colors });
-  const [dataStatus, setDataStatus] = useState(false);
-  const [toggle, setToggle] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
 
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggle, dataStatus]);
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataStatus(true);
-    }
-    if (!dataStatus) setToggle(toggle + 1);
-  };
+
 
   return (
     <Observer>

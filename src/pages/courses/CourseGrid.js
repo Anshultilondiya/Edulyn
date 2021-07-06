@@ -18,24 +18,22 @@ const CourseGrid = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const [colors, setColors] = useState({ ...clientStore.colors });
-  const [dataStatus, setDataStatus] = useState(false);
-  const [toggle, setToggle] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
+  
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggle, dataStatus]);
+  // useEffect(() => {
+  //   updateColors();
+  // }, [colors, toggle, dataStatus]);
 
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataStatus(true);
-    }
-    if (!dataStatus) setToggle(toggle + 1);
-  };
+  // const updateColors = () => {
+  //   if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+  //     let obj = { ...colors }
+  //     setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+  //     setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+  //     setDataStatus(true);
+  //   }
+  //   if (!dataStatus) setToggle(toggle + 1);
+  // };
 
 
 
@@ -45,7 +43,7 @@ const CourseGrid = () => {
         return (
           <div className="main-wrapper course-page">
             {/* Header 2 */}
-            <HeaderTwo />
+            {/* <HeaderTwo /> */}
 
             {/* Breadcroumb */}
             <BreadcrumbBox title="Courses" />
@@ -71,7 +69,7 @@ const CourseGrid = () => {
             </Styles>
 
             {/* Footer 2 */}
-            <Footer />
+            {/* <Footer /> */}
           </div>
         );
       }}

@@ -10,37 +10,18 @@ import { IoIosArrowForward } from "react-icons/io"
 import { FiMapPin } from "react-icons/fi"
 import { BiEnvelope, BiPhone } from "react-icons/bi"
 import { Observer } from 'mobx-react-lite';
-import { getColorObj } from './common/element/elements';
-import { updateColorObj } from '../utility';
+
 
 const Footer = () => {
     const clientStore = useClientStore();
-
-    const [colors, setColors] = useState({ ...getColorObj() });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
-
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
-
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
-
+    const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
+    const [webConfig, setWebConfig] = useState({});
     const [webDetail, setWebDetail] = useState({});
     useEffect(() => {
         fetchWebData(clientStore.webHash)
             .then((data) => {
                 setWebDetail(data.detail);
-                // console.log("web Details", data.detail)
+                setWebConfig(data.config);
             })
             .catch((err) => {
                 console.log(err);
@@ -58,6 +39,7 @@ const Footer = () => {
                                     <Col md="6">
                                         <div className="footer-logo-info">
                                             <img src={webDetail.footer_logo} alt="" className="img-fluid" />
+                                            <p style={{ fontSize: "2.2em", fontWeight: "500", color: "#eeeeee" }} className="footer-text">{webDetail.institute_name}</p>
                                             <p className="footer-text" dangerouslySetInnerHTML={{ __html: webDetail.footer_text }} />
                                             <ul className="list-unstyled">
                                                 <li><FiMapPin /> {webDetail.address1}</li>
@@ -77,9 +59,15 @@ const Footer = () => {
                                                 <Col>
 
                                                     <ul className="list-unstyled">
-                                                        <li><Link to={process.env.PUBLIC_URL + "/blog-grid"}><IoIosArrowForward />Blogs</Link></li>
-                                                        <li><Link to={process.env.PUBLIC_URL + "/career"}><IoIosArrowForward /> Careers</Link></li>
-                                                        <li><Link to={process.env.PUBLIC_URL + "/franchise"}><IoIosArrowForward />Franchise</Link></li>
+                                                        {webConfig.menu && webConfig.menu[9] == 'Y' ? (
+                                                            <li><Link to={process.env.PUBLIC_URL + "/blog-grid"}><IoIosArrowForward />Blogs</Link></li>
+                                                        ) : (null)}
+                                                        {webConfig.menu && webConfig.menu[6] == 'Y' ? (
+                                                            <li><Link to={process.env.PUBLIC_URL + "/career"}><IoIosArrowForward /> Careers</Link></li>
+                                                        ) : (null)}
+                                                        {webConfig.menu && webConfig.menu[8] == 'Y' ? (
+                                                            <li><Link to={process.env.PUBLIC_URL + "/franchise"}><IoIosArrowForward />Franchise</Link></li>
+                                                        ) : (null)}
                                                         <li><a href={"https://www.speedlabs.in"} target="blank"><IoIosArrowForward />SpeedLabs</a></li>
                                                         <li><Link to={process.env.PUBLIC_URL + "/achievements"}><IoIosArrowForward />Achievements</Link></li>
                                                     </ul>
@@ -91,35 +79,16 @@ const Footer = () => {
                                                         <li><Link to={process.env.PUBLIC_URL + "/admission"}><IoIosArrowForward />Admission</Link></li>
                                                         <li><Link to={process.env.PUBLIC_URL + "/batches"}><IoIosArrowForward />Batches</Link></li>
                                                         <li><Link to={process.env.PUBLIC_URL + "/alerts"}><IoIosArrowForward />Alerts</Link></li>
-                                                        <li><Link to={process.env.PUBLIC_URL + "/contact"}><IoIosArrowForward />Contact Us</Link></li>
+                                                        {webConfig.menu && webConfig.menu[11] == 'Y' ? (
+                                                            <li><Link to={process.env.PUBLIC_URL + "/contact"}><IoIosArrowForward />Contact Us</Link></li>
+                                                        ) : (null)}
+
                                                     </ul>
                                                 </Col>
                                             </Row>
                                         </div>
                                     </Col>
-                                    {/* <Col md="4">
-                            <div className="f-post">
-                                <h5>Recent Post</h5>
-                                <div className="post-box d-flex">
-                                    <div className="post-img">
-                                        <img src={process.env.PUBLIC_URL + "/assets/images/blog-2.jpg"} alt="" />
-                                    </div>
-                                    <div className="post-content">
-                                        <Link to={process.env.PUBLIC_URL + "/blog-details"}>Lorem ipsum dolor sit amet consectet adipisicing elit com...</Link>
-                                        <span>Mar 30, 2020</span>
-                                    </div>
-                                </div>
-                                <div className="post-box d-flex">
-                                    <div className="post-img">
-                                        <img src={process.env.PUBLIC_URL + "/assets/images/blog-3.jpg"} alt="" />
-                                    </div>
-                                    <div className="post-content">
-                                        <Link to={process.env.PUBLIC_URL + "/blog-details"}>Lorem ipsum dolor sit amet consectet adipisicing elit com...</Link>
-                                        <span>Mar 30, 2020</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </Col> */}
+
                                 </Row>
                             </Container>
                         </footer>
@@ -130,16 +99,18 @@ const Footer = () => {
                                 <Row>
                                     <Col md="6">
                                         <div className="copy-text">
-                                            <p>Copyright &copy; 2020 | Designed With <i className="las la-heart"></i> by <a href={process.env.PUBLIC_URL + "/"} target="_blank" rel="noopener noreferrer">SnazzyTheme</a></p>
+                                            <p>Copyright &copy; 2021 <Link to={process.env.PUBLIC_URL + "/"} >{webDetail.institute_name}</Link> All rights reserved</p>
                                         </div>
                                     </Col>
                                     <Col md="6" className="text-right">
                                         <ul className="social list-unstyled list-inline">
-                                            <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-facebook-f"></i></a></li>
-                                            <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-twitter"></i></a></li>
-                                            <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-linkedin-in"></i></a></li>
-                                            <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-youtube"></i></a></li>
-                                            <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-dribbble"></i></a></li>
+                                            {webConfig.social && webConfig.social[0] == 'Y' ? (<li className="list-inline-item"><a target="_blank" href={webDetail.facebook}><i className="fab fa-facebook-f"></i></a></li>) : (null)}
+                                            {webConfig.social && webConfig.social[1] == 'Y' ? (<li className="list-inline-item"><a target="_blank" href={webDetail.twitter}><i className="fab fa-twitter"></i></a></li>) : (null)}
+                                            {webConfig.social && webConfig.social[2] == 'Y' ? (<li className="list-inline-item"><a target="_blank" href={webDetail.linkedin}><i className="fab fa-linkedin-in"></i></a></li>) : (null)}
+                                            {webConfig.social && webConfig.social[3] == 'Y' ? (<li className="list-inline-item"><a target="_blank" href={webDetail.instagram}><i className="fab fa-instagram"></i></a></li>) : (null)}
+                                            {webConfig.social && webConfig.social[4] == 'Y' ? (<li className="list-inline-item"><a target="_blank" href={webDetail.youtube}><i className="fab fa-youtube"></i></a></li>) : (null)}
+                                            {webConfig.social && webConfig.social[5] == 'Y' ? (<li className="list-inline-item"><a target="_blank" href={webDetail.app_url}><i className="fab fa-google-play"></i></a></li>) : (null)}
+
                                         </ul>
                                     </Col>
                                 </Row>

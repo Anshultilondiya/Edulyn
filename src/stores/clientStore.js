@@ -21,6 +21,7 @@ const createClientStore = () => {
     webDetails: {},
     webConfig: {},
     webLayout: {},
+    logo: "",
     colors: {
       bg1: "#182B49",
       bg2: "#F6F9FF",
@@ -49,11 +50,14 @@ const createClientStore = () => {
       ftext: "#8D8E92",
       white: "ffffff"
     },
-    // getColor(obj){
-    //   this.colors.bg1 = obj.primary;
-    //   this.colors.green = obj.secondary;
-    //   this.colors.green2 = obj.ternary;
-    // }
+    updateColors(obj) {
+      this.colors.bg1 = obj.primary
+      this.colors.green = obj.secondary
+      this.colors.green2 = obj.ternary
+      this.colors.gr_bg = `linear-gradient(90deg, ${obj.secondary} 0%, ${obj.ternary} 100%)`
+      this.colors.gr_bg2 = `linear-gradient(90deg, ${obj.ternary} 0%, ${obj.secondary} 100%)`
+      return this.colors
+    }
   };
 };
 

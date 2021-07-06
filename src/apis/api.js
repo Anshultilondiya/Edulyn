@@ -301,8 +301,6 @@ export const sendCareerData = async (data) => {
 }
 export const sendAdmissionData = async (data) => {
   data.append('key', apiKey);
-  data.append('clientMail', 'akshatgoyal705@gmail.com');
-  data.append('clientName', 'Akshat');
   const response = await fetch('http://35.244.8.93:3000/AdmissionForm', {
     method: 'POST',
     body: data

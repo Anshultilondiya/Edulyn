@@ -21,26 +21,7 @@ const Achievements = () => {
         console.log(res.response);
         setArr(res.response)
     }
-    const [colors, setColors] = useState({ ...clientStore.colors });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
-
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
-
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
-
-
+    const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
 
     return (
         <Styles>
@@ -48,7 +29,7 @@ const Achievements = () => {
             <div className="main-wrapper product-page">
 
                 {/* Header 2 */}
-                <HeaderTwo />
+                {/* <HeaderTwo /> */}
 
                 {/* Breadcroumb */}
                 <BreadcrumbBox title="Achievements" />
@@ -103,8 +84,7 @@ const Achievements = () => {
                     </Container>
                 </section>
 
-                {/* Footer 2 */}
-                <Footer />
+               
 
             </div>
         </Styles>

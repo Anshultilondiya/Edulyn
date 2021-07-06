@@ -16,26 +16,11 @@ import { buildBlog, updateColorObj } from "../../utility";
 const BlogGrid = () => {
 
   const clientStore = useClientStore();
-  const [colors, setColors] = useState({ ...clientStore.colors });
-  const [dataStatus, setDataStatus] = useState(false);
-  const [toggle, setToggle] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
 
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggle, dataStatus]);
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataStatus(true);
-    }
-    if (!dataStatus) setToggle(toggle + 1);
-  };
 
-  
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -62,7 +47,7 @@ const BlogGrid = () => {
             {/* Main Wrapper */}
             <div className="main-wrapper blog-grid-page">
               {/* Header 2 */}
-              <HeaderTwo />
+              {/* <HeaderTwo /> */}
 
               {/* Breadcroumb */}
               <BreadcrumbBox title="Blog Grid" />
@@ -159,8 +144,6 @@ const BlogGrid = () => {
                 </Container>
               </section>
 
-              {/* Footer 2 */}
-              <Footer />
             </div>
           </Styles>
         );

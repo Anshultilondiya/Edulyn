@@ -1,46 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
-import CourseSidebar from './components/CourseSidebar';
 import CourseItemList from './components/CourseItemsList';
 import Footer from '../../components/Footer';
 import { StyleFun } from './styles/course.js';
 import { useClientStore } from '../../contextProviders/clientContext';
-import { updateColorObj } from '../../utility';
 
 const CourseList = () => {
 
     const clientStore = useClientStore();
-
-    const [colors, setColors] = useState({ ...clientStore.colors });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
-
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
-
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
-
-
-
-
+    const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
 
     return (
         <div className="main-wrapper course-page">
 
             {/* Header 2 */}
-            <HeaderTwo />
+            {/* <HeaderTwo /> */}
 
             {/* Breadcroumb */}
             <BreadcrumbBox title="Courses" />
@@ -66,7 +41,7 @@ const CourseList = () => {
             </Styles>
 
             {/* Footer 2 */}
-            <Footer />
+            {/* <Footer /> */}
 
         </div>
     )

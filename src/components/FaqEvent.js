@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Datas from "../data/faq-event/faq-event.json";
-import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { StyleFun } from "./styles/faqEvent.js";
 import { fetchNotification, fetchFAQ } from "./../apis/api";
@@ -8,8 +6,7 @@ import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
 import { buildFaq, buildNotification } from "../utility";
 import { Modal, Button } from "react-bootstrap";
-import { getColorObj } from './common/element/elements';
-import { updateColorObj } from '../utility';
+
 
 const FaqEvent = () => {
   const clientStore = useClientStore();
@@ -51,53 +48,25 @@ const FaqEvent = () => {
   };
 
   const getFAQ = async () => {
-    // console.log("FAQ Section");
     const res = await fetchFAQ(clientStore.webHash);
     // console.log("FAQ", res.response);
     clientStore.faqData = buildFaq(res.response);
     setFaqDataArray(clientStore.faqData);
-    // console.log("FAQ", clientStore.faqData);
+
   };
 
   const [notifyLen, setNotifyLen] = useState(1);
-  // const showMore =()=>{
-  //   setNotifyLen
-  // }
-  // const notifyDataFun = (i) => {
-  //   setNotifyData(notificationsDataArray[i]);
-  // }
+
 
   const [show, setShow] = useState(false);
 
-  // const handleClose = () => setShow(false);
+
   const handleShow = (i) => {
     setNotifyData(notificationsDataArray[i]);
     setShow(true);
   }
 
-  // const [modal, setModal] = useState(null);
-
-
-  const [colors, setColors] = useState({ ...getColorObj() });
-  const [dataStatus, setDataStatus] = useState(false);
-  const [toggle, setToggle] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
-
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggle, dataStatus]);
-
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataStatus(true);
-    }
-    if (!dataStatus) setToggle(toggle + 1);
-  };
-
-
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
 
   return (
@@ -134,16 +103,7 @@ const FaqEvent = () => {
                         <p>Publishing Date : {notifyData.eventFullDate}</p>
                       </div>
                       <div className="event-details">
-                        {/* <ul className="list-unstyled list-inline">
-                                      <li className="list-inline-item">
-                                        <i className="las la-clock"></i>
-                                        {eventData.eventTime}
-                                      </li>
-                                      <li className="list-inline-item">
-                                        <i className="las la-map-marker"></i>
-                                        {eventData.eventLocation}
-                                      </li>
-                                    </ul> */}
+
                         <p
                           dangerouslySetInnerHTML={{
                             __html: notifyData.eventdesc,
@@ -163,9 +123,7 @@ const FaqEvent = () => {
                   >
                     Close
                   </Button>
-                  {/* <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button> */}
+
                 </Modal.Footer>
               </Modal>
               <Container>
@@ -195,16 +153,7 @@ const FaqEvent = () => {
                                     <h6>
                                       {eventData.eventTitle}
                                     </h6>
-                                    {/* <ul className="list-unstyled list-inline">
-                                      <li className="list-inline-item">
-                                        <i className="las la-clock"></i>
-                                        {eventData.eventTime}
-                                      </li>
-                                      <li className="list-inline-item">
-                                        <i className="las la-map-marker"></i>
-                                        {eventData.eventLocation}
-                                      </li>
-                                    </ul> */}
+
                                     <p
                                       dangerouslySetInnerHTML={{
                                         __html: `${eventData.eventdesc.slice(0, 200)} ...`,
@@ -220,18 +169,20 @@ const FaqEvent = () => {
                         </Col>
                       </Row>
                     </div>
-                    {notifyLen <= 1 ?
-                      <button
-                        onClick={() => {
-                          setNotifyLen(notificationsDataArray.length)
-                        }}
-                      >Show More</button> :
-                      <button
-                        onClick={() => {
-                          setNotifyLen(2)
-                        }}
-                      >Show Less</button>
-                    }
+                    <Col className="btn-container">
+                      {notifyLen <= 1 ?
+                        <button
+                          onClick={() => {
+                            setNotifyLen(notificationsDataArray.length)
+                          }}
+                        >Show More</button> :
+                        <button
+                          onClick={() => {
+                            setNotifyLen(2)
+                          }}
+                        >Show Less</button>
+                      }
+                    </Col>
                   </Col>
                   <Col md="6">
                     <div className="faq-area">

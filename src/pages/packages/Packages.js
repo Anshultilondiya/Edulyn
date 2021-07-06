@@ -10,7 +10,7 @@ import { useClientStore } from '../../contextProviders/clientContext';
 import { fetchPackageDetails } from '../../apis/api';
 // import { nanoid } from 'nanoid';
 // import { moment } from "moment"
-import { buildPackage, updateColorObj } from '../../utility';
+import { buildPackage } from '../../utility';
 
 
 const Packages = () => {
@@ -27,24 +27,22 @@ const Packages = () => {
         setPackages(arr)
         // console.log(res.response)
     }
-    const [colors, setColors] = useState({ ...clientStore.colors });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
+    
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
+    // useEffect(() => {
+    //     updateColors();
+    // }, [colors, toggle, dataStatus]);
 
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
+    // const updateColors = () => {
+    //     if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+    //         let obj = { ...colors }
+    //         setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+    //         setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+    //         setDataStatus(true);
+    //     }
+    //     if (!dataStatus) setToggle(toggle + 1);
+    // };
 
 
     return (
@@ -53,7 +51,7 @@ const Packages = () => {
             <div className="main-wrapper product-page">
 
                 {/* Header 2 */}
-                <HeaderTwo />
+                {/* <HeaderTwo /> */}
 
                 {/* Breadcroumb */}
                 <BreadcrumbBox title="Packages" />
@@ -115,7 +113,7 @@ const Packages = () => {
                 </section>
 
                 {/* Footer 2 */}
-                <Footer />
+                {/* <Footer /> */}
 
             </div>
         </Styles>

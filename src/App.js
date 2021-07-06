@@ -6,7 +6,7 @@ import { GlobalStyleFun } from "./components/common/styles/global.js";
 import HomeOne from "./HomeOne";
 import HomeTwo from "./HomeTwo";
 import About from "./pages/about/About";
-import CourseGrid from "./pages/courses/CourseGrid";
+// import CourseGrid from "./pages/courses/CourseGrid";
 import CourseList from "./pages/courses/CourseList";
 import CourseDetails from "./pages/courses/CourseDetails";
 import Instructor from "./pages/instructor/Instructors";
@@ -23,7 +23,6 @@ import Contact from "./pages/contact/Contact";
 import Faq from "./pages/faq/Faq";
 import PageNotFound from "./pages/404/PageNotFound";
 import ComingSoon from "./pages/comingsoon/ComingSoon";
-// import BlogClassic from "./pages/blog/BlogClassic";
 import BlogGrid from "./pages/blog/BlogGrid";
 import BlogDetails from "./pages/blog/BlogDetails";
 import Product from "./pages/shop/Products";
@@ -33,8 +32,7 @@ import Cart from "./pages/shop/Cart";
 import Alert from "./pages/alert/Alert";
 import Achievements from "./pages/achievements/Achievements";
 import Batches from "./pages/batches/Batches";
-import { updateColorObj } from "./utility";
-// import { dynamicColor } from "./components/common/element/elementStore";
+
 
 // Additional Swiper Css for adding functionality
 import "swiper/swiper-bundle.css";
@@ -46,14 +44,16 @@ import { fetchInstituteDetails, fetchWebData, fetchWebHash } from "./apis/api";
 // Importing MobX and Stores
 import { useClientStore } from "./contextProviders/clientContext";
 import { Observer } from "mobx-react";
-
+import Loader from "./Loader";
+import Header from "./components/Header";
+import HeaderTwo from "./components/HeaderTwo";
+import Footer from "./components/Footer";
 
 const App = () => {
   const clientStore = useClientStore();
+  const [show, setShow] = useState(true)
   const domain = "aashishtararshub.in";
   useEffect(() => {
-    // getWebHash(domain);
-    // getSliderData();
     getWebData();
     getInstituteDetails();
   }, []);
@@ -70,21 +70,22 @@ const App = () => {
   const getInstituteDetails = async () => {
     const res = await fetchInstituteDetails(clientStore.webHash);
     clientStore.instituteDetails = res.response;
-    // console.log(clientStore.instituteDetails !== {});
-    // console.log("Institute Details", res.response);
+    clientStore.logo = "https://careerliftprod.s3.amazonaws.com/website_logo/" + res.response["Header Logo"];
   };
-  const [colors, setColors] = useState({ ...clientStore.colors });
+
+  const [colors, setColors] = useState(clientStore.colors);
   const [GlobalStyle, setGlobalStyle] = useState(GlobalStyleFun(colors));
+
   const getWebData = async () => {
     const res = await fetchWebData(clientStore.webHash);
-    console.log("web Data JSON", res);
     document.title = res.detail.web_title;
     clientStore.webDetails = res.detail;
     clientStore.webConfig = res.config;
     clientStore.webLayout = res.layout;
-    setGlobalStyle(GlobalStyleFun({ ...updateColorObj(clientStore.colors, clientStore.webLayout) }))
-
-    // dynamicColor(res.layout)
+    let colObj = clientStore.updateColors(res.layout)
+    setColors(colObj)
+    setGlobalStyle(GlobalStyleFun(colObj))
+    setShow(false)
   }
 
   return (
@@ -92,135 +93,138 @@ const App = () => {
       {() => {
         return (
           <Router>
+            {show ? (<Loader />) : null}
             <GlobalStyle />
             <ScrollToTop />
-            <Switch>
-              <Route
-                exact
-                path={`${process.env.PUBLIC_URL + "/"}`}
-                component={HomeOne}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/home-two"}`}
-                component={HomeTwo}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/about"}`}
-                component={About}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/course-grid"}`}
-                component={CourseGrid}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/course-list"}`}
-                component={CourseList}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/course-details/:courseID"}`}
-                component={CourseDetails}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/instructor"}`}
-                component={Instructor}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/instructor-details"}`}
-                component={InstructorDetails}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/gallery"}`}
-                component={Gallery}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/events"}`}
-                component={Events}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/event-details"}`}
-                component={EventDetails}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/login"}`}
-                component={Login}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/registration"}`}
-                component={Register}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/career"}`}
-                component={Career}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/franchise"}`}
-                component={Franchise}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/admission"}`}
-                component={Admission}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/contact"}`}
-                component={Contact}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/faq"}`}
-                component={Faq}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/alerts"}`}
-                component={Alert}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/achievements"}`}
-                component={Achievements}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/batches"}`}
-                component={Batches}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/404"}`}
-                component={PageNotFound}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/coming-soon"}`}
-                component={ComingSoon}
-              />
-              {/* <Route
-                path={`${process.env.PUBLIC_URL + "/blog-classic"}`}
-                component={BlogClassic}
-              /> */}
-              <Route
-                path={`${process.env.PUBLIC_URL + "/blog-grid"}`}
-                component={BlogGrid}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/blog-details/:blogID"}`}
-                component={BlogDetails}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/products"}`}
-                component={Product}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/packages"}`}
-                component={Packages}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/product-details"}`}
-                component={ProductDetails}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/cart"}`}
-                component={Cart}
-              />
-              <Route
-                path={`${process.env.PUBLIC_URL + "/"}`}
-                component={PageNotFound}
-              />
-            </Switch>
+            {!show ? (
+
+              <div>
+                <Header />
+                <HeaderTwo />
+                <Switch>
+                  <Route
+                    exact
+                    path={`${process.env.PUBLIC_URL + "/"}`}
+                    component={HomeOne}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/home-two"}`}
+                    component={HomeTwo}
+                  />
+
+                  <Route path={`${process.env.PUBLIC_URL + "/about"}`}>
+                    {clientStore.webConfig.cms_institute_details == 'true' ? (<About />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/course-list"}`}>
+                    {clientStore.webConfig.cms_course == 'true' ? (<CourseList />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/course-details/:courseID"}`}>
+                    {clientStore.webConfig.cms_course == 'true' ? (<CourseDetails />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/instructor"}`}>
+                    {clientStore.webConfig.cms_faculty_details == 'true' ? (<Instructor />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/instructor-details"}`}>
+                    {clientStore.webConfig.cms_faculty_details == 'true' ? (<InstructorDetails />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/gallery"}`}>
+                    {clientStore.webConfig.cms_images == 'true' ? (<Gallery />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/contact"}`}>
+                    {clientStore.webConfig.cms_contact_details == 'true' ? (<Contact />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/alerts"}`}>
+                    {clientStore.webConfig.cms_alerts == 'true' ? (<Alert />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/batches"}`}>
+                    {clientStore.webConfig.cms_batch == 'true' ? (<Batches />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/blog-grid"}`}>
+                    {clientStore.webConfig.cms_blogs == 'true' ? (<BlogGrid />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/blog-details/:blogID"}`}>
+                    {clientStore.webConfig.cms_blogs == 'true' ? (<BlogDetails />) : (<></>)}
+                  </Route>
+
+                  <Route path={`${process.env.PUBLIC_URL + "/packages"}`}>
+                    {clientStore.webConfig.cms_course == 'true' ? (<Packages />) : (<></>)}
+                  </Route>
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/career"}`}
+                    component={Career}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/franchise"}`}
+                    component={Franchise}
+                  />
+
+                  <Route path={`${process.env.PUBLIC_URL + "/admission"}`}>
+                    {clientStore.webConfig.cms_admission == 'true' ? (<Admission />) : (<></>)}
+                  </Route>
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/faq"}`}
+                    component={Faq}
+                  />
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/achievements"}`}
+                    component={Achievements}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/events"}`}
+                    component={Events}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/event-details"}`}
+                    component={EventDetails}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/login"}`}
+                    component={Login}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/registration"}`}
+                    component={Register}
+                  />
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/404"}`}
+                    component={PageNotFound}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/coming-soon"}`}
+                    component={ComingSoon}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/products"}`}
+                    component={Product}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/product-details"}`}
+                    component={ProductDetails}
+                  />
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/cart"}`}
+                    component={Cart}
+                  />
+
+                  <Route
+                    path={`${process.env.PUBLIC_URL + "/"}`}
+                    component={PageNotFound}
+                  />
+                </Switch> <Footer /> </div>) : null}
           </Router>
         );
       }}

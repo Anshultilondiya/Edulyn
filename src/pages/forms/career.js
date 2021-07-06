@@ -14,24 +14,12 @@ import { updateColorObj } from "./../../utility"
 
 function Career() {
     const clientStore = useClientStore();
-    const [colors, setColors] = useState({ ...clientStore.colors });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
 
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
+    const clientName = clientStore.instituteDetails.web_title;
+    const clientEmail = clientStore.instituteDetails.Email1;
 
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
+
     const [selectedFile, setSelectedFile] = useState("");
     const [buttonState, setButtonState] = useState("Submit");
     const [user, setuser] = useState({
@@ -44,8 +32,8 @@ function Career() {
         career_location: "",
         career_qualification: "",
         career_status: "",
-        clientMail: "akshatgoyal705@gmail.com",
-        clientName: "Akshat"
+        clientMail: clientEmail,
+        clientName: clientName
     })
     function isValidform() {
         var flag = 1;
@@ -213,7 +201,7 @@ function Career() {
             <div className="main-wrapper registration-page">
 
                 {/* Header 2 */}
-                <HeaderTwo />
+                {/* <HeaderTwo /> */}
 
                 {/* Breadcroumb */}
                 {/* <BreadcrumbBox title="Career Form" /> */}
@@ -395,7 +383,7 @@ function Career() {
                 </section>
 
                 {/* Footer 2 */}
-                <Footer />
+                {/* <Footer /> */}
 
             </div>
         </Styles >

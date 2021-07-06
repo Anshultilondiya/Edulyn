@@ -35,7 +35,6 @@ function MobileMenu() {
             status: res.status,
         }
         setDynamicButton(obj)
-        // console.log("dynamic", res)
     }
     useEffect(() => {
         updateData();
@@ -65,25 +64,7 @@ function MobileMenu() {
     const [dynamicOpen, setDynamicOpen] = useState(false);
 
 
-    const [colors, setColors] = useState({ ...clientStore.colors });
-    const [dataColStatus, setDataColStatus] = useState(false);
-    const [toggleCol, setToggleCol] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
-
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggleCol, dataColStatus]);
-
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataColStatus(true);
-        }
-        if (!dataColStatus) setToggleCol(toggleCol + 1);
-    };
-
+    const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
 
 
 

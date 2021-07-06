@@ -16,10 +16,8 @@ import { coreFeatureDataFormat, updateColorObj } from "./../utility";
 const IconBox = () => {
   const clientStore = useClientStore();
 
-  const [dataArray, setDataArray] = useState(Datas);
-  const [maxLen, setMaxLen] = useState(0);
-  const [isHeightAvail, setIsHeightAvail] = useState(false);
-  const [height, setHeight] = useState(0);
+  const [dataArray, setDataArray] = useState([]);
+ 
 
   useEffect(() => {
     if (clientStore.coreFeaturesData.length === 0) {
@@ -35,10 +33,10 @@ const IconBox = () => {
     try {
       const res = await fetchCoreFeatures(clientStore.webHash);
       // console.log("Features: ", res.response);
-      let { arr, maxlen } = coreFeatureDataFormat(res.response[0]);
+      let { arr } = coreFeatureDataFormat(res.response[0]);
       //   console.log(FormatedArr);
       clientStore.coreFeaturesData = arr;
-      setMaxLen(maxlen);
+      
       setDataArray(clientStore.coreFeaturesData);
     } catch (error) {
       console.log(error);
@@ -46,40 +44,8 @@ const IconBox = () => {
   };
 
 
-  const [colors, setColors] = useState({ ...clientStore.colors });
-  const [dataStatus, setDataStatus] = useState(false);
-  const [toggle, setToggle] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
-
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggle, dataStatus]);
-
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataStatus(true);
-    }
-    if (!dataStatus) setToggle(toggle + 1);
-  };
-
-  //   const checkMaxHeight = () => {
-  //     // if (dataState && !isHeightAvail) {
-  //     var x = document.getElementsByClassName("featureCards");
-  //     console.log(x);
-  //     let maxheight = height;
-  //     for (let i = 0; i < x.length; i++) {
-  //       if (maxheight < x[i].clientHeight) {
-  //         maxheight = x[i].clientHeight;
-  //       }
-  //     }
-  //     setHeight(maxheight);
-  //     setIsHeightAvail(true);
-  //     console.log(maxheight);
-  //     // }
-  //   };
+  const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
+  
   const [show, setShow] = useState(false);
 
   // const handleClose = () => setShow(false);

@@ -26,26 +26,12 @@ function StickyMenu(props) {
       status: res.status,
     }
     setDynamicButton(obj)
-    // console.log("dynamic", res)
+    
   }
-  const [colors, setColors] = useState({ ...getColorObj() });
-  const [dataStatus, setDataStatus] = useState(false);
-  const [toggle, setToggle] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
 
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggle, dataStatus]);
+  const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
 
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataStatus(true);
-    }
-    if (!dataStatus) setToggle(toggle + 1);
-  };
+  
 
   useEffect(() => {
     window.addEventListener("scroll", () => {

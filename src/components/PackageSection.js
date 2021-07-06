@@ -25,24 +25,21 @@ const PackageSection = () => {
         setPackages(arr)
         // console.log(res.response)
     }
-    const [colors, setColors] = useState({ ...getColorObj() });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
+    // useEffect(() => {
+    //     updateColors();
+    // }, [colors, toggle, dataStatus]);
 
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
+    // const updateColors = () => {
+    //     if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+    //         let obj = { ...colors }
+    //         setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+    //         setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+    //         setDataStatus(true);
+    //     }
+    //     if (!dataStatus) setToggle(toggle + 1);
+    // };
 
     return (
         <Styles>

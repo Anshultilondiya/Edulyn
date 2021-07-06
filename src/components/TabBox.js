@@ -15,10 +15,9 @@ const TabBox = () => {
   const [coFounderImg, setCoFounderImg] = useState("");
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
-  const [colors, setColors] = useState({ ...clientStore.colors });
-  const [dataColStatus, setDataColStatus] = useState(false);
-  const [toggleCol, setToggleCol] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
+
+  const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
+  
   useEffect(() => {
     updateData();
   }, [toggle, dataStatus]);
@@ -44,20 +43,20 @@ const TabBox = () => {
     if (!dataStatus) setToggle(toggle + 1);
   };
 
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggleCol, dataColStatus]);
+  // useEffect(() => {
+  //   updateColors();
+  // }, [colors, toggleCol, dataColStatus]);
 
 
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataColStatus(true);
-    }
-    if (!dataColStatus) setToggleCol(toggleCol + 1);
-  };
+  // const updateColors = () => {
+  //   if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
+  //     let obj = { ...colors }
+  //     setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+  //     setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+  //     setDataColStatus(true);
+  //   }
+  //   if (!dataColStatus) setToggleCol(toggleCol + 1);
+  // };
   return (
     <Styles>
       {/* Tab Box Area */}

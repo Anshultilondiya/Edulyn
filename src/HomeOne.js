@@ -16,45 +16,63 @@ import PackageSection from "./components/PackageSection";
 
 import { useClientStore } from "./contextProviders/clientContext"
 
-
 const HomeOne = () => {
   const clientStore = useClientStore();
-
   return (
     <div className="main-wrapper">
+      {clientStore.webConfig.cms_slider == 'true' ? (<HeroSlider />) : (<></>)}
+      {/* Icon Box */}
+      {clientStore.webConfig.cms_features == 'true' ? (<IconBox />) : (<></>)}
+      {/* About Area */}
+      {clientStore.webConfig.cms_institute_details == 'true' ? (<AboutUs />) : (<></>)}
+      {/* Course Filter */}
+      {clientStore.webConfig.cms_course == 'true' ? (<CourseFilter />) : (<></>)}
+      {/* Testimonial Slider */}
+      {clientStore.webConfig.cms_testimonial == 'true' ? (<TestimonialSlider />) : (<></>)}
+      {/* Packages */}
+      {clientStore.webConfig.cms_course == 'true' ? (<PackageSection />) : (<></>)}
+      {/* Faq & Event Area */}
+      <FaqEvent />
+      {/* Team Slider */}
+      {clientStore.webConfig.cms_faculty_details == 'true' ? (<TeamSlider />) : (<></>)}
+
+      {/* Help Area */}
+      {/* <HelpArea /> */}
+      {/* Blog Area */}
+      {clientStore.webConfig.cms_blogs == 'true' ? (<HomeBlog />) : (<></>)}
       {/* Header */}
-      <Header />
+      {/* <Header /> */}
 
       {/* Hero Slider */}
-      <HeroSlider />
+      {/* <HeroSlider /> */}
 
       {/* Icon Box */}
-      <IconBox />
+      {/* <IconBox /> */}
 
       {/* About Area */}
-      <AboutUs />
+      {/* <AboutUs /> */}
 
       {/* Course Filter */}
-      <CourseFilter />
+      {/* <CourseFilter /> */}
 
       {/* Testimonial Slider */}
-      <TestimonialSlider />
+      {/* <TestimonialSlider /> */}
 
       {/* Packages */}
-      <PackageSection />
+      {/* <PackageSection /> */}
 
 
       {/* Faq & Event Area */}
-      <FaqEvent />
+      {/* <FaqEvent /> */}
 
       {/* Team Slider */}
-      <TeamSlider />
+      {/* <TeamSlider /> */}
 
       {/* Help Area */}
       {/* <HelpArea /> */}
 
       {/* Blog Area */}
-      <HomeBlog />
+      {/* <HomeBlog /> */}
 
       {/* Campus Tour */}
       {/* <CampusTour /> */}
@@ -63,7 +81,7 @@ const HomeOne = () => {
       {/* <NewsletterForm /> */}
 
       {/* Footer */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 

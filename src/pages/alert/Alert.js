@@ -29,24 +29,8 @@ const Alerts = () => {
         console.log(res.response)
     }
 
-    const [colors, setColors] = useState({ ...clientStore.colors });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
-
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
-
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
+    
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
 
     return (
@@ -55,7 +39,7 @@ const Alerts = () => {
             <div className="main-wrapper product-page">
 
                 {/* Header 2 */}
-                <HeaderTwo />
+                {/* <HeaderTwo /> */}
 
                 {/* Breadcroumb */}
                 <BreadcrumbBox title="Alerts" />
@@ -78,49 +62,20 @@ const Alerts = () => {
                                                 </Alert>
 
 
-                                                {/* <div className="product-box">
-                                                    <div className="product-img">
-                                                        <img src={data.productImg} alt="" className="img-fluid" />
-                                                        <div className="layer-box"></div>
-                                                        <Link className="item_view" to={process.env.PUBLIC_URL + data.productUrl}>View Item</Link>
-                                                    </div>
-                                                    <div className="product-content text-center">
-                                                        <div className="pro-title">
-                                                            <h5><Link to={process.env.PUBLIC_URL + data.productUrl}>{data.productTitle}</Link></h5>
-                                                        </div>
-                                                        <div className="pro-rating">
-                                                            <ul className="list-unstyled list-inline">
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star-half-alt"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div className="pro-price">
-                                                            <p> &#8377; {data.price}</p>
-                                                        </div>
-                                                    </div>
-                                                </div> */}
+                                                
                                             </Col>
                                         ))
                                     }
 
-                                    {/* <Col md="12" className="text-center">
-                                        <Pagination />
-                                    </Col> */}
+                                    
                                 </Row>
                             </Col>
 
-                            {/* <Col lg="3" md="4" sm="5">
-                                <ShopSidebar />
-                            </Col> */}
+                            
                         </Row>
                     </Container>
                 </section>
 
-                {/* Footer 2 */}
-                <Footer />
 
             </div>
         </Styles>

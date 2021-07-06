@@ -1,39 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import HeaderTwo from '../../components/HeaderTwo';
-import { BreadcrumbBox } from '../../components/common/Breadcrumb';
-import Footer from '../../components/Footer';
 import { StyleFun } from './styles/forms.js';
 import { Dropdown, Button, ButtonGroup, Form } from "react-bootstrap"
 import * as api from '../../apis/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useClientStore } from "./../../contextProviders/clientContext"
-import { updateColorObj } from "./../../utility"
+
 
 function Franchise() {
 
     const clientStore = useClientStore();
-    const [colors, setColors] = useState({ ...clientStore.colors });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
+    const clientName = clientStore.instituteDetails.web_title;
+    const clientEmail = clientStore.instituteDetails.Email1;
 
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
-
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
-
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
     const [user, setuser] = useState({
         name_franchise: "",
@@ -47,8 +29,8 @@ function Franchise() {
         location_contact: "",
         investment_contact: "",
         enquiry_contact: "",
-        clientMail: "akshatgoyal705@gmail.com",
-        clientName: "akshat"
+        clientMail: clientEmail,
+        clientName: clientName
     })
     const [buttonState, setButtonState] = useState("Submit Now");
 
@@ -213,7 +195,7 @@ function Franchise() {
             <div className="main-wrapper registration-page">
 
                 {/* Header 2 */}
-                <HeaderTwo />
+                {/* <HeaderTwo /> */}
 
                 {/* Breadcroumb */}
                 {/* <BreadcrumbBox title="Franchise Form" /> */}
@@ -385,7 +367,7 @@ function Franchise() {
                 </section>
 
                 {/* Footer 2 */}
-                <Footer />
+                {/* <Footer /> */}
 
             </div>
         </Styles >

@@ -16,30 +16,11 @@ import { updateColorObj } from "../../utility";
 const BlogDetails = () => {
     const clientStore = useClientStore();
 
-    const [colors, setColors] = useState({ ...clientStore.colors });
-    const [dataStatus, setDataStatus] = useState(false);
-    const [toggle, setToggle] = useState(0);
-    const [Styles, setStyles] = useState(StyleFun(colors));
-
-    useEffect(() => {
-        updateColors();
-    }, [colors, toggle, dataStatus]);
-
-    const updateColors = () => {
-        if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-            let obj = { ...colors }
-            setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-            setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-            setDataStatus(true);
-        }
-        if (!dataStatus) setToggle(toggle + 1);
-    };
+    const[Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
     const { blogID } = useParams();
     const [blog, setblog] = useState({});
-    const [blogs, setblogs] = useState([]);
-    const [status, setStatus] = useState(false);
-    const [defImages, setDefImages] = useState({});
+
     useEffect(() => {
         getBlogData();
     }, []);
@@ -56,7 +37,7 @@ const BlogDetails = () => {
             // console.log(res.response[i].blog_id)
             if (res.response[i].blog_id == blogID) {
                 setblog(res.response[i]);
-                console.log(res.response[i])
+                // console.log(res.response[i])
                 break;
             }
         }
@@ -73,7 +54,7 @@ const BlogDetails = () => {
                         <div className="main-wrapper blog-details-page">
 
                             {/* Header 2 */}
-                            <HeaderTwo />
+                            {/* <HeaderTwo /> */}
 
                             {/* Breadcroumb */}
                             <BreadcrumbBox title="Blog Details" />
@@ -209,8 +190,7 @@ const BlogDetails = () => {
                                 </Container>
                             </section>
 
-                            {/* Footer 2 */}
-                            <Footer />
+
 
                         </div>
                     </Styles>

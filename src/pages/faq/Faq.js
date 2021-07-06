@@ -34,24 +34,22 @@ const Faq = () => {
   };
 
 
-  const [colors, setColors] = useState({ ...clientStore.colors });
-  const [dataStatus, setDataStatus] = useState(false);
-  const [toggle, setToggle] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
 
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggle, dataStatus]);
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataStatus(true);
-    }
-    if (!dataStatus) setToggle(toggle + 1);
-  };
+  // useEffect(() => {
+  //   updateColors();
+  // }, [colors, toggle, dataStatus]);
+
+  // const updateColors = () => {
+  //   if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
+  //     let obj = { ...colors }
+  //     setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+  //     setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+  //     setDataStatus(true);
+  //   }
+  //   if (!dataStatus) setToggle(toggle + 1);
+  // };
 
 
 
@@ -63,7 +61,7 @@ const Faq = () => {
             {/* Main Wrapper */}
             <div className="main-wrapper faq-page">
               {/* Header 2 */}
-              <HeaderTwo />
+              {/* <HeaderTwo /> */}
 
               {/* Breadcroumb */}
               <BreadcrumbBox title="Faq" />
@@ -205,7 +203,7 @@ const Faq = () => {
               </section>
 
               {/* Footer 2 */}
-              <Footer />
+              {/* <Footer /> */}
             </div>
           </Styles>
         );

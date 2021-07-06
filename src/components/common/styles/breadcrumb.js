@@ -11,6 +11,7 @@ export const StyleFun = (colors) => {
         background-repeat  : no-repeat;
         padding            : 60px 0;
         position           : relative;
+        margin-top         : 20px;
 
         &:before {
             position  : absolute;
@@ -48,7 +49,7 @@ export const StyleFun = (colors) => {
                     background-color: transparent;
                     border-radius : 0;
 
-                    li.breadcrumb-item {
+                    li {
                         a {
                             color: ${colors.green};
 
@@ -58,7 +59,7 @@ export const StyleFun = (colors) => {
                         }
                     }
 
-                    li.breadcrumb-item.active {
+                    li.active {
                         color: ${colors.border3};
 
                         &::before {

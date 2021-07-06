@@ -62,24 +62,22 @@ const TestimonialSlider = () => {
     setDataArray(clientStore.testimonials);
     setDataStatus(true);
   };
-  const [colors, setColors] = useState({ ...getColorObj() });
-  const [dataStatusCol, setDataStatusCol] = useState(false);
-  const [toggle, setToggle] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
+  
+  const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
 
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggle, dataStatus]);
+  // useEffect(() => {
+  //   updateColors();
+  // }, [colors, toggle, dataStatus]);
 
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataStatusCol) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataStatusCol(true);
-    }
-    if (!dataStatusCol) setToggle(toggle + 1);
-  };
+  // const updateColors = () => {
+  //   if (clientStore.webLayout["primary"] !== undefined && !dataStatusCol) {
+  //     let obj = { ...colors }
+  //     setColors({ ...updateColorObj(obj, clientStore.webLayout) })
+  //     setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
+  //     setDataStatusCol(true);
+  //   }
+  //   if (!dataStatusCol) setToggle(toggle + 1);
+  // };
 
   return (
     <Observer>

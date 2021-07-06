@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 // import Datas from "../data/about-us/about-us.json";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
@@ -20,21 +20,15 @@ const AboutUs = () => {
   const location = useLocation();
   // console.log(location)
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
   const [data, setData] = useState({});
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
-  const [colors, setColors] = useState({ ...getColorObj() });
-  const [dataColStatus, setDataColStatus] = useState(false);
-  const [toggleCol, setToggleCol] = useState(0);
-  const [Styles, setStyles] = useState(StyleFun(colors));
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
   useEffect(() => {
     updateData();
-  }, [data, toggle, dataStatus]);
+
+  }, [toggle, dataStatus]);
 
   const updateData = () => {
     if (clientStore.instituteDetails["About Us"] !== undefined && !dataStatus) {
@@ -44,39 +38,13 @@ const AboutUs = () => {
         title:
           "We Have Experienced Professionals & We Do Our Best To Achieve Your Goal. Your Happiness Is Our First Priority.",
         desc1: clientStore.instituteDetails["About Us"],
-        // "desc2": "Nam aperiam autem nesciunt perferendis id. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas nulla sequi pariatur quam animi ipsum molestias assumenda cumque."
       };
       setData(obj);
       setDataStatus(true);
-      // console.log("About Us Data ", clientStore.instituteDetails);
-
-      // }
     }
     if (!dataStatus) setToggle(toggle + 1);
   };
 
-  useEffect(() => {
-    updateColors();
-  }, [colors, toggleCol, dataColStatus]);
-
-  const updateColors = () => {
-    if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
-      let obj = { ...colors }
-      setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-      setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-      setDataColStatus(true);
-    }
-    if (!dataColStatus) setToggleCol(toggleCol + 1);
-  };
-
-  // useEffect(() => {
-  //   getVideo();
-  // }, []);
-
-  // const getVideo = async () => {
-  //   const res = await fetchVideo(clientStore.webHash, 1);
-  //   console.log(res.response);
-  // };
 
   return (
     <Observer>
@@ -121,7 +89,7 @@ const AboutUs = () => {
                           videoId="uXFUl0KcIkA"
                           onClose={() => setIsOpen(false)}
                         />
-                        <button onClick={openModal} className="play-button">
+                        <button onClick={() => setIsOpen(true)} className="play-button">
                           <i className="las la-play"></i>
                         </button>
                       </div>

@@ -1,9 +1,9 @@
 import React, { useEffect, Fragment, useState } from 'react';
-import Datas from '../../../data/course/item.json';
+// import Datas from '../../../data/course/item.json';
 import { Link } from 'react-router-dom';
 import { Col } from 'react-bootstrap';
-import Pagination from './../../../components/Pagination';
-import { Observer } from "mobx-react";
+// import Pagination from './../../../components/Pagination';
+// import { Observer } from "mobx-react";
 import { useClientStore } from "./../../../contextProviders/clientContext";
 import { fetchCourseDetails } from "./../../../apis/api";
 import { nanoid } from "nanoid";
@@ -26,7 +26,7 @@ const CourseItemList = () => {
 
     const getCourses = async () => {
         const res = await fetchCourseDetails(clientStore.webHash, 3);
-        console.log("All Courses", res.response);
+        // console.log("All Courses", res.response);
         setDataArray(buildCourse(res.response));
     };
 
