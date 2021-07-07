@@ -57,7 +57,8 @@ const createClientStore = () => {
       this.colors.gr_bg = `linear-gradient(90deg, ${obj.secondary} 0%, ${obj.ternary} 100%)`
       this.colors.gr_bg2 = `linear-gradient(90deg, ${obj.ternary} 0%, ${obj.secondary} 100%)`
       return this.colors
-    }
+    },
+    showBanner: true,
   };
 };
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Datas from '../data/footer/footer.json';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import BackToTop from './common/BackToTop';
@@ -34,7 +33,7 @@ const Footer = () => {
                     <Styles>
                         {/* Footer Area */}
                         <footer className="footer1" >
-                            <a href={"https://wa.me/91" + webDetail.contact1} className="whatsapp_float" target="_blank"> <i style={{ color: "white" }} class="fab fa-whatsapp whatsapp-icon"></i></a>
+                            <a href={"https://wa.me/91" + webDetail.contact1} className="whatsapp_float" target="_blank"> <i style={{ color: "white" }} className="fab fa-whatsapp whatsapp-icon"></i></a>
 
                             <Container>
                                 <Row>

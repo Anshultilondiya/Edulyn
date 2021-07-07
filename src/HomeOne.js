@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
 import HeroSlider from "./components/HeroSlider";
 import IconBox from "./components/IconBox";
 import AboutUs from "./components/AboutUs";
@@ -7,18 +6,16 @@ import CourseFilter from "./components/CourseFilter";
 import TestimonialSlider from "./components/TestimonialSlider";
 import FaqEvent from "./components/FaqEvent";
 import TeamSlider from "./components/TeamSlider";
-import HelpArea from "./components/HelpArea";
 import HomeBlog from "./components/HomeBlog";
-import CampusTour from "./components/CampusTour";
-import NewsletterForm from "./components/NewsletterForm";
-import Footer from "./components/Footer";
 import PackageSection from "./components/PackageSection";
 import { Modal } from "react-bootstrap";
 import { GrFormClose } from "react-icons/gr"
+import { fetchImagePopUp } from "./apis/api";
 
 import { useClientStore } from "./contextProviders/clientContext"
 
 function MyVerticallyCenteredModal(props) {
+
   return (
     <Modal
       {...props}
@@ -40,7 +37,7 @@ function MyVerticallyCenteredModal(props) {
     >
         <GrFormClose onClick={props.onHide} style={{ color: "#ffffff", fontSize: "250%", border: "3px solid #ffffff", borderRadius: "50%", position: "absolute", top: "-40px", right: "-40px" }} />
         <img
-          src="https://images.unsplash.com/photo-1623996458525-8b879346cc6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"
+          src={props.imageurl}
           style={{
             maxHeight: "auto",
             width: "100%",
@@ -57,12 +54,27 @@ const HomeOne = () => {
 
 
   const clientStore = useClientStore();
-  const [modalShow, setModalShow] = useState(true);
+  const [modalShow, setModalShow] = useState(clientStore.showBanner);
 
   const [homeShow, setHomeShow] = useState(false);
 
+  const [imageUrl, setImageUrl] = useState("https://cdn.pixabay.com/photo/2016/11/08/05/18/hot-air-balloons-1807521_960_720.jpg")
+
   useEffect(() => {
     setHomeShow(true)
+  }, [])
+
+  useEffect(() => {
+    fetchImagePopUp(clientStore.webHash)
+      .then((data) => {
+        console.log("data", data)
+        if (data.status === "Success") {
+          setImageUrl(data.response)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, [])
 
 
@@ -73,7 +85,11 @@ const HomeOne = () => {
 
       <MyVerticallyCenteredModal
         show={modalShow}
-        onHide={() => setModalShow(false)}
+        onHide={() => {
+          setModalShow(false)
+          clientStore.showBanner = false;
+        }}
+        imageurl={imageUrl}
       />
       {clientStore.webConfig.cms_slider == 'true' ? (<HeroSlider />) : (<></>)}
       {/* Icon Box */}

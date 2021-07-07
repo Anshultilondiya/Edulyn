@@ -34,6 +34,16 @@ export const fetchImages = async (instId, limit) => {
   })
   return response.json();
 }
+export const fetchImagePopUp = async (instId) => {
+  const response = await fetch('http://35.244.8.93:3000/Get_image_popup', {
+    method: 'POST',
+    body: new URLSearchParams({
+      id: instId,
+      key: apiKey
+    })
+  })
+  return response.json();
+}
 
 //4. Institute Details
 export const fetchInstituteDetails = async (instId) => {
