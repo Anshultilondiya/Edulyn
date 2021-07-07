@@ -136,7 +136,14 @@
   justify-content: center;
   margin-bottom: 50px;
 }
+#modalHome .modal-content{
+background-color: transparent !important;
+border: none;
+}
 
+#modalHome .modal-content svg path{
+  stroke: #fff;
+}
 
 
 /* ---------------------------------------------------- */

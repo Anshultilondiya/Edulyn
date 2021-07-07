@@ -32,6 +32,8 @@ import Cart from "./pages/shop/Cart";
 import Alert from "./pages/alert/Alert";
 import Achievements from "./pages/achievements/Achievements";
 import Batches from "./pages/batches/Batches";
+import { Modal, Button } from "react-bootstrap";
+import { GrFormClose } from "react-icons/gr"
 
 
 // Additional Swiper Css for adding functionality
@@ -48,6 +50,44 @@ import Loader from "./Loader";
 import Header from "./components/Header";
 import HeaderTwo from "./components/HeaderTwo";
 import Footer from "./components/Footer";
+
+
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      id="modalHome"
+    >     <div
+      style={{
+        width: "max-content",
+        margin: "auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        position: "relative",
+        maxWidth: "70%",
+        backgroundColor: "transparent",
+      }}
+    >
+        <GrFormClose onClick={props.onHide} style={{ color: "#ffffff", fontSize: "250%", border: "3px solid #ffffff", borderRadius: "50%", position: "absolute", top: "-40px", right: "-40px" }} />
+        <img
+          src="https://images.unsplash.com/photo-1623996458525-8b879346cc6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"
+          style={{
+            maxHeight: "auto",
+            width: "100%",
+            margin: "auto"
+          }}
+          alt="" />
+      </div>
+
+    </Modal >
+  );
+}
+
+
 
 const App = () => {
   const clientStore = useClientStore();
@@ -87,6 +127,7 @@ const App = () => {
     setGlobalStyle(GlobalStyleFun(colObj))
     setShow(false)
   }
+  const [modalShow, setModalShow] = useState(true);
 
   return (
     <Observer>
@@ -96,9 +137,14 @@ const App = () => {
             {show ? (<Loader />) : null}
             <GlobalStyle />
             <ScrollToTop />
+
             {!show ? (
 
               <div>
+                <MyVerticallyCenteredModal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
                 <Header />
                 <HeaderTwo />
                 <Switch>

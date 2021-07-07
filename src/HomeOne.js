@@ -17,6 +17,8 @@ import PackageSection from "./components/PackageSection";
 import { useClientStore } from "./contextProviders/clientContext"
 
 const HomeOne = () => {
+
+
   const clientStore = useClientStore();
   return (
     <div className="main-wrapper">
