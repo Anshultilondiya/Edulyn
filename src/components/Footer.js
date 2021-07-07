@@ -14,7 +14,7 @@ import { Observer } from 'mobx-react-lite';
 
 const Footer = () => {
     const clientStore = useClientStore();
-    const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
     const [webConfig, setWebConfig] = useState({});
     const [webDetail, setWebDetail] = useState({});
     useEffect(() => {
@@ -34,6 +34,8 @@ const Footer = () => {
                     <Styles>
                         {/* Footer Area */}
                         <footer className="footer1" >
+                            <a href={"https://wa.me/91" + webDetail.contact1} className="whatsapp_float" target="_blank"> <i style={{ color: "white" }} class="fab fa-whatsapp whatsapp-icon"></i></a>
+
                             <Container>
                                 <Row>
                                     <Col md="6">

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
 import GoogleMap from './GoogleMap';
-import Footer from '../../components/Footer';
 import { StyleFun } from './styles/contact.js';
 import { useClientStore } from '../../contextProviders/clientContext';
 import { fetchInstituteDetails, fetchStatus, sendContactData } from "./../../apis/api"
@@ -11,12 +9,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { updateColorObj } from "./../../utility"
-
 function Contact() {
-
-
-
 
     const [formData, updateFormData] = useState({
         first_name: "",
@@ -199,7 +192,7 @@ function Contact() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
-    
+
     const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
     return (
         <Styles>
@@ -248,15 +241,7 @@ function Contact() {
                                         <p>{instDetail.Contact1}<br />{instDetail.Contact2}</p>
                                     </div>
                                 </div>
-                                <div className="contact-social">
-                                    <ul className="social list-unstyled list-inline">
-                                        <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-facebook-f"></i></a></li>
-                                        <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-twitter"></i></a></li>
-                                        <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-linkedin-in"></i></a></li>
-                                        <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-youtube"></i></a></li>
-                                        <li className="list-inline-item"><a href={process.env.PUBLIC_URL + "/"}><i className="fab fa-dribbble"></i></a></li>
-                                    </ul>
-                                </div>
+
                             </Col>
                             <Col md="8">
                                 <div className="contact-form">
@@ -303,7 +288,9 @@ function Contact() {
                                                     </p>
                                                 </Col>
                                                 <Col md="12">
-                                                    <button onClick={handleSubmit} >{buttonState}</button>
+                                                    <Col lg="6" style={{ margin: "auto" }}>
+                                                        <button onClick={handleSubmit} >{buttonState}</button>
+                                                    </Col>
                                                 </Col>
                                             </Row>
                                         </form>

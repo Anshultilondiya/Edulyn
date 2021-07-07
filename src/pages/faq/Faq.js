@@ -14,6 +14,7 @@ import { buildFaq, updateColorObj } from "../../utility";
 const Faq = () => {
   const clientStore = useClientStore();
   const [dataArray, setDataArray] = useState([]);
+  const [dataStatus, setDataStatus] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -27,9 +28,12 @@ const Faq = () => {
   const getFAQ = async () => {
     console.log("FAQ Section");
     const res = await fetchFAQ(clientStore.webHash);
-    console.log("FAQ", res.response);
-    clientStore.faqData = buildFaq(res.response);
-    setDataArray(clientStore.faqData);
+    if (res.status === "success") {
+      clientStore.faqData = buildFaq(res.response);
+      setDataArray(clientStore.faqData);
+      setDataStatus(true)
+    }
+
     // console.log("FAQ", clientStore.faqData);
   };
 
@@ -67,28 +71,11 @@ const Faq = () => {
               <BreadcrumbBox title="Faq" />
 
               {/* Faq Area */}
-              <section className="faq-area">
+              {dataStatus ? (<section className="faq-area">
                 <Container>
                   <Row>
                     <Col md="12">
                       <Tab.Container defaultActiveKey="general">
-                        {/* <Nav className="justify-content-center">
-                          <Nav.Item>
-                            <Nav.Link eventKey="general">General </Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link eventKey="author">Author</Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link eventKey="buyer">Buyer</Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link eventKey="price">Pricing</Nav.Link>
-                          </Nav.Item>
-                          <Nav.Item>
-                            <Nav.Link eventKey="payment">Payment</Nav.Link>
-                          </Nav.Item>
-                        </Nav> */}
                         <Tab.Content>
                           <Tab.Pane eventKey="general">
                             <Row>
@@ -111,99 +98,13 @@ const Faq = () => {
                               ))}
                             </Row>
                           </Tab.Pane>
-                          {/* <Tab.Pane eventKey="author">
-                            <Row>
-                              {dataArray.map((data, i) => (
-                                <Col md="6" key={i}>
-                                  <div className="faq-item">
-                                    <div className="faq-title d-flex">
-                                      <div className="title-icon">
-                                        <span>Q</span>
-                                      </div>
-                                      <div className="title-text">
-                                        <p>{data.faqTitle}</p>
-                                      </div>
-                                    </div>
-                                    <div className="faq-desc">
-                                      <p>{data.faqDesc}</p>
-                                    </div>
-                                  </div>
-                                </Col>
-                              ))}
-                            </Row>
-                          </Tab.Pane>
-                          <Tab.Pane eventKey="buyer">
-                            <Row>
-                              {dataArray.map((data, i) => (
-                                <Col md="6" key={i}>
-                                  <div className="faq-item">
-                                    <div className="faq-title d-flex">
-                                      <div className="title-icon">
-                                        <span>Q</span>
-                                      </div>
-                                      <div className="title-text">
-                                        <p>{data.faqTitle}</p>
-                                      </div>
-                                    </div>
-                                    <div className="faq-desc">
-                                      <p>{data.faqDesc}</p>
-                                    </div>
-                                  </div>
-                                </Col>
-                              ))}
-                            </Row>
-                          </Tab.Pane>
-                          <Tab.Pane eventKey="price">
-                            <Row>
-                              {dataArray.map((data, i) => (
-                                <Col md="6" key={i}>
-                                  <div className="faq-item">
-                                    <div className="faq-title d-flex">
-                                      <div className="title-icon">
-                                        <span>Q</span>
-                                      </div>
-                                      <div className="title-text">
-                                        <p>{data.faqTitle}</p>
-                                      </div>
-                                    </div>
-                                    <div className="faq-desc">
-                                      <p>{data.faqDesc}</p>
-                                    </div>
-                                  </div>
-                                </Col>
-                              ))}
-                            </Row>
-                          </Tab.Pane>
-                          <Tab.Pane eventKey="payment">
-                            <Row>
-                              {dataArray.map((data, i) => (
-                                <Col md="6" key={i}>
-                                  <div className="faq-item">
-                                    <div className="faq-title d-flex">
-                                      <div className="title-icon">
-                                        <span>Q</span>
-                                      </div>
-                                      <div className="title-text">
-                                        <p>{data.faqTitle}</p>
-                                      </div>
-                                    </div>
-                                    <div className="faq-desc">
-                                      <p>{data.faqDesc}</p>
-                                    </div>
-                                  </div>
-                                </Col>
-                              ))}
-                            </Row>
-                          </Tab.Pane> */}
+
                         </Tab.Content>
                       </Tab.Container>
                     </Col>
                   </Row>
                 </Container>
-              </section>
-
-              {/* Footer 2 */}
-              {/* <Footer /> */}
+              </section>) : null}
             </div>
           </Styles>
         );

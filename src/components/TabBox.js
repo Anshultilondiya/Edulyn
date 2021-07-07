@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import { StyleFun } from "./styles/tabBox.js";
 import { useClientStore } from "../contextProviders/clientContext";
-import { updateColorObj } from "../utility.js";
 
 const TabBox = () => {
   const clientStore = useClientStore();
@@ -16,8 +15,8 @@ const TabBox = () => {
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
 
-  const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
-  
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
+
   useEffect(() => {
     updateData();
   }, [toggle, dataStatus]);
@@ -43,21 +42,7 @@ const TabBox = () => {
     if (!dataStatus) setToggle(toggle + 1);
   };
 
-  // useEffect(() => {
-  //   updateColors();
-  // }, [colors, toggleCol, dataColStatus]);
-
-
-  // const updateColors = () => {
-  //   if (clientStore.webLayout["primary"] !== undefined && !dataColStatus) {
-  //     let obj = { ...colors }
-  //     setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-  //     setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-  //     setDataColStatus(true);
-  //   }
-  //   if (!dataColStatus) setToggleCol(toggleCol + 1);
-  // };
-  return (
+  return dataStatus ? (
     <Styles>
       {/* Tab Box Area */}
       <section className="tab-section">
@@ -103,11 +88,7 @@ const TabBox = () => {
                         __html: whyUs,
                       }}
                     ></p>
-                    <ul className="list-unstyled check-list">
-                      {/* <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li>
-                                                <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li>
-                                                <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li> */}
-                    </ul>
+                    
                   </Tab.Pane>
                   <Tab.Pane eventKey="mission">
                     <h4 className="tab-title">Our Mission</h4>
@@ -117,11 +98,7 @@ const TabBox = () => {
                         __html: ourMission,
                       }}
                     ></p>
-                    <ul className="list-unstyled check-list">
-                      {/* <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li>
-                                                <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li>
-                                                <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li> */}
-                    </ul>
+                    
                   </Tab.Pane>
                   <Tab.Pane eventKey="vision">
                     <h4 className="tab-title">Our Vision</h4>
@@ -131,11 +108,7 @@ const TabBox = () => {
                         __html: ourVision,
                       }}
                     ></p>
-                    {/* <ul className="list-unstyled check-list"> */}
-                    {/* <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li>
-                                                <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li>
-                                                <li><i className="fa fa-check"></i>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum amet quo eius saepe et quis necessitatibus hic natus facere.</li> */}
-                    {/* </ul> */}
+                    
                   </Tab.Pane>
                   <Tab.Pane eventKey="ranking">
                     <h4 className="tab-title">Director Message</h4>
@@ -159,33 +132,6 @@ const TabBox = () => {
                       </Row>
                     </Container>
 
-                    {/* <p className="tab-desc">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Voluptatum amet quo eius saepe et quis necessitatibus hic
-                      natus facere a nisi fuga rem quas molestias, eveniet
-                      minima molestiae. Lorem ipsum dolor, sit amet consectetur
-                      adipisicing elit. Ea, recusandae? Assumenda, error. Quam
-                      dicta iusto saepe. Odit minus voluptas, fuga ipsum quia
-                      debitis totam, tempore laudantium quasi dicta dolorem
-                      deleniti.
-                    </p>
-                    <ul className="list-unstyled check-list">
-                      <li>
-                        <i className="fa fa-check"></i>Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit. Voluptatum amet quo
-                        eius saepe et quis necessitatibus hic natus facere.
-                      </li>
-                      <li>
-                        <i className="fa fa-check"></i>Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit. Voluptatum amet quo
-                        eius saepe et quis necessitatibus hic natus facere.
-                      </li>
-                      <li>
-                        <i className="fa fa-check"></i>Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit. Voluptatum amet quo
-                        eius saepe et quis necessitatibus hic natus facere.
-                      </li>
-                    </ul> */}
                   </Tab.Pane>
                   <Tab.Pane eventKey="research">
                     <h4 className="tab-title">Co-founder Message</h4>
@@ -208,33 +154,7 @@ const TabBox = () => {
                         </Col>
                       </Row>
                     </Container>
-                    {/* <p className="tab-desc">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Voluptatum amet quo eius saepe et quis necessitatibus hic
-                      natus facere a nisi fuga rem quas molestias, eveniet
-                      minima molestiae. Lorem ipsum dolor, sit amet consectetur
-                      adipisicing elit. Ea, recusandae? Assumenda, error. Quam
-                      dicta iusto saepe. Odit minus voluptas, fuga ipsum quia
-                      debitis totam, tempore laudantium quasi dicta dolorem
-                      deleniti.
-                    </p>
-                    <ul className="list-unstyled check-list">
-                      <li>
-                        <i className="fa fa-check"></i>Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit. Voluptatum amet quo
-                        eius saepe et quis necessitatibus hic natus facere.
-                      </li>
-                      <li>
-                        <i className="fa fa-check"></i>Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit. Voluptatum amet quo
-                        eius saepe et quis necessitatibus hic natus facere.
-                      </li>
-                      <li>
-                        <i className="fa fa-check"></i>Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit. Voluptatum amet quo
-                        eius saepe et quis necessitatibus hic natus facere.
-                      </li>
-                    </ul> */}
+
                   </Tab.Pane>
                 </Tab.Content>
               </Col>
@@ -243,7 +163,7 @@ const TabBox = () => {
         </Container>
       </section>
     </Styles>
-  );
+  ) : null;
 };
 
 export default TabBox;

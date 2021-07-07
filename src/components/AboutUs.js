@@ -24,6 +24,11 @@ const AboutUs = () => {
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
   const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
+  const [modalV, setModalV] = useState(false)
+
+  useEffect(() => {
+    setModalV(true);
+  }, [])
 
   useEffect(() => {
     updateData();
@@ -49,7 +54,7 @@ const AboutUs = () => {
   return (
     <Observer>
       {() => {
-        return (
+        return dataStatus ? (
           <Styles>
             {/* About Us */}
             <section className="about-us">
@@ -76,10 +81,9 @@ const AboutUs = () => {
                         className="pattern-img"
                         alt=""
                       />
-                      <div
+                      {modalV ? (<div
                         className="video-player"
                         style={{
-                          // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${data.videoBackground})`,
                           backgroundImage: `url(https://yt3.ggpht.com/ytc/AKedOLQBuw62seqtR718dImbTQ0J1ilmg6ouCTS1nbyncQA=s900-c-k-c0x00ffffff-no-rj)`,
                         }}
                       >
@@ -92,7 +96,7 @@ const AboutUs = () => {
                         <button onClick={() => setIsOpen(true)} className="play-button">
                           <i className="las la-play"></i>
                         </button>
-                      </div>
+                      </div>) : null}
                     </div>
                   </Col>
                   <Col md="6">
@@ -110,35 +114,6 @@ const AboutUs = () => {
                           </span>
                         )}
                       </p>
-                      {/* <Row>
-                        <Col sm="4">
-                          <div className="counter-box box1 text-center">
-                            <h3>
-                              <CountUp end={970} duration={5} delay={1.5} />
-                              <i className="las la-plus"></i>
-                            </h3>
-                            <p>Happy Students</p>
-                          </div>
-                        </Col>
-                        <Col sm="4">
-                          <div className="counter-box box2 text-center">
-                            <h3>
-                              <CountUp end={130} duration={5} delay={1.5} />
-                              <i className="las la-plus"></i>
-                            </h3>
-                            <p>Teachers</p>
-                          </div>
-                        </Col>
-                        <Col sm="4">
-                          <div className="counter-box box3 text-center">
-                            <h3>
-                              <CountUp end={340} duration={5} delay={1.5} />
-                              <i className="las la-plus"></i>
-                            </h3>
-                            <p>Courses</p>
-                          </div>
-                        </Col>
-                      </Row> */}
                       {location.pathname !== process.env.PUBLIC_URL + "/about" ? (<Link
                         className="readmore-btn"
                         to={process.env.PUBLIC_URL + "/about"}
@@ -151,7 +126,7 @@ const AboutUs = () => {
               </Container>
             </section>
           </Styles>
-        );
+        ) : null;
       }}
     </Observer>
   );

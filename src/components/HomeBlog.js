@@ -10,6 +10,7 @@ import { fetchBlogs } from "./../apis/api";
 
 const HomeBlog = () => {
   const clientStore = useClientStore();
+  const [dataStatus, setDataStatus] = useState(false);
 
   useEffect(() => {
     getBlogs();
@@ -19,8 +20,11 @@ const HomeBlog = () => {
 
   const getBlogs = async () => {
     const res = await fetchBlogs(clientStore.webHash);
-    clientStore.blogs = buildBlog(res.response);
-    setDataArray(clientStore.blogs);
+    if (res.status === "success") {
+      clientStore.blogs = buildBlog(res.response);
+      setDataArray(clientStore.blogs);
+      setDataStatus(true)
+    }
   };
 
   const [blogLen, setBlogLen] = useState(1)
@@ -29,7 +33,7 @@ const HomeBlog = () => {
 
 
 
-  return (
+  return dataStatus ? (
     <Observer>
       {() => {
         return (
@@ -86,37 +90,7 @@ const HomeBlog = () => {
                                           __html: data.shortDes,
                                         }}
                                       />
-                                      {/* <ul className="list-unstyled list-inline">
-                                        <li className="list-inline-item">
-                                          <Link
-                                            to={
-                                              process.env.PUBLIC_URL +
-                                              data.authorLink
-                                            }
-                                          >
-                                            <i className="las la-user"></i> Jhon
-                                          </Link>
-                                        </li>
-                                        <li className="list-inline-item">
-                                          <Link
-                                            to={
-                                              process.env.PUBLIC_URL +
-                                              data.commentLink
-                                            }
-                                          >
-                                            <i className="las la-comment"></i> 19
-                                          </Link>
-                                        </li>
-                                        <li className="list-inline-item">
-                                          <Link
-                                            to={
-                                              process.env.PUBLIC_URL + data.likeLink
-                                            }
-                                          >
-                                            <i className="las la-thumbs-up"></i> 37
-                                          </Link>
-                                        </li>
-                                      </ul> */}
+
                                     </div>
                                   </div>
                                 </div>
@@ -136,33 +110,14 @@ const HomeBlog = () => {
                     </div>
                   </Col>
                 </Row>
-                {/* <div
-                  style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-                >
-                  <button><Link to={process.env.PUBLIC_URL + "/blog-grid"}>
-                    Show More
-                  </Link></button> */}
-                {/* {blogLen === 1 ?
-                    <button
-                      onClick={() => {
-                        setBlogLen(dataArray.length)
-                      }}
-                    >Show More</button> :
-                    <button
-                      onClick={() => {
-                        setBlogLen(1)
-                      }}
-                    >Show Less</button>
 
-                  } */}
-                {/* </div> */}
               </Container>
             </section>
           </Styles>
         );
       }}
     </Observer >
-  );
+  ) : null;
 };
 
 export default HomeBlog;

@@ -3,7 +3,7 @@ import { colors } from "../../../components/common/element/elements.js";
 
 export const StyleFun = (colors) => {
 
-const Styles = styled.div`
+    const Styles = styled.div`
     .login-page {
         .login-area {
             padding : 70px 0;
@@ -40,6 +40,7 @@ const Styles = styled.div`
                 }
 
                 form.form {
+                    
                     p.form-control {
                         padding      : 0;
                         width        : auto;

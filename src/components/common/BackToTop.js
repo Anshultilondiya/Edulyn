@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { StyleFun } from "./styles/backToTop.js";
 
 import { useClientStore } from "./../../contextProviders/clientContext";
-import { updateColorObj } from "./../../utility"
 
 
 

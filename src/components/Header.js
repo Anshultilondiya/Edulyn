@@ -12,9 +12,9 @@ import { fetchDynamicButton } from "../apis/api";
 const Header = () => {
   const clientStore = useClientStore();
   const location = useLocation();
-  const [phone, setPhone] = useState("(908) 875 7678");
-  const [email, setEmail] = useState("someemail@domain.com");
-  const [address, setAddress] = useState("795 South Park Avenue, CA 94107");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
   const [logo, setLogo] = useState("");
@@ -80,7 +80,7 @@ const Header = () => {
                   </ul>
                 </div>
               </Col>
-              <Col lg="6" md="7">
+              {/* <Col lg="6" md="7">
                 <div className="bar-right d-flex justify-content-end">
                   <ul className="list-unstyled list-inline bar-social">
                     <li className="list-inline-item">
@@ -177,7 +177,7 @@ const Header = () => {
                     </li>
                   </ul>
                 </div>
-              </Col>
+              </Col> */}
             </Row>
           </Container>
         </section>
@@ -217,7 +217,9 @@ const Header = () => {
                     </div>
                     <div className="box-content">
                       <p>Call Us Now</p>
-                      <span>{phone}</span>
+                      <a href={`tel:${phone}`} style={{ color: "inherit" }}>
+                        <span>{phone}</span>
+                      </a>
                     </div>
                   </div>
                   <div className="emcontact-box d-flex">
@@ -226,7 +228,9 @@ const Header = () => {
                     </div>
                     <div className="box-content">
                       <p>Enquery Us</p>
-                      <span>{email}</span>
+                      <a href={`mailto:${email}`} style={{ color: "inherit" }}>
+                        <span>{email}</span>
+                      </a>
                     </div>
                   </div>
                   <div className="apply-btn">

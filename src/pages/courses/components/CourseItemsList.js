@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment, useState } from 'react';
 // import Datas from '../../../data/course/item.json';
 import { Link } from 'react-router-dom';
-import { Col } from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
 // import Pagination from './../../../components/Pagination';
 // import { Observer } from "mobx-react";
 import { useClientStore } from "./../../../contextProviders/clientContext";
@@ -19,15 +19,21 @@ const CourseItemList = () => {
 
 
     const [dataArray, setDataArray] = useState([]);
-
+    const [dataStatus, setDataStatus] = useState(false)
+    const [empty, setEmpty] = useState(false)
     useEffect(() => {
         getCourses();
     }, []);
 
     const getCourses = async () => {
         const res = await fetchCourseDetails(clientStore.webHash, 3);
-        // console.log("All Courses", res.response);
-        setDataArray(buildCourse(res.response));
+        if (res.status === "success") {
+            setDataArray(buildCourse(res.response));
+            setDataStatus(true)
+        }
+        else
+            setEmpty(true)
+
     };
 
 
@@ -53,20 +59,19 @@ const CourseItemList = () => {
         return arr;
     };
 
-    return (
+    return dataStatus ? (
         <Fragment>
-            {/* Course Item */}
-            {
-                dataArray.map((data, i) => (
-                    <Col md="12" key={i}>
-                        <div className="course-item d-flex">
-                            <div className="course-image-box">
-                                <div className="course-image"
-                                    style={{
-                                        // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${data.imgUrl})`
-                                        backgroundImage: `url(${data.imgUrl})`
-                                    }}>
-                                    {/* <div className="author-img d-flex">
+
+            {dataArray.map((data, i) => (
+                <Col md="12" key={i}>
+                    <div className="course-item d-flex">
+                        <div className="course-image-box">
+                            <div className="course-image"
+                                style={{
+                                    // backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${data.imgUrl})`
+                                    backgroundImage: `url(${data.imgUrl})`
+                                }}>
+                                {/* <div className="author-img d-flex">
                                         <div className="img">
                                             <Link to={process.env.PUBLIC_URL + data.courseLink}>
                                                 <img src={process.env.PUBLIC_URL + `/assets/images/${data.authorImg}`} alt="" />
@@ -77,14 +82,14 @@ const CourseItemList = () => {
                                             <span>{data.authorCourses}</span>
                                         </div>
                                     </div> */}
-                                    {/* <div className="course-price">
+                                {/* <div className="course-price">
                                         <p>{data.price}</p>
                                     </div> */}
-                                </div>
                             </div>
-                            <div className="course-content">
-                                <h6 className="heading"><Link to={process.env.PUBLIC_URL + data.courseLink}>{data.courseTitle}</Link></h6>
-                                {/* <div className="rating">
+                        </div>
+                        <div className="course-content">
+                            <h6 className="heading"><Link to={process.env.PUBLIC_URL + data.courseLink}>{data.courseTitle}</Link></h6>
+                            {/* <div className="rating">
                                     <ul className="list-unstyled list-inline">
                                         <li className="list-inline-item"><i className="las la-star"></i></li>
                                         <li className="list-inline-item"><i className="las la-star"></i></li>
@@ -95,12 +100,12 @@ const CourseItemList = () => {
                                         <li className="list-inline-item">(4.5)</li>
                                     </ul>
                                 </div> */}
-                                <p className="desc" dangerouslySetInnerHTML={{ __html: `${data.courseDesc.slice(0, 150)} ...` }}></p>
-                                <Link className="details-btn" to={process.env.PUBLIC_URL + data.courseLink}>View Details</Link>
-                            </div>
+                            <p className="desc" dangerouslySetInnerHTML={{ __html: `${data.courseDesc.slice(0, 150)} ...` }}></p>
+                            <Link className="details-btn" to={process.env.PUBLIC_URL + data.courseLink}>View Details</Link>
                         </div>
-                    </Col>
-                ))
+                    </div>
+                </Col>
+            ))
             }
 
             {/* <Col md="12"  className="text-center">
@@ -108,7 +113,13 @@ const CourseItemList = () => {
                 </Col> */}
 
         </Fragment>
-    )
+    ) : (empty ? (<Container>
+        <Row>
+            <Col style={{ margin: "auto", textAlign: "center" }}>
+                <p>No Course Available</p>
+            </Col>
+        </Row>
+    </Container>) : null);
 
 }
 

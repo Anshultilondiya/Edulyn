@@ -52,59 +52,30 @@ import HeaderTwo from "./components/HeaderTwo";
 import Footer from "./components/Footer";
 
 
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      id="modalHome"
-    >     <div
-      style={{
-        width: "max-content",
-        margin: "auto",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        position: "relative",
-        maxWidth: "70%",
-        backgroundColor: "transparent",
-      }}
-    >
-        <GrFormClose onClick={props.onHide} style={{ color: "#ffffff", fontSize: "250%", border: "3px solid #ffffff", borderRadius: "50%", position: "absolute", top: "-40px", right: "-40px" }} />
-        <img
-          src="https://images.unsplash.com/photo-1623996458525-8b879346cc6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"
-          style={{
-            maxHeight: "auto",
-            width: "100%",
-            margin: "auto"
-          }}
-          alt="" />
-      </div>
 
-    </Modal >
-  );
-}
 
 
 
 const App = () => {
   const clientStore = useClientStore();
   const [show, setShow] = useState(true)
+  const [webStatus, setWebStatus] = useState(true)
   const domain = "aashishtararshub.in";
   useEffect(() => {
-    getWebData();
-    getInstituteDetails();
-  }, []);
+    // getWebHash();
+    if (webStatus) {
+      getWebData();
+      getInstituteDetails();
+    }
+  }, [webStatus]);
 
-  const getWebHash = async (domain) => {
+  const getWebHash = async () => {
     const res = await fetchWebHash(domain);
     clientStore.updateHash(
       res.response[0]["inst_hash"],
       res.response[0]["expiry_date"]
     );
-    return res;
+    setWebStatus(true)
   };
 
   const getInstituteDetails = async () => {
@@ -141,10 +112,7 @@ const App = () => {
             {!show ? (
 
               <div>
-                <MyVerticallyCenteredModal
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
+
                 <Header />
                 <HeaderTwo />
                 <Switch>

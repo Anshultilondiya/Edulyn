@@ -7,8 +7,6 @@ import { useClientStore } from "./../contextProviders/clientContext";
 import { Observer } from "mobx-react";
 import { fetchTestimonials } from "./../apis/api";
 import { buildTestimonials } from "../utility";
-import { getColorObj } from './common/element/elements';
-import { updateColorObj } from '../utility';
 
 const TestimonialSlider = () => {
   const clientStore = useClientStore();
@@ -55,34 +53,19 @@ const TestimonialSlider = () => {
 
   const getTestimonial = async () => {
     const res = await fetchTestimonials(clientStore.webHash);
-    // console.log("Testimonials", res.response);
-    clientStore.testimonials = buildTestimonials(res.response);
-    // console.log("Testimonials >>>", clientStore.testimonials);
-    // console.log(clientStore.testimonials.length);
-    setDataArray(clientStore.testimonials);
-    setDataStatus(true);
+    if (res.status === "success") {
+      clientStore.testimonials = buildTestimonials(res.response);
+      setDataArray(clientStore.testimonials);
+      setDataStatus(true);
+    }
   };
-  
-  const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
 
-  // useEffect(() => {
-  //   updateColors();
-  // }, [colors, toggle, dataStatus]);
-
-  // const updateColors = () => {
-  //   if (clientStore.webLayout["primary"] !== undefined && !dataStatusCol) {
-  //     let obj = { ...colors }
-  //     setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-  //     setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-  //     setDataStatusCol(true);
-  //   }
-  //   if (!dataStatusCol) setToggle(toggle + 1);
-  // };
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
   return (
     <Observer>
       {() => {
-        return (
+        return dataStatus ? (
           <Styles>
             {/* Testimonial Slider */}
             <section
@@ -116,18 +99,12 @@ const TestimonialSlider = () => {
                               )}
                             </div>
                             <div className="writer">
-                              {/* <img
-                                src={data.authorImg}
-                                className="slider-image"
-                                alt={data.authorImg}
-                              /> */}
                               <img
                                 src={data.authorImg}
                                 className="slider-image"
                                 alt={data.authorImg}
                               />
                               <h6>{data.authorName}</h6>
-                              {/* <p>{data.authorTitle}</p> */}
                             </div>
                           </div>
                         ))}
@@ -138,7 +115,7 @@ const TestimonialSlider = () => {
               </Container>
             </section>
           </Styles>
-        );
+        ) : null;
       }}
     </Observer>
   );

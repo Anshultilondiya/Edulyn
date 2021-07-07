@@ -13,7 +13,7 @@ function CourseFilter() {
   const clientStore = useClientStore();
   const [dataArray, setDataArray] = useState([]);
   const [dataStatus, setDataStatus] = useState(false);
-  const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
 
   useEffect(() => {
@@ -22,13 +22,14 @@ function CourseFilter() {
 
   const getTopCourses = async () => {
     const res = await fetchTopCourses(clientStore.webHash, 3);
-    // console.log("Courses", res.response);
-    clientStore.topCourses = buildCourse(res.response);
-    setDataArray(clientStore.topCourses);
-    setDataStatus(true)
+    if (res.status === "success") {
+      clientStore.topCourses = buildCourse(res.response);
+      setDataArray(clientStore.topCourses);
+      setDataStatus(true)
+    }
   };
 
-  return (
+  return dataStatus ? (
     <Observer>
       {() => {
         return (
@@ -51,9 +52,8 @@ function CourseFilter() {
                               <div
                                 className="course-image"
                                 style={{
-                                  backgroundImage: dataStatus
-                                    ? `url(${data.imgUrl})`
-                                    : `url(${process.env.PUBLIC_URL}/assets/images/${data.imgUrl})`,
+                                  backgroundImage: `url(${data.imgUrl})`
+
                                 }}
                               >
                               </div>
@@ -84,7 +84,7 @@ function CourseFilter() {
                   </Col>
                   <Col md="12" className="text-center">
                     <div className="viewall-btn">
-                      <Link to={process.env.PUBLIC_URL + "/course-grid"}>
+                      <Link to={process.env.PUBLIC_URL + "/course-list"}>
                         View All Courses
                       </Link>
                     </div>
@@ -96,7 +96,7 @@ function CourseFilter() {
         );
       }}
     </Observer>
-  );
+  ) : null;
 }
 
 export default CourseFilter;

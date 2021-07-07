@@ -30,8 +30,9 @@
     "react-scripts": "^4.0.3",
     "react-simple-image-viewer": "0.0.8",
     "react-toastify": "^7.0.4",
+    "reactstrap": "^8.9.0",
     "styled-components": "^5.1.1",
-    "swiper": "^6.7.0"
+    "swiper": "^6.4.5"
   },
   "homepage": "",
   "scripts": {

@@ -14,9 +14,9 @@ const HeaderTwo = () => {
   const location = useLocation();
   // console.log("Location", locatipon)
   const clientStore = useClientStore();
-  const [phone, setPhone] = useState("(908) 875 7678");
-  const [email, setEmail] = useState("someemail@domain.com");
-  const [address, setAddress] = useState("795 South Park Avenue, CA 94107");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [dataStatus, setDataStatus] = useState(false);
   const [toggle, setToggle] = useState(0);
   const [logo, setLogo] = useState("");
@@ -65,13 +65,17 @@ const HeaderTwo = () => {
               <Col lg="7" md="9">
                 <div className="bar-left">
                   <ul className="list-unstyled list-inline">
-                    <li className="list-inline-item">
-                      <i className="las la-phone"></i>
-                      {phone}
+                    <li className="list-inline-item" style={{ cursor: "pointer" }}>
+                      <a href={`tel:${phone}`} style={{ color: "inherit" }}>
+                        <i className="las la-phone"></i>
+                        {phone}
+                      </a>
                     </li>
-                    <li className="list-inline-item">
-                      <i className="las la-envelope"></i>
-                      {email}
+                    <li className="list-inline-item" style={{ cursor: "pointer" }}>
+                      <a href={`mailto:${email}`} style={{ color: "inherit" }}>
+                        <i className="las la-envelope"></i>
+                        {email}
+                      </a>
                     </li>
                     <li className="list-inline-item">
                       <i className="las la-map-marker"></i>
@@ -80,7 +84,7 @@ const HeaderTwo = () => {
                   </ul>
                 </div>
               </Col>
-              <Col lg="5" md="3">
+              {/* <Col lg="5" md="3">
                 <div className="bar-right d-flex justify-content-end">
 
                   <ul className="list-unstyled list-inline bar-social">
@@ -106,7 +110,7 @@ const HeaderTwo = () => {
                     </li>
                   </ul>
                 </div>
-              </Col>
+              </Col> */}
             </Row>
           </Container>
         </section>

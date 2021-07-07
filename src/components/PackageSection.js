@@ -15,33 +15,23 @@ const PackageSection = () => {
 
     const clientStore = useClientStore();
     const [packages, setPackages] = useState([])
+    const [dataStatus, setDataStatus] = useState(false)
     useEffect(() => {
         getPackageData()
     }, [])
 
     const getPackageData = async () => {
         const res = await fetchPackageDetails(clientStore.webHash, 3);
-        let arr = buildPackage(res.response)
-        setPackages(arr)
-        // console.log(res.response)
+        if (res.status === "success") {
+            let arr = buildPackage(res.response)
+            setPackages(arr)
+            setDataStatus(true)
+        }
     }
     const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
-    // useEffect(() => {
-    //     updateColors();
-    // }, [colors, toggle, dataStatus]);
 
-    // const updateColors = () => {
-    //     if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-    //         let obj = { ...colors }
-    //         setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-    //         setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-    //         setDataStatus(true);
-    //     }
-    //     if (!dataStatus) setToggle(toggle + 1);
-    // };
-
-    return (
+    return dataStatus ? (
         <Styles>
             {/* Main Wrapper */}
             <div className="main-wrapper product-page">
@@ -72,15 +62,7 @@ const PackageSection = () => {
                                                         <div className="pro-title">
                                                             <h5><Link to={process.env.PUBLIC_URL + data.productUrl}>{data.productTitle}</Link></h5>
                                                         </div>
-                                                        {/* <div className="pro-rating">
-                                                            <ul className="list-unstyled list-inline">
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star-half-alt"></i></li>
-                                                            </ul>
-                                                        </div> */}
+
                                                         <div className="pro-price">
                                                             <p> Price : &#8377; {data.price}</p>
                                                         </div>
@@ -106,7 +88,7 @@ const PackageSection = () => {
                 </section>
             </div>
         </Styles>
-    )
+    ) : null;
 }
 
 export default PackageSection

@@ -17,17 +17,22 @@ const Packages = () => {
 
     const clientStore = useClientStore();
     const [packages, setPackages] = useState([])
+    const [dataStatus, setDataStatus] = useState(false)
+    const [empty, setEmpty] = useState(false)
     useEffect(() => {
         getPackageData()
     }, [])
 
     const getPackageData = async () => {
         const res = await fetchPackageDetails(clientStore.webHash, 10);
-        let arr = buildPackage(res.response)
-        setPackages(arr)
-        // console.log(res.response)
+        if (res.status === "success") {
+            let arr = buildPackage(res.response)
+            setPackages(arr)
+            setDataStatus(true)
+        }
+        else setEmpty(true)
     }
-    
+
     const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
     // useEffect(() => {
@@ -57,7 +62,7 @@ const Packages = () => {
                 <BreadcrumbBox title="Packages" />
 
                 {/* Products */}
-                <section className="product-area">
+                {dataStatus ? (<section className="product-area">
                     <Container>
                         <Row>
                             <Col lg="11" md="9" sm="8" style={{ margin: "auto" }}>
@@ -78,15 +83,7 @@ const Packages = () => {
                                                         <div className="pro-title">
                                                             <h5><Link to={process.env.PUBLIC_URL + data.productUrl}>{data.productTitle}</Link></h5>
                                                         </div>
-                                                        {/* <div className="pro-rating">
-                                                            <ul className="list-unstyled list-inline">
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star-half-alt"></i></li>
-                                                            </ul>
-                                                        </div> */}
+
                                                         <div className="pro-price">
                                                             <p> Price : &#8377; {data.price}</p>
                                                         </div>
@@ -99,22 +96,20 @@ const Packages = () => {
                                         ))
                                     }
 
-                                    {/* <Col md="12" className="text-center">
-                                        <Pagination />
-                                    </Col> */}
+
                                 </Row>
                             </Col>
 
-                            {/* <Col lg="3" md="4" sm="5">
-                                <ShopSidebar />
-                            </Col> */}
+
                         </Row>
                     </Container>
-                </section>
-
-                {/* Footer 2 */}
-                {/* <Footer /> */}
-
+                </section>) : (empty ? (<Container>
+                    <Row>
+                        <Col style={{ margin: "auto", textAlign: "center" }}>
+                            <p>No Package Available</p>
+                        </Col>
+                    </Row>
+                </Container>) : null)}
             </div>
         </Styles>
     )

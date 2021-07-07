@@ -53,11 +53,11 @@ export const buildCourse = (res) => {
     let obj = {
       id: nanoid(),
       targetId: "desi",
-      // imgUrl:
-      //   res[i]["course_image"] !== ""
-      //     ? res[i]["course_image"]
-      //     : "https://i.ibb.co/PQbvZM3/course1.jpg",
-      imgUrl: "https://i.ibb.co/PQbvZM3/course1.jpg",
+      imgUrl:
+        res[i]["course_image"] !== ""
+          ? res[i]["course_image"]
+          : "https://i.ibb.co/PQbvZM3/course1.jpg",
+      // imgUrl: "https://i.ibb.co/PQbvZM3/course1.jpg",
       authorImg: "author.jpg",
       authorName: "John Doe",
       authorCourses: "13 Courses",
@@ -109,7 +109,7 @@ export const buildNotification = (res) => {
       eventLocation: "Newyork,NY.",
       eventdesc: res[i].notify_description,
       eventLink: "/event-details",
-      eventImg: "event-02.jpg",
+      eventImg: res[i].image !== "" ? res[i].image : "https://images.unsplash.com/photo-1614102073832-030967418971?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
     };
     // console.log(obj);
     arr.push(obj);
@@ -123,7 +123,7 @@ export const buildPackage = (res) => {
   for (let i = 0; i < res.length; i++) {
     let obj = {
       "id": nanoid(),
-      "productImg": "https://www.marketplace.org/wp-content/uploads/2021/01/Books_New-e1611252343470.jpg?fit=2879%2C1619",
+      "productImg": res[i].course_image !== "" ? res[i].course_image : "https://www.marketplace.org/wp-content/uploads/2021/01/Books_New-e1611252343470.jpg?fit=2879%2C1619",
       "productTitle": res[i].course_name,
       "productUrl": `/course-details/${res[i].course_slug}`,
       "courseSlug": res[i].course_slug,

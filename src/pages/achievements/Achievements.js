@@ -12,16 +12,19 @@ const Achievements = () => {
 
     const clientStore = useClientStore();
     const [arr, setArr] = useState([]);
+    const [dataStatus, setDataStatus] = useState(false)
     useEffect(() => {
         getAchievements();
     }, [])
 
     const getAchievements = async () => {
         const res = await fetchAchievement(clientStore.webHash);
-        console.log(res.response);
-        setArr(res.response)
+        if (res.status === "success") {
+            setArr(res.response)
+            setDataStatus(true)
+        }
     }
-    const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
     return (
         <Styles>
@@ -35,7 +38,7 @@ const Achievements = () => {
                 <BreadcrumbBox title="Achievements" />
 
                 {/* Products */}
-                <section className="product-area">
+                {dataStatus ? (<section className="product-area">
                     <Container>
                         <Row>
                             <Col lg="11" md="11" sm="11" xs="9" style={{ margin: "auto" }}>
@@ -47,9 +50,7 @@ const Achievements = () => {
                                                     <div className="product-img">
                                                         <img src={data.image} alt="" className="img-fluid" />
                                                         <span className="rank"><span>Rank</span><span>{data.rank}</span></span>
-                                                        {/* <div className="layer-box"></div>
-                                                        <Link className="add_cart" to={process.env.PUBLIC_URL + data.productUrl}>Add To Cart</Link>
-                                                        <Link className="item_view" to={process.env.PUBLIC_URL + data.productUrl}>View Item</Link> */}
+
                                                     </div>
                                                     <div className="product-content text-center">
                                                         <div className="pro-title">
@@ -57,15 +58,7 @@ const Achievements = () => {
                                                             <h5>{data.name}</h5>
                                                             <h5>Score : {data.marks} / {data.total_marks}</h5>
                                                         </div>
-                                                        {/* <div className="pro-rating">
-                                                            <ul className="list-unstyled list-inline">
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star"></i></li>
-                                                                <li className="list-inline-item"><i className="las la-star-half-alt"></i></li>
-                                                            </ul>
-                                                        </div> */}
+
                                                         <div className="pro-price">
                                                             <p>{data.price}</p>
                                                         </div>
@@ -74,18 +67,11 @@ const Achievements = () => {
                                             </Col>
                                         ))
                                     }
-
-
                                 </Row>
                             </Col>
-
-
                         </Row>
                     </Container>
-                </section>
-
-               
-
+                </section>) : null}
             </div>
         </Styles>
     )

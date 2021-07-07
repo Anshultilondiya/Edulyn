@@ -16,9 +16,9 @@ import { buildBlog, updateColorObj } from "../../utility";
 const BlogGrid = () => {
 
   const clientStore = useClientStore();
-
+  const [dataStatus, setDataStatus] = useState(false);
   const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
-
+  const [empty, setEmpty] = useState(false)
 
 
   useEffect(() => {
@@ -34,10 +34,12 @@ const BlogGrid = () => {
 
   const getBlogs = async () => {
     const res = await fetchBlogs(clientStore.webHash);
-    console.log("Blogs", res.response);
-    clientStore.blogs = buildBlog(res.response);
-    setDataArray(clientStore.blogs);
-    // console.log("Blogs", clientStore.blogs);
+    if (res.status === "success") {
+      clientStore.blogs = buildBlog(res.response);
+      setDataArray(clientStore.blogs);
+      setDataStatus(true)
+    }
+    else setEmpty(true)
   };
   return (
     <Observer>
@@ -53,7 +55,7 @@ const BlogGrid = () => {
               <BreadcrumbBox title="Blog Grid" />
 
               {/* Blog Classic */}
-              <section className="blog-grid-area">
+              {dataStatus ? (<section className="blog-grid-area">
                 <Container>
                   <Row>
                     <Col lg="11" md="8" sm="7" style={{ margin: "auto" }}>
@@ -73,39 +75,7 @@ const BlogGrid = () => {
                                 </Link>
                               </div>
                               <div className="blog-content">
-                                {/* <div className="blog-auth_date d-flex">
-                                  <div className="author-img d-flex">
-                                    <Link
-                                      to={
-                                        process.env.PUBLIC_URL + data.authorLink
-                                      }
-                                    >
-                                      <img
-                                        src={
-                                          process.env.PUBLIC_URL +
-                                          `/assets/images/${data.authorImg}`
-                                        }
-                                        alt=""
-                                      />
-                                    </Link>
-                                    <p>
-                                      <Link
-                                        to={
-                                          process.env.PUBLIC_URL +
-                                          data.authorLink
-                                        }
-                                      >
-                                        {data.authorName}
-                                      </Link>
-                                    </p>
-                                  </div>
-                                  <div className="post-date">
-                                    <p>
-                                      <i className="las la-calendar"></i>{" "}
-                                      {data.postDate}
-                                    </p>
-                                  </div>
-                                </div> */}
+
                                 <div className="blog-title">
                                   <h6>
                                     <Link
@@ -133,16 +103,18 @@ const BlogGrid = () => {
                         ))}
                       </Row>
 
-                      {/* <div className="text-center">
-                        <Pagination />
-                      </div> */}
+
                     </Col>
-                    {/* <Col lg="3" md="4" sm="5">
-                      <BlogSidebar />
-                    </Col> */}
+
                   </Row>
                 </Container>
-              </section>
+              </section>) : (empty ? (<Container>
+                <Row>
+                  <Col style={{ margin: "auto", textAlign: "center" }}>
+                    <p>No Course Available</p>
+                  </Col>
+                </Row>
+              </Container>) : null)}
 
             </div>
           </Styles>

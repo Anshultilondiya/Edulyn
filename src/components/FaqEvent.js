@@ -13,6 +13,8 @@ const FaqEvent = () => {
   const [faqDataArray, setFaqDataArray] = useState([]);
   const [notificationsDataArray, setNotificationsDataArray] = useState([]);
   const [notifyData, setNotifyData] = useState({})
+  const [notiDataStatus, setNotiDataStatus] = useState(false)
+  const [faqDataStatus, setFAQDataStatus] = useState(false);
 
   useEffect(() => {
     const accordionButton = document.querySelectorAll(".accordion-button");
@@ -41,17 +43,23 @@ const FaqEvent = () => {
   const getNotification = async () => {
     const res = await fetchNotification(clientStore.webHash);
     // console.log("Notifications", res.response);
-    let notifications = buildNotification(res.response);
-    setNotificationsDataArray(notifications);
-    setNotifyData(notifications[0])
+    if (res.status === "success") {
+      let notifications = buildNotification(res.response);
+      setNotificationsDataArray(notifications);
+      setNotifyData(notifications[0])
+      setNotiDataStatus(true)
+    }
     // console.log("Notifications", clientStore.notifications);
   };
 
   const getFAQ = async () => {
     const res = await fetchFAQ(clientStore.webHash);
-    // console.log("FAQ", res.response);
-    clientStore.faqData = buildFaq(res.response);
-    setFaqDataArray(clientStore.faqData);
+    if (res.status === "success") {
+
+      clientStore.faqData = buildFaq(res.response);
+      setFaqDataArray(clientStore.faqData);
+      setFAQDataStatus(true)
+    }
 
   };
 
@@ -92,7 +100,7 @@ const FaqEvent = () => {
                 <Modal.Body>
                   <div className="event-box eventModal">
                     <img
-                      src="https://images.unsplash.com/photo-1614102073832-030967418971?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+                      src={notifyData.eventImg}
                       alt=""
                     />
                     <div
@@ -128,7 +136,7 @@ const FaqEvent = () => {
               </Modal>
               <Container>
                 <Row>
-                  <Col md="6">
+                  {notiDataStatus ? (<Col md="6">
                     <div className="event-area">
                       <Row>
                         <Col md="12">
@@ -183,8 +191,8 @@ const FaqEvent = () => {
                         >Show Less</button>
                       }
                     </Col>
-                  </Col>
-                  <Col md="6">
+                  </Col>) : null}
+                  {faqDataArray ? (<Col md="6">
                     <div className="faq-area">
                       <div className="sec-title">
                         <h4>
@@ -213,7 +221,7 @@ const FaqEvent = () => {
                         })}
                       </div>
                     </div>
-                  </Col>
+                  </Col>) : null}
                 </Row>
               </Container>
             </section>

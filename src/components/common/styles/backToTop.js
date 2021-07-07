@@ -30,7 +30,7 @@ export const StyleFun = (colors) => {
     }
 
     button.totop-btn.show {
-        bottom : 40px;
+        bottom : 120px;
         opacity: 1;
         pointer-events : auto;
     }

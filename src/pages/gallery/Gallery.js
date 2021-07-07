@@ -1,26 +1,18 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import Datas from '../../data/gallery/gallery-page.json';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import ModalImage from "react-modal-image";
-import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
-import Pagination from './../../components/Pagination';
-import Footer from '../../components/Footer';
 import { StyleFun } from './styles/gallery.js';
 import { fetchImages, fetchVideo } from '../../apis/api';
 import { useClientStore } from '../../contextProviders/clientContext';
 import { Observer } from 'mobx-react';
-import ImageViewer from 'react-simple-image-viewer';
-import { updateColorObj } from '../../utility';
-
 
 
 const Gallery = () => {
-    // const [imageUrlArr, setImageUrlArr] = useState([])
     const [images, setImages] = useState([]);
     const [status, setStatus] = useState(false);
     const [videos, setVideos] = useState([]);
-
+    const [empty, setEmpty] = useState(false)
     const clientStore = useClientStore();
 
     useEffect(() => {
@@ -28,10 +20,9 @@ const Gallery = () => {
             .then((data) => {
                 if (data.status === "success") {
                     setImages(data.response);
-                    // let arr = data.response.map(el => el.url)
-                    // setImageUrlArr(arr);
                     setStatus(true);
                 }
+                else setEmpty(true)
             })
             .catch((err) => {
                 console.log(err);
@@ -58,41 +49,6 @@ const Gallery = () => {
 
     const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
-    // useEffect(() => {
-    //     updateColors();
-    // }, [colors, toggle, dataStatus]);
-
-    // const updateColors = () => {
-    //     if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-    //         let obj = { ...colors }
-    //         setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-    //         setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-    //         setDataStatus(true);
-    //     }
-    //     if (!dataStatus) setToggle(toggle + 1);
-    // };
-
-
-
-    // console.log(images);
-    // console.log(status);
-    // const [imageLg, setImageLg] = useState(null)
-    // const [currentImage, setCurrentImage] = useState(0);
-    // const [isViewerOpen, setIsViewerOpen] = useState(false);
-
-    // const openImageViewer = useCallback((index) => {
-    //     setCurrentImage(index);
-    //     setIsViewerOpen(true);
-    //     document.getElementsByTagName("BODY")[0].style.overflow = "hidden"
-    //     // $('body').css('overflow','hidden')
-    // }, []);
-
-    // const closeImageViewer = () => {
-    //     setCurrentImage(0);
-    //     setIsViewerOpen(false);
-    //     document.getElementsByTagName("BODY")[0].style.overflow = "auto"
-
-    // };
 
     return (
         <Observer>
@@ -109,7 +65,7 @@ const Gallery = () => {
                             <BreadcrumbBox title="Gallery" />
 
                             {/* Gallery Area */}
-                            <section className="gallery-page-area">
+                            {status ? (<section className="gallery-page-area">
                                 <Container>
                                     <h3
                                         style={{
@@ -132,15 +88,10 @@ const Gallery = () => {
                                                 <Col lg="4" sm="6" key={i} >
                                                     <div className="gallery-box">
                                                         <ModalImage small={data.url} alt="" large={data.url} />
-                                                        {/* <ModalImage small={process.env.PUBLIC_URL + `/assets/images/${data.galleryImage}`} large={process.env.PUBLIC_URL + `/assets/images/${data.galleryImage}`} alt="" /> */}
                                                     </div>
                                                 </Col>
                                             ))
                                         }
-
-                                        {/* <Col md="12" className="text-center">
-                                            <Pagination />
-                                        </Col> */}
                                     </Row>
                                 </Container>
                                 <div
@@ -170,18 +121,10 @@ const Gallery = () => {
 
                                             {videos.map((video, index) => {
                                                 return (
-                                                    //  <Col sm={4}>
-                                                    //     <div class=" text-center embed-responsive embed-responsive-16by9 videoDiv">
-                                                    //         <div>
-                                                    //             <iframe width="auto" height="auto" class="rounded embed-responsive-item" src={video.video_link.replace("watch?v=", "embed/")} allowfullscreen="allowfullscreen" ></iframe>
-                                                    //             <h5 className="mb-0">{video.video_title}</h5>
-                                                    //             <p>{video.desc}</p>
-                                                    //         </div>
-                                                    //     </div>
-                                                    // </Col>
+
                                                     <Col lg="4" sm="6" key={index}>
                                                         <div className="gallery-box embed-responsive embed-responsive-16by9">
-                                                            <iframe width="auto" height="auto" class="rounded embed-responsive-item" src={video.video_link.replace("watch?v=", "embed/")} allowfullscreen="allowfullscreen" ></iframe>
+                                                            <iframe width="auto" height="auto" className="rounded embed-responsive-item" src={video.video_link.replace("watch?v=", "embed/")} allowFullScreen="allowfullscreen" ></iframe>
                                                             <h5 className="mb-0">{video.video_title}</h5>
                                                             <p>{video.desc}</p>
                                                         </div>
@@ -193,10 +136,13 @@ const Gallery = () => {
                                         </Row>
                                     </Container>
                                 </div>
-                            </section>
-
-                            {/* Footer 2 */}
-                            {/* <Footer /> */}
+                            </section>) : (empty ? (<Container>
+                                <Row>
+                                    <Col style={{ margin: "auto", textAlign: "center" }}>
+                                        <p>No Data Available</p>
+                                    </Col>
+                                </Row>
+                            </Container>) : null)}
 
                         </div>
                     </Styles>
