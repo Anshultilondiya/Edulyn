@@ -1,5 +1,6 @@
 const createClientStore = () => {
   return {
+    domain: "site35.mycareerlift.com",
     webHash: "81c318711abc5110e0fbd3d374e9103c",
     expiryDate: "",
     updateHash(webHash, expiryDate) {
@@ -58,7 +59,7 @@ const createClientStore = () => {
       this.colors.gr_bg2 = `linear-gradient(90deg, ${obj.ternary} 0%, ${obj.secondary} 100%)`
       return this.colors
     },
-    showBanner: true,
+    showBanner: false,
   };
 };
 

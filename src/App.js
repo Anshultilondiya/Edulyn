@@ -59,10 +59,10 @@ import Footer from "./components/Footer";
 const App = () => {
   const clientStore = useClientStore();
   const [show, setShow] = useState(true)
-  const [webStatus, setWebStatus] = useState(true)
-  const domain = "aashishtararshub.in";
+  const [webStatus, setWebStatus] = useState(false)
+  // const domain = "site35.mycareerlift.com";
   useEffect(() => {
-    // getWebHash();
+    getWebHash();
     if (webStatus) {
       getWebData();
       getInstituteDetails();
@@ -70,7 +70,7 @@ const App = () => {
   }, [webStatus]);
 
   const getWebHash = async () => {
-    const res = await fetchWebHash(domain);
+    const res = await fetchWebHash(clientStore.domain);
     clientStore.updateHash(
       res.response[0]["inst_hash"],
       res.response[0]["expiry_date"]

@@ -73,6 +73,11 @@ const HomeOne = () => {
     const res = await fetchImagePopUp(clientStore.webHash)
     if (res.status === "success") {
       setImageUrl(res.response[0].image)
+      setModalShow(true)
+    }
+    else {
+      setModalShow(false)
+      clientStore.showBanner = false;
     }
   }
 
