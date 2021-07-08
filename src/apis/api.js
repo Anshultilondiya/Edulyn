@@ -35,7 +35,7 @@ export const fetchImages = async (instId, limit) => {
   return response.json();
 }
 export const fetchImagePopUp = async (instId) => {
-  const response = await fetch('http://35.244.8.93:3000/Get_image_popup', {
+  const response = await fetch('http://35.244.8.93:3001/Get_image_popup', {
     method: 'POST',
     body: new URLSearchParams({
       id: instId,
@@ -320,7 +320,7 @@ export const sendAdmissionData = async (data) => {
 export const sendContactData = async (instId, data) => {
   data['key'] = apiKey;
   data['id'] = instId;
-  const response = await fetch('http://35.244.8.93:3000/contact_us_new', {
+  const response = await fetch('http://35.244.8.93:3001/contact_us_new', {
     method: 'POST',
     body: new URLSearchParams(data)
   })
@@ -660,7 +660,7 @@ export const sendFranchiseData = async (data) => {
 // export const sendContactData = async (instId, data) => {
 //     data['key'] = apiKey;
 //     data['id'] = instId;
-//     const response = await fetch('http://35.244.8.93:3000/contact_us_new', {
+//     const response = await fetch('http://35.244.8.93:3001/contact_us_new', {
 //         method: 'POST',
 //         body: new URLSearchParams(data)
 //     })

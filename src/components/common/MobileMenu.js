@@ -5,7 +5,6 @@ import { StyleFun } from "./styles/mobileMenu.js";
 import { useClientStore } from "./../../contextProviders/clientContext";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
 import { fetchDynamicButton } from "./../../apis/api";
-import { updateColorObj } from "./../../utility"
 
 
 function MobileMenu() {
@@ -19,16 +18,16 @@ function MobileMenu() {
     const [logo, setLogo] = useState("");
     const [dynamicButton, setDynamicButton] = useState({});
 
-
+    const menu = clientStore.webConfig.menu;
 
     useEffect(() => {
         getDynamicButton();
     }, [])
 
     const getDynamicButton = async () => {
-        // const res = await fetchDynamicButton(clientStore.webHash);
-        const hash = "56609cdc79b2838b15c2950d5dbf654b"
-        const res = await fetchDynamicButton(hash);
+        const res = await fetchDynamicButton(clientStore.webHash);
+        // const hash = "56609cdc79b2838b15c2950d5dbf654b"
+        // const res = await fetchDynamicButton(hash);
         let obj = {
             tab: res.tab_name,
             arr: res.response,
@@ -64,7 +63,7 @@ function MobileMenu() {
     const [dynamicOpen, setDynamicOpen] = useState(false);
 
 
-    const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
 
 
@@ -75,24 +74,7 @@ function MobileMenu() {
                 <Container>
                     <Row>
                         <Col md="0" sm="12">
-                            {/* <div className="mb-topbar d-flex justify-content-between">
-                                <div className="topbar-item">
-                                    <p><i className="las la-phone"></i>{phone}</p>
-                                </div>
-                                <div className="topbar-item">
-                                    <p><i className="flaticon-envelope"></i>{email}</p>
-                                </div> */}
-                            {/* <div className="topbar-item">
-                                    <p><i className="las la-map-marker"></i>{address}</p>
-                                </div> */}
-                            {/* <div className="topbar-item">
-                                    <ul className="list-unstyled list-inline">
-                                        <li className="list-inline-item"><Link to={process.env.PUBLIC_URL + "/login"}>Log In</Link></li>
-                                        <li className="list-inline-item">/</li>
-                                        <li className="list-inline-item"><Link to={process.env.PUBLIC_URL + "/registration"}>Register</Link></li>
-                                    </ul>
-                                </div> */}
-                            {/* </div> */}
+
                             <div className="mb-logo-area">
                                 <div className="mb-logo-box d-flex">
                                     <div className="mb-logo">
@@ -108,12 +90,7 @@ function MobileMenu() {
                                         </p>
                                     </div>
                                 </div>
-                                {/* <div className="mb-search-box">
-                                    <form action="#">
-                                        <input type="text" name="search" placeholder="Search Here" />
-                                        <button type="submit"><i className="las la-search"></i></button>
-                                    </form>
-                                </div> */}
+
                             </div>
                         </Col>
                     </Row>
@@ -130,8 +107,9 @@ function MobileMenu() {
                         }}
                     ><AiOutlineClose /></div>
                 </div>
+
                 <div className="mb-sidebar-menu">
-                    <div className="mb-menu-item">
+                    {menu && menu[0] == 'Y' ? (<div className="mb-menu-item">
                         <button className="mb-menu-button active">
                             <p><Link
 
@@ -140,15 +118,9 @@ function MobileMenu() {
                                 Home
                             </Link></p>
                         </button>
-                        {/* <div className="mb-menu-content show">
-                            <ul className="list-unstyled">
-                                <li><Link to={process.env.PUBLIC_URL + "/"}>Home Style 1</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/home-two"}>Home Style 2</Link></li>
-                            </ul>
-                        </div> */}
-                    </div>
-                    <div className="mb-menu-item">
-                        <button className="mb-menu-button active">
+                    </div>) : null}
+                    {menu && menu[1] == 'Y' ? (<div className="mb-menu-item">
+                        <button className="mb-menu-button">
                             <p><Link
 
                                 to={process.env.PUBLIC_URL + "/about"}
@@ -156,21 +128,9 @@ function MobileMenu() {
                                 About
                             </Link></p>
                         </button>
-                        {/* <div className="mb-menu-content show">
-                            <ul className="list-unstyled">
-                                <li><Link to={process.env.PUBLIC_URL + "/about"}>About Us</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/gallery"}>Gallery</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/login"}>Log In</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/registration"}>Registration</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/contact"}>Contact</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/faq"}>Faq</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/404"}>404</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/coming-soon"}>Coming Soon</Link></li>
-                            </ul>
-                        </div> */}
-                    </div>
-                    <div className="mb-menu-item">
-                        <button className="mb-menu-button active">
+                    </div>) : null}
+                    {menu && menu[2] == 'Y' ? (<div className="mb-menu-item">
+                        <button className="mb-menu-button">
                             <p><Link
 
                                 to={process.env.PUBLIC_URL + "/course-list"}
@@ -178,15 +138,8 @@ function MobileMenu() {
                                 Courses
                             </Link></p>
                         </button>
-                        {/* <div className="mb-menu-content show">
-                            <ul className="list-unstyled">
-                                <li><Link to={process.env.PUBLIC_URL + "/course-grid"}>Course Grid</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/course-list"}>Course List</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/course-details"}>Course Details</Link></li>
-                            </ul>
-                        </div> */}
-                    </div>
-                    <div className="mb-menu-item">
+                    </div>) : null}
+                    {menu && menu[3] == 'Y' ? (<div className="mb-menu-item">
                         <button className="mb-menu-button">
                             <p><Link
 
@@ -195,14 +148,8 @@ function MobileMenu() {
                                 Packages
                             </Link></p>
                         </button>
-                        {/* <div className="mb-menu-content">
-                            <ul className="list-unstyled">
-                                <li><Link to={process.env.PUBLIC_URL + "/instructor"}>Instructors</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/instructor-details"}>Instructor Details</Link></li>
-                            </ul>
-                        </div> */}
-                    </div>
-                    <div className="mb-menu-item">
+                    </div>) : null}
+                    {menu && menu[4] == 'Y' ? (<div className="mb-menu-item">
                         <button className="mb-menu-button">
                             <p><Link
 
@@ -211,14 +158,8 @@ function MobileMenu() {
                                 Gallery
                             </Link></p>
                         </button>
-                        {/* <div className="mb-menu-content">
-                            <ul className="list-unstyled">
-                                <li><Link to={process.env.PUBLIC_URL + "/instructor"}>Instructors</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/instructor-details"}>Instructor Details</Link></li>
-                            </ul>
-                        </div> */}
-                    </div>
-                    <div className="mb-menu-item">
+                    </div>) : null}
+                    {menu && menu[7] == 'Y' ? (<div className="mb-menu-item">
                         <button className="mb-menu-button">
                             <p><a
 
@@ -228,30 +169,16 @@ function MobileMenu() {
                                 Online Test
                             </a></p>
                         </button>
-                        {/* <div className="mb-menu-content">
-                            <ul className="list-unstyled">
-                                <li><Link to={process.env.PUBLIC_URL + "/events"}>Events</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/event-details"}>Event Details</Link></li>
-                            </ul>
-                        </div> */}
-                    </div>
-                    <div className="mb-menu-item">
+                    </div>) : null}
+                    {menu && menu[10] == 'Y' ? (<div className="mb-menu-item">
                         <button className="mb-menu-button">
                             <p><Link
-
                                 to={process.env.PUBLIC_URL + "/payonline"}
                             >
                                 Pay Online
                             </Link></p>
                         </button>
-                        {/* <div className="mb-menu-content">
-                            <ul className="list-unstyled">
-                                <li><Link to={process.env.PUBLIC_URL + "/blog-classic"}>Blog Classic</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/blog-grid"}>Blog Grid</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/blog-details"}>Blog Details</Link></li>
-                            </ul>
-                        </div> */}
-                    </div>
+                    </div>) : null}
                     {dynamicButton.status === "success" ? (<div className="mb-menu-item">
                         <button className="mb-menu-button" onClick={() => {
                             setDynamicOpen(!dynamicOpen)
@@ -260,10 +187,6 @@ function MobileMenu() {
                         </button>
                         <div className={`mb-menu-content ${dynamicOpen ? "show" : ""}`}>
                             <ul className="list-unstyled">
-                                {/* <li><Link to={process.env.PUBLIC_URL + "/products"}>Products</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/product-details"}>Product Details</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/cart"}>Cart</Link></li> */}
-
                                 {dynamicButton.arr.length > 0 ? (
                                     <div>
                                         {dynamicButton.arr.map((el, i) => {
@@ -291,9 +214,177 @@ function MobileMenu() {
                         </button>
                         <div className={`mb-menu-content ${menuOpen ? "show" : ""}`}>
                             <ul className="list-unstyled">
-                                {/* <li><Link to={process.env.PUBLIC_URL + "/products"}>Products</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/product-details"}>Product Details</Link></li>
-                                <li><Link to={process.env.PUBLIC_URL + "/cart"}>Cart</Link></li> */}
+                                <li className="nav-item">
+                                    <Link
+                                        to={process.env.PUBLIC_URL + "/contact"}
+                                    >
+                                        Contact
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+
+                                        to={process.env.PUBLIC_URL + "/faq"}
+                                    >
+                                        FAQ
+                                    </Link>
+                                </li>
+
+                                {menu && menu[6] == 'Y' ? (<li className="nav-item">
+                                    <Link
+
+                                        to={process.env.PUBLIC_URL + "/career"}
+                                    >
+                                        Career Form
+                                    </Link>
+                                </li>) : null}
+                                {menu && menu[8] == 'Y' ? (<li className="nav-item">
+                                    <Link
+
+                                        to={process.env.PUBLIC_URL + "/franchise"}
+                                    >
+                                        Franchise Form
+                                    </Link>
+                                </li>) : null}
+                                <li className="nav-item">
+                                    <Link
+
+                                        to={process.env.PUBLIC_URL + "/admission"}
+                                    >
+                                        Admission Form
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+
+                                        to={process.env.PUBLIC_URL + "/alerts"}
+                                    >
+                                        Alerts
+                                    </Link>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {/* <div className="mb-sidebar-menu">
+                    <div className="mb-menu-item">
+                        <button className="mb-menu-button active">
+                            <p><Link
+
+                                to={process.env.PUBLIC_URL + "/"}
+                            >
+                                Home
+                            </Link></p>
+                        </button>
+
+                    </div>
+                    <div className="mb-menu-item">
+                        <button className="mb-menu-button active">
+                            <p><Link
+
+                                to={process.env.PUBLIC_URL + "/about"}
+                            >
+                                About
+                            </Link></p>
+                        </button>
+
+                    </div>
+                    <div className="mb-menu-item">
+                        <button className="mb-menu-button active">
+                            <p><Link
+
+                                to={process.env.PUBLIC_URL + "/course-list"}
+                            >
+                                Courses
+                            </Link></p>
+                        </button>
+
+                    </div>
+                    <div className="mb-menu-item">
+                        <button className="mb-menu-button">
+                            <p><Link
+
+                                to={process.env.PUBLIC_URL + "/packages"}
+                            >
+                                Packages
+                            </Link></p>
+                        </button>
+
+                    </div>
+                    <div className="mb-menu-item">
+                        <button className="mb-menu-button">
+                            <p><Link
+
+                                to={process.env.PUBLIC_URL + "/gallery"}
+                            >
+                                Gallery
+                            </Link></p>
+                        </button>
+
+                    </div>
+                    <div className="mb-menu-item">
+                        <button className="mb-menu-button">
+                            <p><a
+
+                                href="https://practice.speedlabs.in/"
+                                target="blank"
+                            >
+                                Online Test
+                            </a></p>
+                        </button>
+
+                    </div>
+                    <div className="mb-menu-item">
+                        <button className="mb-menu-button">
+                            <p><Link
+
+                                to={process.env.PUBLIC_URL + "/payonline"}
+                            >
+                                Pay Online
+                            </Link></p>
+                        </button>
+
+                    </div>
+                    {dynamicButton.status === "success" ? (<div className="mb-menu-item">
+                        <button className="mb-menu-button" onClick={() => {
+                            setDynamicOpen(!dynamicOpen)
+                        }}>
+                            <p>{dynamicButton.tab} <i className="las la-plus"></i></p>
+                        </button>
+                        <div className={`mb-menu-content ${dynamicOpen ? "show" : ""}`}>
+                            <ul className="list-unstyled">
+                                {dynamicButton.arr.length > 0 ? (
+                                    <div>
+                                        {dynamicButton.arr.map((el, i) => {
+                                            return (
+                                                <li className="nav-item" key={i}>
+                                                    <a
+                                                        style={{ textTransform: "uppercase" }}
+                                                        href={el.url}
+                                                    >
+                                                        {el.title}
+                                                    </a>
+                                                </li>
+                                            )
+                                        })}
+                                    </div>
+                                ) : null}
+                            </ul>
+                        </div>
+                    </div>) : null}
+                    <div className="mb-menu-item">
+                        <button className="mb-menu-button" onClick={() => {
+                            setMenuOpen(!menuOpen)
+                        }}>
+                            <p>More<i className="las la-plus"></i></p>
+                        </button>
+                        <div className={`mb-menu-content ${menuOpen ? "show" : ""}`}>
+                            <ul className="list-unstyled">
                                 <li className="nav-item">
                                     <Link
 
@@ -310,14 +401,7 @@ function MobileMenu() {
                                         FAQ
                                     </Link>
                                 </li>
-                                {/* <li className="nav-item">
-                                    <Link
 
-                                        to={process.env.PUBLIC_URL + "/404"}
-                                    >
-                                        404
-                                    </Link>
-                                </li> */}
                                 <li className="nav-item">
                                     <Link
 
@@ -350,12 +434,10 @@ function MobileMenu() {
                                         Alerts
                                     </Link>
                                 </li>
-
-
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </section>
             <div className={`mb-sidebar-overlay ${isOpen ? "visible" : ""}`} id="mb-sidebar-overlay"></div>
         </Styles>

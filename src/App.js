@@ -81,6 +81,7 @@ const App = () => {
   const getInstituteDetails = async () => {
     const res = await fetchInstituteDetails(clientStore.webHash);
     clientStore.instituteDetails = res.response;
+    // console.log(res.response)
     clientStore.logo = "https://careerliftprod.s3.amazonaws.com/website_logo/" + res.response["Header Logo"];
   };
 
@@ -93,6 +94,7 @@ const App = () => {
     clientStore.webDetails = res.detail;
     clientStore.webConfig = res.config;
     clientStore.webLayout = res.layout;
+    // let colObj = clientStore.colors;
     let colObj = clientStore.updateColors(res.layout)
     setColors(colObj)
     setGlobalStyle(GlobalStyleFun(colObj))

@@ -58,27 +58,23 @@ const HomeOne = () => {
 
   const [homeShow, setHomeShow] = useState(false);
 
-  const [imageUrl, setImageUrl] = useState("https://cdn.pixabay.com/photo/2016/11/08/05/18/hot-air-balloons-1807521_960_720.jpg")
+  // const [imageUrl, setImageUrl] = useState("https://i.ytimg.com/vi/5LOE98vi650/maxresdefault.jpg")
+  const [imageUrl, setImageUrl] = useState("")
 
   useEffect(() => {
     setHomeShow(true)
   }, [])
 
   useEffect(() => {
-    fetchImagePopUp(clientStore.webHash)
-      .then((data) => {
-        console.log("data", data)
-        if (data.status === "Success") {
-          setImageUrl(data.response)
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    imagePop();
   }, [])
 
-
-
+  const imagePop = async () => {
+    const res = await fetchImagePopUp(clientStore.webHash)
+    if (res.status === "success") {
+      setImageUrl(res.response[0].image)
+    }
+  }
 
   return homeShow ? (
     <div className="main-wrapper">
@@ -93,7 +89,7 @@ const HomeOne = () => {
       />
       {clientStore.webConfig.cms_slider == 'true' ? (<HeroSlider />) : (<></>)}
       {/* Icon Box */}
-      {clientStore.webConfig.cms_features == 'true' ? (<IconBox />) : (<></>)}
+      {clientStore.webConfig.cms_features == 'false' ? (<IconBox />) : (<></>)}
       {/* About Area */}
       {clientStore.webConfig.cms_institute_details == 'true' ? (<AboutUs />) : (<></>)}
       {/* Course Filter */}

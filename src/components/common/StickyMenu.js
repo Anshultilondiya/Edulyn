@@ -16,22 +16,24 @@ function StickyMenu(props) {
     getDynamicButton();
   }, [])
 
+  const menu = clientStore.webConfig.menu;
+
   const getDynamicButton = async () => {
-    // const res = await fetchDynamicButton(clientStore.webHash);
-    const hash = "56609cdc79b2838b15c2950d5dbf654b"
-    const res = await fetchDynamicButton(hash);
+    const res = await fetchDynamicButton(clientStore.webHash);
+    // const hash = "56609cdc79b2838b15c2950d5dbf654b"
+    // const res = await fetchDynamicButton(hash);
     let obj = {
       tab: res.tab_name,
       arr: res.response,
       status: res.status,
     }
     setDynamicButton(obj)
-    
+
   }
 
-  const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
+  const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
 
-  
+
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -70,91 +72,94 @@ function StickyMenu(props) {
                 style={{ margin: "auto" }}
               >
                 <ul className="nav menu-nav">
-                  {/* <li className="nav-item dropdown active">
-                    <Link
-                      className="nav-link dropdown-toggle"
-                      to={process.env.PUBLIC_URL + "/"}
-                      data-toggle="dropdown"
-                    >
-                      Home <i className="las la-angle-down"></i>
-                    </Link>
-                    <ul className="dropdown list-unstyled">
+
+                  {
+                    menu && menu[0] == 'Y' ? (
                       <li className="nav-item">
                         <Link
                           className="nav-link"
                           to={process.env.PUBLIC_URL + "/"}
                         >
-                          Home Style 1
+                          Home
                         </Link>
                       </li>
-                      <li className="nav-item active">
+                    ) : (null)
+                  }
+
+                  {
+                    menu && menu[1] == 'Y' ? (
+                      <li className="nav-item">
                         <Link
                           className="nav-link"
-                          to={process.env.PUBLIC_URL + "/home-two"}
+                          to={process.env.PUBLIC_URL + "/about"}
                         >
-                          Home Style 2
+                          About
                         </Link>
                       </li>
-                    </ul>
-                  </li> */}
-                  <li className="nav-item active">
-                    <Link
-                      className="nav-link"
-                      to={process.env.PUBLIC_URL + "/"}
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to={process.env.PUBLIC_URL + "/about"}
-                    >
-                      About
-                    </Link>
-                  </li>
+                    ) : (null)
+                  }
 
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to={process.env.PUBLIC_URL + "/course-list"}
-                    >
-                      Courses
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to={process.env.PUBLIC_URL + "/packages"}
-                    >
-                      Packages
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to={process.env.PUBLIC_URL + "/gallery"}
-                    >
-                      Gallery
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      href="https://practice.speedlabs.in/"
-                      target="blank"
-                    >
-                      Online Test
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to={process.env.PUBLIC_URL + "/payonline"}
-                    >
-                      Pay Online
-                    </Link>
-                  </li>
+                  {
+                    menu && menu[2] == 'Y' ? (
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link"
+                          to={process.env.PUBLIC_URL + "/course-list"}
+                        >
+                          Courses
+                        </Link>
+                      </li>
+                    ) : (null)
+                  }
+                  {
+                    menu && menu[3] == 'Y' ? (
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link"
+                          to={process.env.PUBLIC_URL + "/packages"}
+                        >
+                          Packages
+                        </Link>
+                      </li>
+                    ) : (null)
+                  }
+                  {
+                    menu && menu[4] == 'Y' ? (
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link"
+                          to={process.env.PUBLIC_URL + "/gallery"}
+                        >
+                          Gallery
+                        </Link>
+                      </li>
+                    ) : (null)
+                  }
+                  {
+                    menu && menu[7] == 'Y' ? (
+                      <li className="nav-item">
+                        <a
+                          className="nav-link"
+                          href={"https://" + clientStore.webDetails.sub_domain}
+                          target="blank"
+                        >
+                          Online Test
+                        </a>
+                      </li>
+                    ) : (null)
+                  }
+                  {
+                    menu && menu[10] == 'Y' ? (
+                      <li className="nav-item">
+                        <Link
+                          className="nav-link"
+                          to={process.env.PUBLIC_URL + "/payonline"}
+                        >
+                          Pay Online
+                        </Link>
+                      </li>
+                    ) : (null)
+                  }
                   {dynamicButton.status === "success" ? (<li className="nav-item">
                     <Link
                       className="nav-link dropdown-toggle"
@@ -195,38 +200,7 @@ function StickyMenu(props) {
                       More <RiArrowDropDownLine className="moreButton" />
                     </Link>
                     <ul className="dropdown list-unstyled">
-                      {/* <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/about"}
-                        >
-                          About Us
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/gallery"}
-                        >
-                          Gallery
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/login"}
-                        >
-                          Log In
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/registration"}
-                        >
-                          Registration
-                        </Link>
-                      </li> */}
+
                       <li className="nav-item">
                         <Link
                           className="nav-link"
@@ -243,46 +217,33 @@ function StickyMenu(props) {
                           FAQ
                         </Link>
                       </li>
-                      {/* <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/404"}
-                        >
-                          404
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/coming-soon"}
-                        >
-                          Coming Soon
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/course-grid"}
-                        >
-                          Courses Grid
-                        </Link>
-                      </li> */}
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/career"}
-                        >
-                          Career Form
-                        </Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link
-                          className="nav-link"
-                          to={process.env.PUBLIC_URL + "/franchise"}
-                        >
-                          Franchise Form
-                        </Link>
-                      </li>
+
+                      {
+                        menu && menu[6] == 'Y' ? (
+                          <li className="nav-item">
+                            <Link
+                              className="nav-link"
+                              to={process.env.PUBLIC_URL + "/career"}
+                            >
+                              Career Form
+                            </Link>
+                          </li>
+                        ) : (null)
+                      }
+
+                      {
+                        menu && menu[8] == 'Y' ? (
+                          <li className="nav-item">
+                            <Link
+                              className="nav-link"
+                              to={process.env.PUBLIC_URL + "/franchise"}
+                            >
+                              Franchise Form
+                            </Link>
+                          </li>
+                        ) : (null)
+                      }
+
                       <li className="nav-item">
                         <Link
                           className="nav-link"
@@ -291,6 +252,7 @@ function StickyMenu(props) {
                           Admission Form
                         </Link>
                       </li>
+
                       <li className="nav-item">
                         <Link
                           className="nav-link"
@@ -299,6 +261,7 @@ function StickyMenu(props) {
                           Alerts
                         </Link>
                       </li>
+
                       <li className="nav-item">
                         <Link
                           className="nav-link"
@@ -307,6 +270,7 @@ function StickyMenu(props) {
                           Achievements
                         </Link>
                       </li>
+
 
                     </ul>
                   </li>

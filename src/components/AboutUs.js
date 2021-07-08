@@ -38,7 +38,7 @@ const AboutUs = () => {
   const updateData = () => {
     if (clientStore.instituteDetails["About Us"] !== undefined && !dataStatus) {
       let obj = {
-        mainImage: clientStore.instituteDetails["default_img1"],
+        mainImage: clientStore.instituteDetails["About Us Image"],
         videoBackground: "vd-bg.jpg",
         title:
           "We Have Experienced Professionals & We Do Our Best To Achieve Your Goal. Your Happiness Is Our First Priority.",

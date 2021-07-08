@@ -47,9 +47,9 @@ const Header = () => {
 
 
   const getDynamicButton = async () => {
-    // const res = await fetchDynamicButton(clientStore.webHash);
-    const hash = "56609cdc79b2838b15c2950d5dbf654b"
-    const res = await fetchDynamicButton(hash);
+    const res = await fetchDynamicButton(clientStore.webHash);
+    // const hash = "56609cdc79b2838b15c2950d5dbf654b"
+    // const res = await fetchDynamicButton(hash);
     let obj = {
       tab: res.tab_name,
       arr: res.response,
