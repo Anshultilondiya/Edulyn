@@ -41,30 +41,35 @@ import Footer from "./components/Footer";
 const App = () => {
   const clientStore = useClientStore();
   const [show, setShow] = useState(true)
-  const [webStatus, setWebStatus] = useState(true)
-  // const domain = "site35.mycareerlift.com";
+  const [webStatus, setWebStatus] = useState(false)
   useEffect(() => {
-    // getWebHash();
-    // if (webStatus) {
-    getWebData();
-    getInstituteDetails();
-    // }
-  }, [webStatus]);
+    getWebHash();
+  }, []);
+
+  useEffect(() => {
+    if (webStatus) {
+      getWebData();
+      getInstituteDetails();
+    }
+  }, [webStatus])
 
   const getWebHash = async () => {
     const res = await fetchWebHash(clientStore.domain);
-    clientStore.updateHash(
-      res.response[0]["inst_hash"],
-      res.response[0]["expiry_date"]
-    );
-    setWebStatus(true)
+    if (res.status === "success") {
+      clientStore.webHash = res.response[0]["inst_hash"]
+      // clientStore.webHash = "81c318711abc5110e0fbd3d374e9103c"
+      clientStore.expiryDate = res.response[0]["expiry_date"]
+      setWebStatus(true)
+    }
   };
 
   const getInstituteDetails = async () => {
     const res = await fetchInstituteDetails(clientStore.webHash);
-    clientStore.instituteDetails = res.response;
-    // console.log(res.response)
-    clientStore.logo = "https://careerliftprod.s3.amazonaws.com/website_logo/" + res.response["Header Logo"];
+    if (res.status === "Success") {
+      clientStore.instituteDetails = res.response;
+      console.log("institute", res)
+      clientStore.logo = "https://careerliftprod.s3.amazonaws.com/website_logo/" + res.response["Header Logo"];
+    }
   };
 
   const [colors, setColors] = useState(clientStore.colors);
@@ -75,6 +80,7 @@ const App = () => {
     document.title = res.detail.web_title;
     clientStore.webDetails = res.detail;
     clientStore.webConfig = res.config;
+    console.log(res.config)
     clientStore.webLayout = res.layout;
     // let colObj = clientStore.colors;
     let colObj = clientStore.updateColors(res.layout)

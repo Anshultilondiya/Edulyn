@@ -4,8 +4,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import { StyleFun } from "./styles/stickyMenu.js";
 import { RiArrowDropDownLine } from "react-icons/ri"
 import { fetchDynamicButton } from "./../../apis/api";
-import { getColorObj } from './element/elements'
-import { updateColorObj } from "./../../utility"
 import { useClientStore } from "./../../contextProviders/clientContext"
 
 function StickyMenu(props) {
@@ -62,7 +60,7 @@ function StickyMenu(props) {
             <Col lg="2" md="2">
               <div className="logo">
                 <Link to={process.env.PUBLIC_URL + "/"}>
-                  <img src={props.logo} alt="" width="100%" height="auto" />
+                  <img src={props.logo} alt="" width="auto" height="auto" />
                 </Link>
               </div>
             </Col>

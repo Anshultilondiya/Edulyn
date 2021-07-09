@@ -13,18 +13,21 @@ export const StyleFun = (colors) => {
         z-index: 11;
         animation: 300ms ease-in-out 0s normal none 1 fadeInDown;
         background: #ffffff;
-        height: 75px;
+        height: 80px;
         padding-top: 18px;
         box-shadow: 0 0 20px -10px #222222;
 
         .logo {
             display: flex;
-            height:100%;
+            height:80px;
+            overflow:hidden;
             a { 
                 margin: auto;
                 img {
+                    max-width : 100%;
+                    max-height:75px;
                     @media(max-width: 1199px) {
-                        max-width : 100%;
+                        max-width : 90%;
                     }
                 }
             }
@@ -41,7 +44,7 @@ export const StyleFun = (colors) => {
                         color         : ${colors.black1};
                         text-transform: uppercase;
                         font-weight   : 500;
-                        padding       : 10px 10px 20px;
+                        padding       : 10px 10px;
                         
                         
                         i {

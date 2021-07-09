@@ -23,8 +23,6 @@ const About = () => {
                 {/* About Area */}
                 <AboutUs />
 
-            
-
                 {/* Tab Section */}
                 <TabBox />
 

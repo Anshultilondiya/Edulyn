@@ -193,14 +193,22 @@ export const StyleFun = (colors) => {
     }
 
     .logo-area2 {
-        height     : 82px;
-        padding-top: 20px;
-
+        padding: 15px 0;
+        display:flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content:center
+        height:100px;
         .logo {
+            overflow:hidden;
             a {
                 img {
+                    @media(min-width: 992px) {
+                        max-height:90px;
+                        max-width:100%;
+                    }
                     @media(max-width: 991px) {
-                        max-width: 100%;
+                        max-width: 80%;
                     }
                 }
             }

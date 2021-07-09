@@ -30,7 +30,7 @@ const HeaderTwo = () => {
   }, [])
   const updateData = () => {
     if (clientStore.instituteDetails["About Us"] !== undefined && !dataStatus) {
-      setPhone(clientStore.instituteDetails.Contact1);
+      setPhone(clientStore.instituteDetails.Contact1.slice(0, 10));
       setEmail(clientStore.instituteDetails.Email1);
       setAddress(clientStore.instituteDetails.Address2);
       setLogo(clientStore.logo)
@@ -92,16 +92,13 @@ const HeaderTwo = () => {
         {/* Logo Area 2 */}
         <section
           className="logo-area2"
-          style={{
-            padding: "20px 0 30px 0",
-          }}
         >
           <Container className="header-menu-container">
             <Row>
               <Col lg="3">
                 <div className="logo">
                   <Link to={process.env.PUBLIC_URL + "/"}>
-                    <img src={logo} alt="" width="90%" height="auto" />
+                    <img src={logo} alt="" width="auto" height="auto" />
                   </Link>
                 </div>
               </Col>
