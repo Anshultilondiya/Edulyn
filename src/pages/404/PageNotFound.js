@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Datas from '../../data/404/error.json';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import HeaderTwo from '../../components/HeaderTwo';
-import Footer from '../../components/Footer';
 import { StyleFun } from './styles/pageNotFound.js';
 import { useClientStore } from "./../../contextProviders/clientContext"
-import { updateColorObj } from "./../../utility"
 const PageNotFound = () => {
     const clientStore = useClientStore();
 
-    const [Styles,setStyles] = useState(StyleFun(clientStore.colors))
-    
+    const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
+
     return (
         <Styles>
             {/* Main Wrapper */}
             <div className="main-wrapper error-page">
 
                 {/* Header 2 */}
-                
+
 
                 {/* 404 Area */}
                 <section className="error-area"
@@ -37,9 +33,6 @@ const PageNotFound = () => {
                         </Row>
                     </Container>
                 </section>
-
-                {/* Footer 2 */}
-                <Footer />
             </div>
         </Styles>
     )

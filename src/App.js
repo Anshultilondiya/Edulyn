@@ -4,18 +4,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ScrollToTop from "./helper/ScrollToTop";
 import { GlobalStyleFun } from "./components/common/styles/global.js";
 import HomeOne from "./HomeOne";
-import HomeTwo from "./HomeTwo";
 import About from "./pages/about/About";
-// import CourseGrid from "./pages/courses/CourseGrid";
 import CourseList from "./pages/courses/CourseList";
 import CourseDetails from "./pages/courses/CourseDetails";
-import Instructor from "./pages/instructor/Instructors";
-import InstructorDetails from "./pages/instructor/InstructorDetails";
 import Gallery from "./pages/gallery/Gallery";
-import Events from "./pages/events/Events";
-import EventDetails from "./pages/events/EventsDetails";
-import Login from "./pages/account/Login";
-import Register from "./pages/account/Register";
 import Career from "./pages/forms/career";
 import Franchise from "./pages/forms/franchise";
 import Admission from "./pages/forms/admission";
@@ -25,15 +17,10 @@ import PageNotFound from "./pages/404/PageNotFound";
 import ComingSoon from "./pages/comingsoon/ComingSoon";
 import BlogGrid from "./pages/blog/BlogGrid";
 import BlogDetails from "./pages/blog/BlogDetails";
-import Product from "./pages/shop/Products";
 import Packages from "./pages/packages/Packages";
-import ProductDetails from "./pages/shop/ProductDetails";
-import Cart from "./pages/shop/Cart";
 import Alert from "./pages/alert/Alert";
 import Achievements from "./pages/achievements/Achievements";
 import Batches from "./pages/batches/Batches";
-import { Modal, Button } from "react-bootstrap";
-import { GrFormClose } from "react-icons/gr"
 
 
 // Additional Swiper Css for adding functionality
@@ -51,22 +38,17 @@ import Header from "./components/Header";
 import HeaderTwo from "./components/HeaderTwo";
 import Footer from "./components/Footer";
 
-
-
-
-
-
 const App = () => {
   const clientStore = useClientStore();
   const [show, setShow] = useState(true)
-  const [webStatus, setWebStatus] = useState(false)
+  const [webStatus, setWebStatus] = useState(true)
   // const domain = "site35.mycareerlift.com";
   useEffect(() => {
-    getWebHash();
-    if (webStatus) {
-      getWebData();
-      getInstituteDetails();
-    }
+    // getWebHash();
+    // if (webStatus) {
+    getWebData();
+    getInstituteDetails();
+    // }
   }, [webStatus]);
 
   const getWebHash = async () => {
@@ -107,7 +89,10 @@ const App = () => {
       {() => {
         return (
           <Router>
-            {show ? (<Loader />) : null}
+            {show ? (<div style={{ height: "100vh" }}>
+              <Loader />
+            </div>
+            ) : null}
             <GlobalStyle />
             <ScrollToTop />
 
@@ -123,10 +108,6 @@ const App = () => {
                     path={`${process.env.PUBLIC_URL + "/"}`}
                     component={HomeOne}
                   />
-                  <Route
-                    path={`${process.env.PUBLIC_URL + "/home-two"}`}
-                    component={HomeTwo}
-                  />
 
                   <Route path={`${process.env.PUBLIC_URL + "/about"}`}>
                     {clientStore.webConfig.cms_institute_details == 'true' ? (<About />) : (<></>)}
@@ -139,15 +120,6 @@ const App = () => {
                   <Route path={`${process.env.PUBLIC_URL + "/course-details/:courseID"}`}>
                     {clientStore.webConfig.cms_course == 'true' ? (<CourseDetails />) : (<></>)}
                   </Route>
-
-                  <Route path={`${process.env.PUBLIC_URL + "/instructor"}`}>
-                    {clientStore.webConfig.cms_faculty_details == 'true' ? (<Instructor />) : (<></>)}
-                  </Route>
-
-                  <Route path={`${process.env.PUBLIC_URL + "/instructor-details"}`}>
-                    {clientStore.webConfig.cms_faculty_details == 'true' ? (<InstructorDetails />) : (<></>)}
-                  </Route>
-
                   <Route path={`${process.env.PUBLIC_URL + "/gallery"}`}>
                     {clientStore.webConfig.cms_images == 'true' ? (<Gallery />) : (<></>)}
                   </Route>
@@ -199,23 +171,6 @@ const App = () => {
                     component={Achievements}
                   />
                   <Route
-                    path={`${process.env.PUBLIC_URL + "/events"}`}
-                    component={Events}
-                  />
-                  <Route
-                    path={`${process.env.PUBLIC_URL + "/event-details"}`}
-                    component={EventDetails}
-                  />
-                  <Route
-                    path={`${process.env.PUBLIC_URL + "/login"}`}
-                    component={Login}
-                  />
-                  <Route
-                    path={`${process.env.PUBLIC_URL + "/registration"}`}
-                    component={Register}
-                  />
-
-                  <Route
                     path={`${process.env.PUBLIC_URL + "/404"}`}
                     component={PageNotFound}
                   />
@@ -223,19 +178,6 @@ const App = () => {
                     path={`${process.env.PUBLIC_URL + "/coming-soon"}`}
                     component={ComingSoon}
                   />
-                  <Route
-                    path={`${process.env.PUBLIC_URL + "/products"}`}
-                    component={Product}
-                  />
-                  <Route
-                    path={`${process.env.PUBLIC_URL + "/product-details"}`}
-                    component={ProductDetails}
-                  />
-                  <Route
-                    path={`${process.env.PUBLIC_URL + "/cart"}`}
-                    component={Cart}
-                  />
-
                   <Route
                     path={`${process.env.PUBLIC_URL + "/"}`}
                     component={PageNotFound}

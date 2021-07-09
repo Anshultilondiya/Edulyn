@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import HeaderTwo from '../../components/HeaderTwo';
 import { BreadcrumbBox } from '../../components/common/Breadcrumb';
-import BlogSidebar from './components/BlogSidebar';
-import CommentForm from './components/CommentForm';
-import Footer from '../../components/Footer';
 import { StyleFun } from './styles/blogDetails.js';
 import { useParams } from 'react-router-dom'
 import { useClientStore } from '../../contextProviders/clientContext';
 import { Observer } from 'mobx-react';
 import { fetchBlogs } from '../../apis/api';
-import { updateColorObj } from "../../utility";
+import PageNotFound from '../404/PageNotFound';
+import Loader from '../../Loader';
 
 const BlogDetails = () => {
     const clientStore = useClientStore();
@@ -20,6 +16,7 @@ const BlogDetails = () => {
     const [dataStatus, setDataStatus] = useState(false)
     const { blogID } = useParams();
     const [blog, setblog] = useState({});
+    const [empty, setEmpty] = useState(false)
 
     useEffect(() => {
         getBlogData();
@@ -40,8 +37,13 @@ const BlogDetails = () => {
                 }
             }
         }
+        else setEmpty(true)
     }
-
+    const [bread, setBread] = useState(true)
+    const notFound = () => {
+        setBread(false)
+        return <PageNotFound />
+    }
 
 
     return (
@@ -56,7 +58,7 @@ const BlogDetails = () => {
                             {/* <HeaderTwo /> */}
 
                             {/* Breadcroumb */}
-                            <BreadcrumbBox title="Blog Details" />
+                            {bread ? <BreadcrumbBox title="Blog Details" /> : null}
 
                             {/* Blog Details */}
                             {dataStatus ? (<section className="blog-details-area">
@@ -84,7 +86,7 @@ const BlogDetails = () => {
 
                                     </Row>
                                 </Container>
-                            </section>) : null}
+                            </section>) : (empty ? notFound() : <Loader />)}
                         </div>
                     </Styles>
                 )

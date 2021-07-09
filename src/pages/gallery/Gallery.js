@@ -6,7 +6,8 @@ import { StyleFun } from './styles/gallery.js';
 import { fetchImages, fetchVideo } from '../../apis/api';
 import { useClientStore } from '../../contextProviders/clientContext';
 import { Observer } from 'mobx-react';
-
+import Loader from '../../Loader';
+import PageNotFound from '../404/PageNotFound';
 
 const Gallery = () => {
     const [images, setImages] = useState([]);
@@ -48,6 +49,12 @@ const Gallery = () => {
 
 
     const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
+    const [bread, setBread] = useState(true)
+    const notFound = () => {
+        setBread(false)
+        return <PageNotFound />
+    }
+
 
 
     return (
@@ -58,11 +65,8 @@ const Gallery = () => {
                         {/* Main Wrapper */}
                         <div className="main-wrapper gallery-page">
 
-                            {/* Header 2 */}
-                            {/* <HeaderTwo /> */}
 
-                            {/* Breadcroumb */}
-                            <BreadcrumbBox title="Gallery" />
+                            {bread ? <BreadcrumbBox title="Gallery" /> : null}
 
                             {/* Gallery Area */}
                             {status ? (<section className="gallery-page-area">
@@ -136,13 +140,8 @@ const Gallery = () => {
                                         </Row>
                                     </Container>
                                 </div>
-                            </section>) : (empty ? (<Container>
-                                <Row>
-                                    <Col style={{ margin: "auto", textAlign: "center" }}>
-                                        <p>No Data Available</p>
-                                    </Col>
-                                </Row>
-                            </Container>) : null)}
+                            </section>) : (empty ? notFound() : <Loader />)
+                            }
 
                         </div>
                     </Styles>

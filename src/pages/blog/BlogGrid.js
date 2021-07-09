@@ -1,17 +1,14 @@
-import React, { Component, useEffect, useState } from "react";
-import Datas from "../../data/blog/grid.json";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import HeaderTwo from "../../components/HeaderTwo";
 import { BreadcrumbBox } from "../../components/common/Breadcrumb";
-import Pagination from "./../../components/Pagination";
-import BlogSidebar from "./components/BlogSidebar";
-import Footer from "../../components/Footer";
 import { StyleFun } from "./styles/blog.js";
 import { Observer } from "mobx-react";
 import { useClientStore } from "./../../contextProviders/clientContext";
 import { fetchBlogs } from "../../apis/api";
-import { buildBlog, updateColorObj } from "../../utility";
+import { buildBlog } from "../../utility";
+import PageNotFound from "../404/PageNotFound";
+import Loader from "../../Loader";
 
 const BlogGrid = () => {
 
@@ -41,6 +38,16 @@ const BlogGrid = () => {
     }
     else setEmpty(true)
   };
+
+
+  const [bread, setBread] = useState(true)
+  const notFound = () => {
+    setBread(false)
+    return <PageNotFound />
+  }
+
+
+
   return (
     <Observer>
       {() => {
@@ -52,7 +59,7 @@ const BlogGrid = () => {
               {/* <HeaderTwo /> */}
 
               {/* Breadcroumb */}
-              <BreadcrumbBox title="Blog Grid" />
+              {bread ? <BreadcrumbBox title="Blog Grid" /> : null}
 
               {/* Blog Classic */}
               {dataStatus ? (<section className="blog-grid-area">
@@ -108,13 +115,7 @@ const BlogGrid = () => {
 
                   </Row>
                 </Container>
-              </section>) : (empty ? (<Container>
-                <Row>
-                  <Col style={{ margin: "auto", textAlign: "center" }}>
-                    <p>No Course Available</p>
-                  </Col>
-                </Row>
-              </Container>) : null)}
+              </section>) : (empty ? notFound() : <Loader />)}
 
             </div>
           </Styles>

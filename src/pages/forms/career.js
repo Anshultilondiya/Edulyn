@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import HeaderTwo from '../../components/HeaderTwo';
-import { BreadcrumbBox } from '../../components/common/Breadcrumb';
-import Footer from '../../components/Footer';
 import { StyleFun } from './styles/forms.js';
 import { Dropdown, Button, ButtonGroup, Form } from "react-bootstrap"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as api from '../../apis/api';
 import { useClientStore } from "./../../contextProviders/clientContext"
-import { updateColorObj } from "./../../utility"
 
 function Career() {
     const clientStore = useClientStore();

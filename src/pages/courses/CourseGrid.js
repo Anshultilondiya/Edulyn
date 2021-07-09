@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import HeaderTwo from "../../components/HeaderTwo";
 import { BreadcrumbBox } from "../../components/common/Breadcrumb";
-import CourseSidebar from "./components/CourseSidebar";
 import CourseItemGrid from "./components/CourseItemsGrid";
-import Footer from "../../components/Footer";
 import { StyleFun } from "./styles/course.js";
 import { Observer } from "mobx-react";
 import { useClientStore } from "../../contextProviders/clientContext";
-import { updateColorObj } from "../../utility";
 
 
 const CourseGrid = () => {

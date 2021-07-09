@@ -1,12 +1,10 @@
 import React, { useEffect, Fragment, useState } from 'react';
-// import Datas from '../../../data/course/item.json';
 import { Link } from 'react-router-dom';
-import { Col, Row, Container } from 'react-bootstrap';
-// import Pagination from './../../../components/Pagination';
-// import { Observer } from "mobx-react";
+import { Col } from 'react-bootstrap';
 import { useClientStore } from "./../../../contextProviders/clientContext";
 import { fetchCourseDetails } from "./../../../apis/api";
 import { nanoid } from "nanoid";
+import Loader from '../../../Loader';
 
 const CourseItemList = () => {
 
@@ -20,7 +18,7 @@ const CourseItemList = () => {
 
     const [dataArray, setDataArray] = useState([]);
     const [dataStatus, setDataStatus] = useState(false)
-    const [empty, setEmpty] = useState(false)
+    const [empty, setEmpty] = useState(true)
     useEffect(() => {
         getCourses();
     }, []);
@@ -28,11 +26,14 @@ const CourseItemList = () => {
     const getCourses = async () => {
         const res = await fetchCourseDetails(clientStore.webHash, 3);
         if (res.status === "success") {
+            clientStore.hideCourseList.bread = true
             setDataArray(buildCourse(res.response));
             setDataStatus(true)
         }
-        else
+        else {
             setEmpty(true)
+            clientStore.hideCourseList.list = true
+        }
 
     };
 
@@ -113,13 +114,7 @@ const CourseItemList = () => {
                 </Col> */}
 
         </Fragment>
-    ) : (empty ? (<Container>
-        <Row>
-            <Col style={{ margin: "auto", textAlign: "center" }}>
-                <p>No Course Available</p>
-            </Col>
-        </Row>
-    </Container>) : null);
+    ) : (empty ? (null) : <Loader />);
 
 }
 

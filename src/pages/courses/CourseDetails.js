@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
-import HeaderTwo from "../../components/HeaderTwo";
 import { BreadcrumbBox } from "../../components/common/Breadcrumb";
-import ReviewForm from "./components/ReviewForm";
-import PopularCourse from "./components/PopularCourse";
-import CourseTag from "./components/CourseTag";
-import Footer from "../../components/Footer";
 import { StyleFun } from "./styles/course.js";
 import { useParams } from "react-router-dom";
 import { useClientStore } from "../../contextProviders/clientContext";
 import { Observer } from "mobx-react";
-
 import { fetchCourseDetailsById } from "./../../apis/api";
-
-import { updateColorObj } from "../../utility";
-
+import PageNotFound from "../404/PageNotFound";
+import Loader from "../../Loader";
 
 const CourseDetails = () => {
   let { courseID } = useParams();
-  //   console.log("ID :", courseID);
-  //   console.log("Para ", useParams());
   useEffect(() => {
     const courseButton = document.querySelectorAll(".course-button");
     courseButton.forEach((button) => {
@@ -44,22 +35,32 @@ const CourseDetails = () => {
   const [courseOverview, setCourseOverview] = useState(" ");
   const [courseKeyBenefits, setCourseKeyBenefits] = useState(" ");
   const [courseEligibility, setCourseEligibility] = useState(" ");
+  const [empty, setEmpty] = useState(false)
   useEffect(() => {
     getCourseData();
   }, []);
 
   const getCourseData = async () => {
     const res = await fetchCourseDetailsById(clientStore.webHash, courseID);
-    // console.log("Course Data", res.response[0]);
-    setDataStatus(true);
-    setCourseName(res.response[0]["course_name"]);
-    setCourseDesc(res.response[0]["course_detail"]);
-    setCourseOverview(res.response[0]["course_overview"]);
-    setCourseKeyBenefits(res.response[0]["course_key_benefits"]);
-    setCourseEligibility(res.response[0]["course_eligibility"]);
+    if (res.status === "success") {
+      setCourseName(res.response[0]["course_name"]);
+      setCourseDesc(res.response[0]["course_detail"]);
+      setCourseOverview(res.response[0]["course_overview"]);
+      setCourseKeyBenefits(res.response[0]["course_key_benefits"]);
+      setCourseEligibility(res.response[0]["course_eligibility"]);
+      setDataStatus(true);
+    }
+    else setEmpty(true)
   };
 
   const [Styles, setStyles] = useState(StyleFun(clientStore.colors))
+
+  const [bread, setBread] = useState(true)
+  const notFound = () => {
+    setBread(false)
+    return <PageNotFound />
+  }
+
 
   return (
     <Observer>
@@ -70,11 +71,11 @@ const CourseDetails = () => {
             {/* <HeaderTwo /> */}
 
             {/* Breadcroumb */}
-            <BreadcrumbBox title="Course Details" />
+            {bread ? <BreadcrumbBox title="Course Details" /> : null}
 
             <Styles>
               {/* Course Details */}
-              <section className="course-details-area">
+              {dataStatus ? (<section className="course-details-area">
                 <Container>
                   <Row>
                     <Col lg="9" md="10" sm="12" style={{ margin: "auto" }}>
@@ -180,12 +181,9 @@ const CourseDetails = () => {
 
                   </Row>
                 </Container>
-              </section>
+              </section>) : (empty ? notFound() : <Loader />)}
             </Styles>
-
-
-          </div>
-        );
+          </div>)
       }}
     </Observer>
   );

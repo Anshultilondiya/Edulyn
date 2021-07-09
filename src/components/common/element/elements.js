@@ -1,6 +1,3 @@
-// import { fetchWebData } from "../../../apis/api"
-
-
 export const colors = {
     bg1: "#182B49",
     bg2: "#F6F9FF",
@@ -30,20 +27,9 @@ export const colors = {
     white: "ffffff"
 }
 
-// export const getColor = (obj) => {
-//     // const res = await fetchWebData(id);
-//     // const obj = res.layout;
-//     colors.bg1 = obj.primary;
-//     colors.green = obj.secondary
-//     colors.green2 = obj.ternary
-//     return colors;
-// }
-
 export const getColorObj = () => {
     return colors
 }
-
-
 
 export const fonts = {
 

@@ -3,9 +3,7 @@ import Datas from '../../data/coming-soon/coming-soon.json';
 import { Container, Row, Col } from 'react-bootstrap';
 import Timer from 'react-compound-timer';
 import { StyleFun } from './styles/comingSoon.js';
-
 import { useClientStore } from "./../../contextProviders/clientContext"
-import { updateColorObj } from "./../../utility"
 
 function ComingSoon() {
     const clientStore = useClientStore();

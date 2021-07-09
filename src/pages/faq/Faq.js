@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Datas from "../../data/faq/faq.json";
 import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
-import HeaderTwo from "../../components/HeaderTwo";
 import { BreadcrumbBox } from "../../components/common/Breadcrumb";
-import Footer from "../../components/Footer";
 import { StyleFun } from "./styles/faq.js";
 import { Observer } from "mobx-react";
 import { useClientStore } from "../../contextProviders/clientContext";
 import { fetchFAQ } from "../../apis/api";
-import { buildFaq, updateColorObj } from "../../utility";
-
+import { buildFaq } from "../../utility";
+import PageNotFound from "../404/PageNotFound";
+import Loader from "../../Loader";
 
 const Faq = () => {
   const clientStore = useClientStore();
   const [dataArray, setDataArray] = useState([]);
   const [dataStatus, setDataStatus] = useState(false)
-
+  const [empty, setEmpty] = useState(false)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -26,36 +24,24 @@ const Faq = () => {
   }, []);
 
   const getFAQ = async () => {
-    console.log("FAQ Section");
     const res = await fetchFAQ(clientStore.webHash);
     if (res.status === "success") {
       clientStore.faqData = buildFaq(res.response);
       setDataArray(clientStore.faqData);
       setDataStatus(true)
     }
-
-    // console.log("FAQ", clientStore.faqData);
+    else setEmpty(true)
   };
-
 
 
   const [Styles, setStyles] = useState(StyleFun(clientStore.colors));
 
-  // useEffect(() => {
-  //   updateColors();
-  // }, [colors, toggle, dataStatus]);
 
-  // const updateColors = () => {
-  //   if (clientStore.webLayout["primary"] !== undefined && !dataStatus) {
-  //     let obj = { ...colors }
-  //     setColors({ ...updateColorObj(obj, clientStore.webLayout) })
-  //     setStyles(StyleFun({ ...updateColorObj(obj, clientStore.webLayout) }))
-  //     setDataStatus(true);
-  //   }
-  //   if (!dataStatus) setToggle(toggle + 1);
-  // };
-
-
+  const [bread, setBread] = useState(true)
+  const notFound = () => {
+    setBread(false)
+    return <PageNotFound />
+  }
 
   return (
     <Observer>
@@ -68,7 +54,7 @@ const Faq = () => {
               {/* <HeaderTwo /> */}
 
               {/* Breadcroumb */}
-              <BreadcrumbBox title="Faq" />
+              {bread ? (<BreadcrumbBox title="Faq" />) : null}
 
               {/* Faq Area */}
               {dataStatus ? (<section className="faq-area">
@@ -104,13 +90,13 @@ const Faq = () => {
                     </Col>
                   </Row>
                 </Container>
-              </section>) : null}
+              </section>) : (empty ? notFound() : <Loader />)}
             </div>
           </Styles>
         );
       }}
     </Observer>
-  );
+  )
 };
 
 export default Faq;

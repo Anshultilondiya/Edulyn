@@ -64,7 +64,7 @@ const Footer = () => {
                                                             <li><Link to={process.env.PUBLIC_URL + "/blog-grid"}><IoIosArrowForward />Blogs</Link></li>
                                                         ) : (null)}
                                                         {webConfig.menu && webConfig.menu[6] == 'Y' ? (
-                                                            <li><Link to={process.env.PUBLIC_URL + "/career"}><IoIosArrowForward /> Careers</Link></li>
+                                                            <li><Link to={process.env.PUBLIC_URL + "/career"}><IoIosArrowForward />Careers</Link></li>
                                                         ) : (null)}
                                                         {webConfig.menu && webConfig.menu[8] == 'Y' ? (
                                                             <li><Link to={process.env.PUBLIC_URL + "/franchise"}><IoIosArrowForward />Franchise</Link></li>

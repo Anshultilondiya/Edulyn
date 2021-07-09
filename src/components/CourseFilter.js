@@ -69,8 +69,9 @@ function CourseFilter() {
                               {dataStatus ? (
                                 <p
                                   className="desc"
+                                  style={{ overflow: "hidden" }}
                                   dangerouslySetInnerHTML={{
-                                    __html: `${data.courseDesc.slice(0, 300)} ...`,
+                                    __html: `${data.courseDesc.slice(0, 200)} ...`,
                                   }}
                                 ></p>
                               ) : (
